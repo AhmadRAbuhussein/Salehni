@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Salehni</string>
+    <string name="welcome_to">welcome to</string>
+    <string name="fix_any_time_anywhere">fix anytime any where</string>
+    <string name="choose_language">choose a language</string>
+    <string name="language_ar">العربية</string>
+    <string name="language_en">English</string>
+    <string name="you_can_change_at_any_time">you can change at any time</string>
+    <string name="all_right_reserved">© 2020 All Rights reserved</string>
+
+</resources>
