@@ -31,14 +31,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.salehni.salehni.PersonalInfoActivity">
-            <intent-filter>
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="com.salehni.salehni.MobileNumber_activity">
+        <activity android:name="com.salehni.salehni.SignUpActivity">
             <intent-filter>
 
                 <category android:name="android.intent.category.DEFAULT" />

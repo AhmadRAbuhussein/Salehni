@@ -11,6 +11,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <CheckBox
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:button="@null" />
+
         <ImageView
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
@@ -40,53 +49,6 @@
             android:layout_height="match_parent"
             android:background="@color/text_on_white_bg"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:background="@null"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="@string/user_role"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/text_on_black_bg"
-                        android:textSize="@dimen/_11ssp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerHorizontal="true"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:src="@drawable/drop_down" />
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/text_on_black_bg" />
-
-            </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -229,8 +191,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:orientation="horizontal"
                 android:weightSum="100">
 
                 <CheckBox
@@ -239,22 +201,21 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:background="@null"
-                    android:button="@drawable/shape_checkbox_selector"
-                    android:layout_marginLeft="@dimen/_15sdp"
-                    android:layout_marginTop="@dimen/_5sdp" />
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:buttonTint="@color/text_on_black_bg" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/remeberMeCheckbox"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
                     android:layout_marginRight="@dimen/_20sdp"
+                    android:layout_toRightOf="@+id/remeberMeCheckbox"
                     android:text="@string/remember_me"
-                    android:textSize="@dimen/_11ssp"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_11ssp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -262,11 +223,11 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
-                    android:textSize="@dimen/_11ssp"
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_20sdp"
                     android:text="@string/forget_password"
-                    android:textColor="@color/links_and_buttons" />
+                    android:textColor="@color/links_and_buttons"
+                    android:textSize="@dimen/_11ssp" />
             </RelativeLayout>
 
             <Button
@@ -297,14 +258,20 @@
                 android:text="@string/sign_up"
                 android:textColor="@color/links_and_buttons" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_40sdp"
-                android:layout_marginBottom="@dimen/_20sdp"
-                android:text="@string/all_right_reserved"
-                android:textColor="@color/text_on_black_bg" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:text="@string/all_right_reserved"
+                    android:textColor="@color/text_on_black_bg" />
+            </RelativeLayout>
 
         </LinearLayout>
 

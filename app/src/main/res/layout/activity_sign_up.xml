@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/_5sdp"
-            android:text="@string/personal_info"
+            android:text="@string/sign_up"
             android:textColor="@color/text_on_white_bg"
             android:textSize="@dimen/_15ssp" />
 
@@ -86,47 +86,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:background="@null"
-                        android:hint="@string/user_role"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/text_on_black_bg"
-                        android:textSize="@dimen/_11ssp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_alignParentRight="true"
-                        android:minHeight="0dp"
-                        android:minWidth="0dp"
-                        android:layout_centerHorizontal="true"
-                        android:src="@drawable/drop_down" />
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/text_on_black_bg" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -420,6 +379,7 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/sign_up_Btn"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"

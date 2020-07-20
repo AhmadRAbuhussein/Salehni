@@ -22,8 +22,7 @@ public class SignInActivity extends AppCompatActivity {
         sign_up_Tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this, PersonalInfoActivity.class);
-                startActivity(intent);
+
             }
         });
 

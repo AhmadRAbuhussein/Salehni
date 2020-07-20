@@ -8,21 +8,21 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MobileNumber_activity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
-    Button submit_Btn;
+    Button sign_up_Btn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mobile_number);
+        setContentView(R.layout.activity_sign_up);
 
-        submit_Btn = findViewById(R.id.submit_Btn);
+        sign_up_Btn = findViewById(R.id.sign_up_Btn);
 
-        submit_Btn.setOnClickListener(new View.OnClickListener() {
+        sign_up_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MobileNumber_activity.this, VerifyAccountActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, VerifyAccountActivity.class);
                 startActivity(intent);
             }
         });
