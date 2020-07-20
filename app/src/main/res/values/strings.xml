@@ -12,7 +12,7 @@
     <string name="mobile_number">Mobile Number</string>
     <string name="user_role">User Role</string>
     <string name="password">Password</string>
-    <string name="remember_me">Remember_Me</string>
+    <string name="remember_me">Remember Me</string>
     <string name="forget_password">Forget Password?</string>
     <string name="login">Login</string>
     <string name="dont_have_an_account_yet">Don\'t have an account yet?</string>
@@ -27,5 +27,12 @@
     <string name="terms_conditions">Terms &amp; Conditions</string>
     <string name="enter_mobile_number">Enter Your Mobile Number</string>
     <string name="submit">Submit</string>
+    <string name="verfiy">Verify</string>
+    <string name="verify_account">Verify Your Account</string>
+    <string name="code_recived">Enter the code that you recivied</string>
+    <string name="num1">1</string>
+    <string name="num2">2</string>
+    <string name="num3">3</string>
+    <string name="num4">4</string>
 
 </resources>

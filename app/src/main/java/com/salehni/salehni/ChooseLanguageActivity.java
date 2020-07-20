@@ -22,7 +22,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
         en_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ChooseLanguageActivity.this, SignInActivity.class);
+                Intent intent = new Intent(ChooseLanguageActivity.this, MobileNumber_activity.class);
                 startActivity(intent);
                 finish();
             }

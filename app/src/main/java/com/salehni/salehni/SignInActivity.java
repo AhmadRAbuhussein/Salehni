@@ -15,7 +15,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_language);
+        setContentView(R.layout.activity_sign_in);
 
         sign_up_Tv = findViewById(R.id.sign_up_Tv);
 

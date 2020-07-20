@@ -17,7 +17,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_250sdp"
-        android:src="@drawable/splash_logo" />
+        android:src="@drawable/splash_logo"
+        android:minHeight="0dp"
+        android:minWidth="0dp" />
 
     <TextView
         android:layout_width="wrap_content"
