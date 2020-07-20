@@ -17,5 +17,15 @@
     <string name="login">Login</string>
     <string name="dont_have_an_account_yet">Don\'t have an account yet?</string>
     <string name="sign_up">Sign up</string>
+    <string name="personal_info">Personal Info.</string>
+    <string name="fname_lname">First Name, Last Name</string>
+    <string name="ph_no">0798809109</string>
+    <string name="email">Email</string>
+    <string name="dob">Date of birh</string>
+    <string name="confrim_pass">Confirm password</string>
+    <string name="accept_our">Accept our</string>
+    <string name="terms_conditions">Terms &amp; Conditions</string>
+    <string name="enter_mobile_number">Enter Your Mobile Number</string>
+    <string name="submit">Submit</string>
 
 </resources>

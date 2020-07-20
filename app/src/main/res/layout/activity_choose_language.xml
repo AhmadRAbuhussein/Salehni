@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:text="@string/choose_language"
         android:textColor="@color/text_on_white_bg"
         android:textSize="@dimen/_15ssp" />
@@ -59,6 +59,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/shape_btn_red_bg"
                 android:text="@string/language_ar"
+                android:textSize="@dimen/_12ssp"
                 android:textColor="@color/white" />
 
             <Button
@@ -66,9 +67,10 @@
                 android:layout_width="@dimen/_150sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:background="@drawable/shape_btn_white_bg"
                 android:text="@string/language_en"
+                android:textSize="@dimen/_10ssp"
                 android:textColor="@color/text_on_white_bg" />
 
         </LinearLayout>
@@ -79,9 +81,9 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/_20sdp"
             android:text="@string/all_right_reserved"
-            android:textColor="@color/text_on_black_bg" />
+            android:textColor="@color/text_on_black_bg"
+            android:layout_marginBottom="@dimen/_20sdp" />
     </RelativeLayout>
 
 </LinearLayout>

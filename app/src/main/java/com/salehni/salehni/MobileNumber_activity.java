@@ -3,30 +3,28 @@ package com.salehni.salehni;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SignInActivity extends AppCompatActivity {
+public class MobileNumber_activity extends AppCompatActivity {
 
-    TextView sign_up_Tv;
+    Button submit_Btn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_language);
+        setContentView(R.layout.activity_mobile_number);
 
-        sign_up_Tv = findViewById(R.id.sign_up_Tv);
+        submit_Btn = findViewById(R.id.submit_Btn);
 
-        sign_up_Tv.setOnClickListener(new View.OnClickListener() {
+        submit_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInActivity.this, PersonalInfoActivity.class);
+                Intent intent = new Intent(MobileNumber_activity.this, VerifyAccountActivity.class);
                 startActivity(intent);
             }
         });
-
-
     }
 }

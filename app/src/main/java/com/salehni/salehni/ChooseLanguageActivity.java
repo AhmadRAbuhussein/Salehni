@@ -15,7 +15,7 @@ public class ChooseLanguageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.choose_language);
+        setContentView(R.layout.activity_choose_language);
 
         en_Btn = findViewById(R.id.en_Btn);
 
