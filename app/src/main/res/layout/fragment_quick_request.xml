@@ -1,60 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/splash_bg">
+    android:background="@drawable/splash_bg"
+    android:fillViewport="true">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_110sdp"
-        android:background="@drawable/circle_header" />
-
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/text_on_white_bg">
+        android:orientation="vertical">
 
-        <RadioGroup
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="100">
+            android:layout_height="@dimen/_110sdp"
+            android:background="@drawable/circle_header" />
 
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="50"
-                android:text="@string/fix_at_your_location"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_10ssp"
-                app:buttonTint="@color/text_on_black_bg" />
-
-            <androidx.appcompat.widget.AppCompatRadioButton
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="50"
-                android:text="@string/fix_at_mechanic_location"
-                android:textColor="@color/white"
-                app:buttonTint="@color/text_on_black_bg"
-                android:textSize="@dimen/_10ssp" />
-        </RadioGroup>
-
-        <GridView
-            android:id="@+id/carParts_Gv"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_250sdp"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
-            android:gravity="center"
-            android:columnWidth="@dimen/_100sdp"
-            android:numColumns="2"
-            android:verticalSpacing="@dimen/_3sdp"
-            android:horizontalSpacing="@dimen/_3sdp"
-            android:stretchMode="columnWidth" />
+            android:layout_height="match_parent"
+            android:background="@color/text_on_white_bg"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="100">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:text="@string/fix_at_your_location"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp"
+                    app:buttonTint="@color/text_on_black_bg" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:text="@string/fix_at_mechanic_location"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp"
+                    app:buttonTint="@color/text_on_black_bg" />
+            </RadioGroup>
+
+            <GridView
+                android:id="@+id/carParts_Gv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_250sdp"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:columnWidth="@dimen/_100sdp"
+                android:gravity="center"
+                android:horizontalSpacing="@dimen/_4sdp"
+                android:numColumns="2"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="@dimen/_4sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@drawable/shape_btn_red_bg"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_request" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/submit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_11ssp" />
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_2sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="@drawable/black_to_white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/or"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_2sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@drawable/white_to_black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@drawable/shape_primary_color_bg"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/custom_request" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/submit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_11ssp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_40sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:text="@string/all_right_reserved"
+                android:textColor="@color/text_on_black_bg" />
+
+
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</ScrollView>

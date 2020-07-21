@@ -45,5 +45,6 @@
     <string name="oil_change">Oil Change</string>
     <string name="air_filter_change">Air Filter Change</string>
     <string name="air_condition_gaz">Air Condition Gaz</string>
+    <string name="or">OR</string>
 
 </resources>
