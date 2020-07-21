@@ -11,15 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <CheckBox
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_centerVertical="true"
-            android:layout_gravity="center"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:button="@null" />
-
         <ImageView
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
@@ -195,15 +186,16 @@
                 android:orientation="horizontal"
                 android:weightSum="100">
 
-                <CheckBox
+
+                <ImageView
                     android:id="@+id/remeberMeCheckbox"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
-                    android:layout_centerVertical="true"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:buttonTint="@color/text_on_black_bg" />
+                    android:background="@drawable/checkbox_unselected_icon"
+                    android:layout_marginLeft="@dimen/_20sdp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -231,6 +223,7 @@
             </RelativeLayout>
 
             <Button
+                android:id="@+id/login_Btn"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"

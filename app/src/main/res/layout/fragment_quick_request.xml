@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/splash_bg">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_110sdp"
+        android:background="@drawable/circle_header" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/text_on_white_bg">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:text="@string/fix_at_your_location"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10ssp"
+                app:buttonTint="@color/text_on_black_bg" />
+
+            <androidx.appcompat.widget.AppCompatRadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:text="@string/fix_at_mechanic_location"
+                android:textColor="@color/white"
+                app:buttonTint="@color/text_on_black_bg"
+                android:textSize="@dimen/_10ssp" />
+        </RadioGroup>
+
+        <GridView
+            android:id="@+id/carParts_Gv"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:gravity="center"
+            android:columnWidth="@dimen/_100sdp"
+            android:numColumns="2"
+            android:verticalSpacing="@dimen/_3sdp"
+            android:horizontalSpacing="@dimen/_3sdp"
+            android:stretchMode="columnWidth" />
+
+
+    </LinearLayout>
+</LinearLayout>

@@ -355,18 +355,28 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <CheckBox
+                <ImageView
+                    android:id="@+id/remeberMeCheckbox"
+                    android:layout_width="13dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/checkbox_unselected_icon"
+                    android:minWidth="0dp"
+                    android:minHeight="0dp" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center|left"
-                    android:buttonTint="@color/text_on_black_bg"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_3sdp"
                     android:text="@string/accept_our"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_11ssp" />
+
 
                 <TextView
                     android:layout_width="match_parent"

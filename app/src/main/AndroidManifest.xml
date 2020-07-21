@@ -45,6 +45,13 @@
             </intent-filter>
         </activity>
 
+        <activity android:name="com.salehni.salehni.MainPageCustomerActivity">
+            <intent-filter>
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

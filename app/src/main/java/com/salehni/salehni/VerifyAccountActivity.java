@@ -14,7 +14,7 @@ public class VerifyAccountActivity extends AppCompatActivity {
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.verify_account_activity);
+        setContentView(R.layout.activity_verify_account_activity);
 
         verify_Btn = findViewById(R.id.verify_Btn);
 
