@@ -113,7 +113,8 @@
                             android:paddingTop="@dimen/_5sdp"
                             android:textColor="@color/white"
                             android:textColorHint="@color/text_on_black_bg"
-                            android:textSize="@dimen/_11ssp" />
+                            android:textSize="@dimen/_11ssp"
+                            android:textCursorDrawable="@null" />
 
                         <ImageView
                             android:layout_width="@dimen/_16sdp"
@@ -159,7 +160,8 @@
                         android:paddingTop="@dimen/_5sdp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_on_black_bg"
-                        android:textSize="@dimen/_11ssp" />
+                        android:textSize="@dimen/_11ssp"
+                        android:textCursorDrawable="@null" />
 
                     <ImageView
                         android:layout_width="@dimen/_16sdp"
@@ -189,8 +191,8 @@
 
                 <ImageView
                     android:id="@+id/remeberMeCheckbox"
-                    android:layout_width="@dimen/_20sdp"
-                    android:layout_height="@dimen/_20sdp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     android:layout_gravity="center"

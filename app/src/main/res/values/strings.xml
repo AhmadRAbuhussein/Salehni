@@ -46,5 +46,15 @@
     <string name="air_filter_change">Air Filter Change</string>
     <string name="air_condition_gaz">Air Condition Gaz</string>
     <string name="or">OR</string>
+    <string name="custom_request">Custom Request</string>
+    <string name="take_images">Take images</string>
+    <string name="images3">3 images</string>
+    <string name="take_video">Take a video</string>
+    <string name="video1">1 video |</string>
+    <string name="retake"><u>Retake</u></string>
+    <string name="send_location">Send your location</string>
+    <string name="amman_jordan">Amman,Jordan- Mecca St.</string>
+    <string name="send_notes">Send any other notes</string>
+
 
 </resources>

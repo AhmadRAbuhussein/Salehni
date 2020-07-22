@@ -68,6 +68,7 @@
                 app:lineColor="@color/text_on_black_bg"
                 app:viewType="line" />
 
+
             <Button
                 android:id="@+id/verify_Btn"
                 android:layout_width="match_parent"

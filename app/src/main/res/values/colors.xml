@@ -9,6 +9,7 @@
     <color name="text_on_black_bg">#556981</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="blue">#3232ff</color>
 
 
 </resources>

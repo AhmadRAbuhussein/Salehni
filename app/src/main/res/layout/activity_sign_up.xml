@@ -65,17 +65,22 @@
                         android:paddingTop="@dimen/_5sdp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_on_black_bg"
-                        android:textSize="@dimen/_11ssp" />
+                        android:textSize="@dimen/_11ssp"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@null"
+                        android:inputType="textCapWords" />
 
                     <ImageView
-                        android:layout_width="12dp"
-                        android:layout_height="11dp"
+                        android:layout_width="@dimen/_12sdp"
+                        android:layout_height="@dimen/_11sdp"
                         android:layout_alignParentRight="true"
                         android:layout_centerHorizontal="true"
                         android:layout_marginRight="5dp"
                         android:minWidth="0dp"
                         android:minHeight="0dp"
-                        android:src="@drawable/name" />
+                        android:src="@drawable/name"
+                        android:layout_centerVertical="true" />
 
                 </RelativeLayout>
 
@@ -160,7 +165,10 @@
                             android:paddingTop="@dimen/_5sdp"
                             android:textColor="@color/white"
                             android:textColorHint="@color/text_on_black_bg"
-                            android:textSize="@dimen/_11ssp" />
+                            android:textSize="@dimen/_11ssp"
+                            android:singleLine="true"
+                            android:imeOptions="actionNext"
+                            android:textCursorDrawable="@null" />
 
                         <ImageView
                             android:layout_width="@dimen/_16sdp"
@@ -204,7 +212,11 @@
                         android:paddingTop="@dimen/_5sdp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_on_black_bg"
-                        android:textSize="@dimen/_11ssp" />
+                        android:textSize="@dimen/_11ssp"
+                        android:inputType="textEmailAddress"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@null" />
 
                     <ImageView
                         android:layout_width="@dimen/_15sdp"
@@ -214,48 +226,6 @@
                         android:minWidth="0dp"
                         android:minHeight="0dp"
                         android:src="@drawable/email_input" />
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/text_on_black_bg" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:background="@null"
-                        android:hint="@string/dob"
-                        android:paddingTop="@dimen/_5sdp"
-                        android:textColor="@color/white"
-                        android:textColorHint="@color/text_on_black_bg"
-                        android:textSize="@dimen/_11ssp" />
-
-                    <ImageView
-                        android:layout_width="@dimen/_15sdp"
-                        android:layout_height="@dimen/_15sdp"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerHorizontal="true"
-                        android:minWidth="0dp"
-                        android:minHeight="0dp"
-                        android:src="@drawable/birthday" />
 
                 </RelativeLayout>
 
@@ -289,7 +259,10 @@
                         android:paddingTop="@dimen/_5sdp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_on_black_bg"
-                        android:textSize="@dimen/_11ssp" />
+                        android:textSize="@dimen/_11ssp"
+                        android:singleLine="true"
+                        android:imeOptions="actionNext"
+                        android:textCursorDrawable="@null" />
 
                     <ImageView
                         android:layout_width="@dimen/_16sdp"
@@ -332,7 +305,10 @@
                         android:paddingTop="@dimen/_5sdp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_on_black_bg"
-                        android:textSize="@dimen/_11ssp" />
+                        android:textSize="@dimen/_11ssp"
+                        android:singleLine="true"
+                        android:imeOptions="actionDone"
+                        android:textCursorDrawable="@null" />
 
                     <ImageView
                         android:layout_width="@dimen/_16sdp"
@@ -361,8 +337,8 @@
 
                 <ImageView
                     android:id="@+id/remeberMeCheckbox"
-                    android:layout_width="13dp"
-                    android:layout_height="18dp"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
                     android:layout_gravity="center"
                     android:background="@drawable/checkbox_unselected_icon"
                     android:minWidth="0dp"
@@ -393,7 +369,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_30sdp"
                 android:background="@drawable/shape_btn_red_bg"
                 android:text="@string/sign_up"
                 android:textAllCaps="false"
