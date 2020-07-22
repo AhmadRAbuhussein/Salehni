@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.salehni.salehni.SplashScreenActivity">
+        <activity android:name="com.salehni.salehni.view.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,35 +17,35 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.salehni.salehni.ChooseLanguageActivity">
+        <activity android:name="com.salehni.salehni.view.activities.ChooseLanguageActivity">
             <intent-filter>
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.salehni.salehni.SignInActivity">
+        <activity android:name="com.salehni.salehni.view.activities.SignInActivity">
             <intent-filter>
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.salehni.salehni.SignUpActivity">
+        <activity android:name="com.salehni.salehni.view.activities.SignUpActivity">
             <intent-filter>
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.salehni.salehni.VerifyAccountActivity">
+        <activity android:name="com.salehni.salehni.view.activities.VerifyAccountActivity">
             <intent-filter>
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 
-        <activity android:name="com.salehni.salehni.MainPageCustomerActivity">
+        <activity android:name="com.salehni.salehni.view.activities.MainPageCustomerActivity">
             <intent-filter>
 
                 <category android:name="android.intent.category.DEFAULT" />

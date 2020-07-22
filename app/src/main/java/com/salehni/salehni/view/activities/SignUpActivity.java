@@ -1,14 +1,15 @@
-package com.salehni.salehni;
+package com.salehni.salehni.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.salehni.salehni.R;
 
 public class SignUpActivity extends AppCompatActivity {
 

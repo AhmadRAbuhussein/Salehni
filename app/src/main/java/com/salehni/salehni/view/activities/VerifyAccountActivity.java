@@ -1,4 +1,4 @@
-package com.salehni.salehni;
+package com.salehni.salehni.view.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,25 +8,24 @@ import android.widget.Button;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ChooseLanguageActivity extends AppCompatActivity {
+import com.salehni.salehni.R;
 
-    Button en_Btn;
+public class VerifyAccountActivity extends AppCompatActivity {
 
-    @Override
+    Button verify_Btn;
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_language);
+        setContentView(R.layout.activity_verify_account_activity);
 
-        en_Btn = findViewById(R.id.en_Btn);
+        verify_Btn = findViewById(R.id.verify_Btn);
 
-        en_Btn.setOnClickListener(new View.OnClickListener() {
+        verify_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ChooseLanguageActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(VerifyAccountActivity.this, SignInActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
-
     }
 }

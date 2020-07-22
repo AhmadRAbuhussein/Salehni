@@ -1,6 +1,5 @@
-package com.salehni.salehni;
+package com.salehni.salehni.view.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,10 @@ import android.widget.LinearLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.salehni.salehni.R;
+import com.salehni.salehni.data.model.CarPartsModel;
+import com.salehni.salehni.view.adapters.CarPartsGridViewAdapter;
 
 import java.util.ArrayList;
 
@@ -32,14 +35,14 @@ public class QuickRequestFragment extends Fragment {
         custom_request_Ll = view.findViewById(R.id.custom_request_Ll);
 
 
-        setDrawer();
+        carPartsGrid();
 
 
         custom_request_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), CustomRequestFragment.class);
-                startActivity(intent);
+                CustomRequestFragment customRequestFragment = new CustomRequestFragment();
+                setFragment(customRequestFragment);
             }
         });
 
@@ -47,7 +50,7 @@ public class QuickRequestFragment extends Fragment {
         return view;
     }
 
-    private void setDrawer() {
+    private void carPartsGrid() {
         carPartsModels = new ArrayList<>();
 
         for (int i = 0; i < 9; i++) {
@@ -61,6 +64,14 @@ public class QuickRequestFragment extends Fragment {
         carPartsGridViewAdapter = new CarPartsGridViewAdapter(getActivity(), carPartsModels);
         carParts_Gv.setAdapter(carPartsGridViewAdapter);
 
+    }
+
+    public void setFragment(Fragment fragment) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 

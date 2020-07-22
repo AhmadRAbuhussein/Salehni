@@ -1,4 +1,4 @@
-package com.salehni.salehni;
+package com.salehni.salehni.view.adapters;
 
 import android.content.Context;
 
@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+
+import com.salehni.salehni.R;
+import com.salehni.salehni.data.model.CarPartsModel;
 
 import java.util.ArrayList;
 
@@ -46,7 +49,7 @@ public class CarPartsGridViewAdapter extends BaseAdapter {
         if (vi == null) {
 
             vi = LayoutInflater.from(mContext).inflate(
-                    R.layout.grid_view_row, parent, false);
+                    R.layout.row_grid_view, parent, false);
 
             holder = new ViewHolder();
 

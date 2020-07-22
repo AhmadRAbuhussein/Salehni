@@ -1,17 +1,18 @@
-package com.salehni.salehni;
+package com.salehni.salehni.view.activities;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import com.salehni.salehni.view.fragments.QuickRequestFragment;
+import com.salehni.salehni.R;
 
 public class MainPageCustomerActivity extends AppCompatActivity {
 

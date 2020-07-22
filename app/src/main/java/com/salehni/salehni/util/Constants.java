@@ -1,4 +1,4 @@
-package com.salehni.salehni;
+package com.salehni.salehni.util;
 
 public class Constants {
 

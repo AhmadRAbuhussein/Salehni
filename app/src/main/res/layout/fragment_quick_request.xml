@@ -73,12 +73,12 @@
 
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_height="@dimen/_8sdp"
                     android:layout_gravity="center"
-                    android:background="@drawable/custom_request" />
+                    android:background="@drawable/arrow_submit" />
 
                 <Button
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_50sdp"
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:text="@string/submit"
@@ -128,18 +128,28 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@drawable/shape_primary_color_bg"
                 android:gravity="center"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
                 android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_gravity="center"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:layout_marginRight="@dimen/_3sdp"
                     android:background="@drawable/custom_request" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:clickable="false"
                     android:text="@string/custom_request"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_11ssp"
