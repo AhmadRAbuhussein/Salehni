@@ -5,7 +5,6 @@ public class CarPartsOffersModel {
     String provider;
     String price;
     int items;
-    String img;
 
     public int getId() {
         return id;
@@ -39,11 +38,4 @@ public class CarPartsOffersModel {
         this.items = items;
     }
 
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
 }

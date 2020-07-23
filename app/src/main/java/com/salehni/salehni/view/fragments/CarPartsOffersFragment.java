@@ -22,15 +22,17 @@ import java.util.ArrayList;
 
 public class CarPartsOffersFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    RecyclerView recyclerView;
+    RecyclerView carParts_Rv;
     CarPartsOffersRecyViewAdapter offersRecyViewAdapter;
     ArrayList<CarPartsOffersModel> carPartsOffersModels;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_car_parts_offers, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        carParts_Rv = (RecyclerView) view.findViewById(R.id.carParts_Rv);
+        carParts_Rv.setNestedScrollingEnabled(false);
         testingData();
+
 
         return view;
     }
@@ -39,7 +41,7 @@ public class CarPartsOffersFragment extends Fragment implements AdapterView.OnIt
 
         carPartsOffersModels = new ArrayList<>();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 20; i++) {
             CarPartsOffersModel carPartsOffersModel = new CarPartsOffersModel();
             carPartsOffersModel.setId(i + 1);
 
@@ -51,19 +53,19 @@ public class CarPartsOffersFragment extends Fragment implements AdapterView.OnIt
 
     public void intiRecView(ArrayList<CarPartsOffersModel> carPartsOffersModels) {
 
-        recyclerView.setHasFixedSize(true);
+        carParts_Rv.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(layoutManager);
+        carParts_Rv.setLayoutManager(layoutManager);
 
         offersRecyViewAdapter = new CarPartsOffersRecyViewAdapter(getActivity(), carPartsOffersModels, this);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider));
+        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider_height));
 
-        recyclerView.addItemDecoration(itemDecorator);
+        carParts_Rv.addItemDecoration(itemDecorator);
 
 
-        recyclerView.setAdapter(offersRecyViewAdapter);
+        carParts_Rv.setAdapter(offersRecyViewAdapter);
 
 
     }

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.salehni.salehni.view.fragments.CustomRequestFragment;
 import com.salehni.salehni.view.fragments.QuickRequestFragment;
 import com.salehni.salehni.R;
 
@@ -31,8 +32,8 @@ public class MainPageCustomerActivity extends AppCompatActivity {
         menu_Btn = findViewById(R.id.menu_Btn);
         mainFrameLayout = findViewById(R.id.mainFrameLayout);
 
-        QuickRequestFragment quickRequestFragment = new QuickRequestFragment();
-        setFragment(quickRequestFragment);
+        CustomRequestFragment customRequestFragment = new CustomRequestFragment();
+        setFragment(customRequestFragment);
 
 //        menu_Btn.setOnClickListener(new View.OnClickListener() {
 ////            @Override

@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,16 +23,26 @@ import java.util.ArrayList;
 
 public class CustomRequestFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    RecyclerView recyclerView;
+    RecyclerView img_recycler_view;
     CustomRequestRecyViewAdapter customRequestRecyViewAdapter;
     ArrayList<CustomRequestModel> customRequestModels;
+    LinearLayout send_request_Ll;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_custom_request, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        send_request_Ll = (LinearLayout) view.findViewById(R.id.send_request_Ll);
+        img_recycler_view = (RecyclerView) view.findViewById(R.id.img_recycler_view);
         testingData();
+
+        send_request_Ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyRequestFragment myRequestFragment = new MyRequestFragment();
+                setFragment(myRequestFragment);
+            }
+        });
 
         return view;
     }
@@ -50,21 +63,29 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
     public void intiRecView(ArrayList<CustomRequestModel> customRequestModels) {
 
-        recyclerView.setHasFixedSize(true);
+        img_recycler_view.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(layoutManager);
+        img_recycler_view.setLayoutManager(layoutManager);
 
         customRequestRecyViewAdapter = new CustomRequestRecyViewAdapter(getActivity(), customRequestModels, this);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider));
 
-        recyclerView.addItemDecoration(itemDecorator);
+        img_recycler_view.addItemDecoration(itemDecorator);
 
 
-        recyclerView.setAdapter(customRequestRecyViewAdapter);
+        img_recycler_view.setAdapter(customRequestRecyViewAdapter);
 
 
+    }
+
+    public void setFragment(Fragment fragment) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
     @Override

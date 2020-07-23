@@ -63,6 +63,9 @@
     <string name="details">Details</string>
     <string name="autohub">autohub</string>
     <string name="jd_50">50 JD</string>
+    <string name="request_1">Request 1</string>
+    <string name="custome_resquest">Custom Request</string>
+    <string name="am_11_30">11:30 am</string>
 
 
 </resources>

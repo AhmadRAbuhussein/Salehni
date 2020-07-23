@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,14 +12,14 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
-;
 import com.salehni.salehni.data.model.CarPartsOffersModel;
+import com.salehni.salehni.data.model.MyRequestModel;
 
 import java.util.ArrayList;
 
-public class CarPartsOffersRecyViewAdapter extends
-        RecyclerView.Adapter<CarPartsOffersRecyViewAdapter.MyViewHolder> {
-    ArrayList<CarPartsOffersModel> carPartsOffersModels;
+public class MyRequestAdapter extends
+        RecyclerView.Adapter<MyRequestAdapter.MyViewHolder> {
+    ArrayList<MyRequestModel> myRequestModels;
     private AdapterView.OnItemClickListener onItemClickListener;
 
     Context context;
@@ -31,9 +30,10 @@ public class CarPartsOffersRecyViewAdapter extends
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        public TextView provider_Tv;
-        public TextView price_Tv;
-        public TextView items_Tv;
+        public ImageView request_img;
+        public TextView request;
+        public TextView request_type;
+        public TextView clock;
         public LinearLayout container_Ll;
 
         public MyViewHolder(View view) {
@@ -41,9 +41,10 @@ public class CarPartsOffersRecyViewAdapter extends
 
 
             container_Ll = (LinearLayout) view.findViewById(R.id.container_Ll);
-            provider_Tv = (TextView) view.findViewById(R.id.provider_Tv);
-            price_Tv = (TextView) view.findViewById(R.id.price_Tv);
-            items_Tv = (TextView) view.findViewById(R.id.items_Tv);
+            request_img = (ImageView) view.findViewById(R.id.notfication_Iv);
+            request = (TextView) view.findViewById(R.id.request_Tv);
+            request_type = (TextView) view.findViewById(R.id.request_type_Tv);
+            clock = (TextView) view.findViewById(R.id.clock_Tv);
 
             container_Ll.setOnClickListener(this);
 
@@ -58,26 +59,25 @@ public class CarPartsOffersRecyViewAdapter extends
         }
     }
 
-    public CarPartsOffersRecyViewAdapter(Context context,
-                                         ArrayList<CarPartsOffersModel> carPartsOffersModels,
-                                         AdapterView.OnItemClickListener onItemClickListener) {
+    public MyRequestAdapter(Context context,
+                            ArrayList<MyRequestModel> carPartsOffersModels,
+                            AdapterView.OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.carPartsOffersModels = carPartsOffersModels;
+        this.myRequestModels = carPartsOffersModels;
         this.onItemClickListener = onItemClickListener;
 
     }
 
     @Override
-    public void onBindViewHolder(CarPartsOffersRecyViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyRequestAdapter.MyViewHolder holder, int position) {
 
-        CarPartsOffersModel carPartsOffersModel = carPartsOffersModels.get(position);
-
+        MyRequestModel myRequestModel = myRequestModels.get(position);
 
     }
 
     @Override
     public int getItemCount() {
-        return carPartsOffersModels.size();
+        return myRequestModels.size();
     }
 
     @Override
@@ -91,9 +91,9 @@ public class CarPartsOffersRecyViewAdapter extends
     }
 
     @Override
-    public CarPartsOffersRecyViewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyRequestAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_offers_recy_view, parent, false);
-        return new CarPartsOffersRecyViewAdapter.MyViewHolder(v);
+                .inflate(R.layout.row_my_request, parent, false);
+        return new MyRequestAdapter.MyViewHolder(v);
     }
 }
