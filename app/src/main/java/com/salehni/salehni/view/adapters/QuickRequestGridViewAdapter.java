@@ -12,16 +12,16 @@ import android.widget.TextView;
 
 
 import com.salehni.salehni.R;
-import com.salehni.salehni.data.model.CarPartsModel;
+import com.salehni.salehni.data.model.QuickRequestModel;
 
 import java.util.ArrayList;
 
 
-public class CarPartsGridViewAdapter extends BaseAdapter {
+public class QuickRequestGridViewAdapter extends BaseAdapter {
     private final Context mContext;
-    ArrayList<CarPartsModel> fields;
+    ArrayList<QuickRequestModel> fields;
 
-    public CarPartsGridViewAdapter(Context context, ArrayList<CarPartsModel> fields) {
+    public QuickRequestGridViewAdapter(Context context, ArrayList<QuickRequestModel> fields) {
         mContext = context;
         this.fields = fields;
     }

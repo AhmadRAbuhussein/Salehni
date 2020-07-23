@@ -1,6 +1,6 @@
 package com.salehni.salehni.data.model;
 
-public class CarPartsModel {
+public class QuickRequestModel {
 
     private String id;
     private int icon;

@@ -1,6 +1,6 @@
 package com.salehni.salehni.data.model;
 
-public class FixingPicturesModel {
+public class CustomRequestModel {
     int id;
     String img;
 

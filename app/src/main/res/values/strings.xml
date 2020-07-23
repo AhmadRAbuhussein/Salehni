@@ -55,6 +55,14 @@
     <string name="send_location">Send your location</string>
     <string name="amman_jordan">Amman,Jordan- Mecca St.</string>
     <string name="send_notes">Send any other notes</string>
+    <string name="you_choose">You choose</string>
+    <string name="items_4">4 items</string>
+    <string name="provider">Provider</string>
+    <string name="total_price">Total Price</string>
+    <string name="items">items</string>
+    <string name="details">Details</string>
+    <string name="autohub">autohub</string>
+    <string name="jd_50">50 JD</string>
 
 
 </resources>

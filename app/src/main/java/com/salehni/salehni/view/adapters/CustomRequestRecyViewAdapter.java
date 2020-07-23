@@ -11,13 +11,13 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
-import com.salehni.salehni.data.model.FixingPicturesModel;
+import com.salehni.salehni.data.model.CustomRequestModel;
 
 import java.util.ArrayList;
 
-public class FixingPicturesRecyViewAdapter extends
-        RecyclerView.Adapter<FixingPicturesRecyViewAdapter.MyViewHolder> {
-    ArrayList<FixingPicturesModel> fixingPicturesModels;
+public class CustomRequestRecyViewAdapter extends
+        RecyclerView.Adapter<CustomRequestRecyViewAdapter.MyViewHolder> {
+    ArrayList<CustomRequestModel> customRequestModels;
     private AdapterView.OnItemClickListener onItemClickListener;
 
     Context context;
@@ -52,11 +52,11 @@ public class FixingPicturesRecyViewAdapter extends
         }
     }
 
-    public FixingPicturesRecyViewAdapter(Context context,
-                                         ArrayList<FixingPicturesModel> fixingPicturesModels,
-                                         AdapterView.OnItemClickListener onItemClickListener) {
+    public CustomRequestRecyViewAdapter(Context context,
+                                        ArrayList<CustomRequestModel> customRequestModels,
+                                        AdapterView.OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.fixingPicturesModels = fixingPicturesModels;
+        this.customRequestModels = customRequestModels;
         this.onItemClickListener = onItemClickListener;
 
     }
@@ -64,7 +64,7 @@ public class FixingPicturesRecyViewAdapter extends
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        FixingPicturesModel fixingPicturesModel = fixingPicturesModels.get(position);
+        CustomRequestModel customRequestModel = customRequestModels.get(position);
 
 //        holder.fix_pic_Iv.setImageBitmap(Global.convertStringToBitmap(fixingPicturesModel.getImg()));
 
@@ -73,7 +73,7 @@ public class FixingPicturesRecyViewAdapter extends
 
     @Override
     public int getItemCount() {
-        return fixingPicturesModels.size();
+        return customRequestModels.size();
     }
 
     @Override

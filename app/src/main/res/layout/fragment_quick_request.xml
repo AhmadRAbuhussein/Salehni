@@ -62,6 +62,7 @@
                 android:verticalSpacing="@dimen/_4sdp" />
 
             <LinearLayout
+                android:id="@+id/submit_Btn"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginLeft="@dimen/_15sdp"

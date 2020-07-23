@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="@dimen/_25sdp"
+    android:background="@color/text_on_black_bg"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/_5sdp"
+    android:paddingRight="@dimen/_5sdp"
+    android:weightSum="100"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/provider_Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:text="@string/autohub"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp" />
+
+    <TextView
+        android:id="@+id/price_Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:text="@string/jd_50"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp" />
+
+    <TextView
+        android:id="@+id/items_Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:text="@string/num2"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12ssp" />
+
+    <ImageView
+        android:id="@+id/details_Iv"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_20sdp"
+        android:layout_weight="20"
+        android:gravity="center"
+        android:src="@drawable/details"
+        android:minWidth="0dp"
+        android:minHeight="0dp" />
+
+
+</LinearLayout>
