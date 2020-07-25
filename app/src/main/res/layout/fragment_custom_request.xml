@@ -205,14 +205,20 @@
                 android:layout_marginTop="@dimen/_30sdp"
                 android:background="@drawable/shape_btn_red_bg"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusableInTouchMode="true"
+                android:focusable="true">
 
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_gravity="center"
                     android:layout_marginRight="@dimen/_4sdp"
-                    android:background="@drawable/send_request_white" />
+                    android:background="@drawable/send_request_white"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:clickable="false" />
 
                 <Button
                     android:layout_width="wrap_content"
@@ -221,7 +227,10 @@
                     android:text="@string/send_request"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_11ssp" />
+                    android:textSize="@dimen/_11ssp"
+                    android:focusableInTouchMode="false"
+                    android:focusable="false"
+                    android:clickable="false" />
 
             </LinearLayout>
 

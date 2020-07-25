@@ -3,10 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_50sdp"
-    android:background="@color/text_on_black_bg"
+    android:background="@drawable/shape_my_request"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/_5sdp"
     android:paddingRight="@dimen/_5sdp">
+
 
     <ImageView
         android:id="@+id/notfication_Iv"
