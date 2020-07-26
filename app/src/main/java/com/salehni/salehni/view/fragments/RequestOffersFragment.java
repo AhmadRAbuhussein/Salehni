@@ -14,21 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 
-import com.salehni.salehni.data.model.CarPartsOffersModel;
+import com.salehni.salehni.data.model.ReuqestOffersModel;
 
-import com.salehni.salehni.view.adapters.CarPartsOffersRecyViewAdapter;
+import com.salehni.salehni.view.adapters.RequestOffersDetailsAdapter;
+import com.salehni.salehni.view.adapters.RequestOffersRecyViewAdapter;
 
 import java.util.ArrayList;
 
-public class CarPartsOffersFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class RequestOffersFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     RecyclerView carParts_Rv;
-    CarPartsOffersRecyViewAdapter offersRecyViewAdapter;
-    ArrayList<CarPartsOffersModel> carPartsOffersModels;
+    RequestOffersRecyViewAdapter requestOffersRecyViewAdapter;
+    ArrayList<ReuqestOffersModel> reuqestOffersModels;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_car_parts_offers, container, false);
+        View view = inflater.inflate(R.layout.fragment_request_offers, container, false);
         carParts_Rv = (RecyclerView) view.findViewById(R.id.carParts_Rv);
         carParts_Rv.setNestedScrollingEnabled(false);
         testingData();
@@ -39,25 +40,25 @@ public class CarPartsOffersFragment extends Fragment implements AdapterView.OnIt
 
     private void testingData() {
 
-        carPartsOffersModels = new ArrayList<>();
+        reuqestOffersModels = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
-            CarPartsOffersModel carPartsOffersModel = new CarPartsOffersModel();
-            carPartsOffersModel.setId(i + 1);
+            ReuqestOffersModel reuqestOffersDetailsModel = new ReuqestOffersModel();
+            reuqestOffersDetailsModel.setId(i + 1);
 
-            carPartsOffersModels.add(carPartsOffersModel);
+            reuqestOffersModels.add(reuqestOffersDetailsModel);
         }
 
-        intiRecView(carPartsOffersModels);
+        intiRecView(reuqestOffersModels);
     }
 
-    public void intiRecView(ArrayList<CarPartsOffersModel> carPartsOffersModels) {
+    public void intiRecView(ArrayList<ReuqestOffersModel> reuqestOffersModels) {
 
         carParts_Rv.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         carParts_Rv.setLayoutManager(layoutManager);
 
-        offersRecyViewAdapter = new CarPartsOffersRecyViewAdapter(getActivity(), carPartsOffersModels, this);
+        requestOffersRecyViewAdapter = new RequestOffersRecyViewAdapter(getActivity(), reuqestOffersModels, this);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider_height));
@@ -65,7 +66,7 @@ public class CarPartsOffersFragment extends Fragment implements AdapterView.OnIt
         carParts_Rv.addItemDecoration(itemDecorator);
 
 
-        carParts_Rv.setAdapter(offersRecyViewAdapter);
+        carParts_Rv.setAdapter(requestOffersRecyViewAdapter);
 
 
     }

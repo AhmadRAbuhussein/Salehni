@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +41,9 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        RequestOffersFragment requestOffersFragment = new RequestOffersFragment();
+        setFragment(requestOffersFragment);
 
     }
 
@@ -73,6 +78,14 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
         requests_Rv.setAdapter(myRequestAdapter);
 
 
+    }
+
+    public void setFragment(Fragment fragment) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 
 }

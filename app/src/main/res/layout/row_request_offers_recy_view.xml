@@ -24,17 +24,17 @@
         android:id="@+id/price_Tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="25"
+        android:layout_weight="20"
         android:paddingLeft="@dimen/_3sdp"
         android:text="@string/jd_50"
         android:textColor="@color/white"
         android:textSize="@dimen/_10ssp" />
 
     <TextView
-        android:id="@+id/items_Tv"
+        android:id="@+id/working_days_Tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="25"
+        android:layout_weight="30"
         android:gravity="center"
         android:paddingRight="@dimen/_3sdp"
         android:text="@string/num2"

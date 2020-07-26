@@ -41,8 +41,8 @@ public class QuickRequestFragment extends Fragment {
         submit_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CarPartsOffersFragment carPartsOffersFragment = new CarPartsOffersFragment();
-                setFragment(carPartsOffersFragment);
+                RequestOffersFragment requestOffersFragment = new RequestOffersFragment();
+                setFragment(requestOffersFragment);
             }
         });
 

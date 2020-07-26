@@ -66,6 +66,19 @@
     <string name="request_1">Request 1</string>
     <string name="custome_resquest">Custom Request</string>
     <string name="am_11_30">11:30 am</string>
+    <string name="request_details">Your Request Offers Detail</string>
+    <string name="working_days">Working Days</string>
+    <string name="final_solution">الحل النهائي</string>
+    <string name="num100">100</string>
+    <string name="jd">JD</string>
+    <string name="days3">3 days</string>
+    <string name="notes">Notes</string>
+    <string name="etc">etcetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetetet</string>
+    <string name="voice_note">Voice Note</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_price">Item Price</string>
+    <string name="item1">Item 1</string>
+    <string name="total">Total</string>
 
 
 </resources>

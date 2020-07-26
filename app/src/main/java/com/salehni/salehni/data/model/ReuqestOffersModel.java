@@ -1,10 +1,10 @@
 package com.salehni.salehni.data.model;
 
-public class CarPartsOffersModel {
+public class ReuqestOffersModel {
     int id;
     String provider;
     String price;
-    int items;
+    int working_days;
 
     public int getId() {
         return id;
@@ -30,12 +30,12 @@ public class CarPartsOffersModel {
         this.price = price;
     }
 
-    public int getItems() {
-        return items;
+    public int getWorking_days() {
+        return working_days;
     }
 
-    public void setItems(int items) {
-        this.items = items;
+    public void setWorking_days(int working_days) {
+        this.working_days = working_days;
     }
 
 }
