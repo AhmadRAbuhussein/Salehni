@@ -16,21 +16,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.ClientNotificationModel;
+import com.salehni.salehni.data.model.MechanicNotificationModel;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.ClientNotificationAdapter;
+import com.salehni.salehni.view.adapters.MechanicNotificationAdapter;
 
 import java.util.ArrayList;
 
 
-public class ClientNotificationFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class MechanicNotificationFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     RecyclerView notification_Rv;
-    ClientNotificationAdapter clientNotificationAdapter;
-    ArrayList<ClientNotificationModel> clientNotificationModels;
+    MechanicNotificationAdapter mechanicNotificationAdapter;
+    ArrayList<MechanicNotificationModel> mechanicNotificationModels;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_client_notification, container, false);
+        View view = inflater.inflate(R.layout.fragment_mechanic_notification, container, false);
 
         notification_Rv = (RecyclerView) view.findViewById(R.id.notification_Rv);
         testingData();
@@ -48,39 +50,37 @@ public class ClientNotificationFragment extends Fragment implements AdapterView.
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        MechanicNotificationFragment mechanicNotificationFragment = new MechanicNotificationFragment();
-        setFragment(mechanicNotificationFragment);
 
     }
 
     private void testingData() {
 
-        clientNotificationModels = new ArrayList<>();
+        mechanicNotificationModels = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
-            ClientNotificationModel clientNotificationModel = new ClientNotificationModel();
-            clientNotificationModel.setId(i + 1);
+            MechanicNotificationModel mechanicNotificationModel = new MechanicNotificationModel();
+            mechanicNotificationModel.setId(i + 1);
 
-            clientNotificationModels.add(clientNotificationModel);
+            mechanicNotificationModels.add(mechanicNotificationModel);
         }
 
-        intiRecView(clientNotificationModels);
+        intiRecView(mechanicNotificationModels);
     }
 
-    public void intiRecView(ArrayList<ClientNotificationModel> clientNotificationModels) {
+    public void intiRecView(ArrayList<MechanicNotificationModel> mechanicNotificationModels) {
 
         notification_Rv.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         notification_Rv.setLayoutManager(layoutManager);
 
-        clientNotificationAdapter = new ClientNotificationAdapter(getActivity(), clientNotificationModels, this);
+        mechanicNotificationAdapter = new MechanicNotificationAdapter(getActivity(), mechanicNotificationModels, this);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider_height));
 
         notification_Rv.addItemDecoration(itemDecorator);
 
-        notification_Rv.setAdapter(clientNotificationAdapter);
+        notification_Rv.setAdapter(mechanicNotificationAdapter);
 
     }
 

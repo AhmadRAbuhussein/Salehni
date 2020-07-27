@@ -92,6 +92,8 @@
     <string name="mechanic_name">Mechanic Name</string>
     <string name="send_offer">Send you an offer about you request</string>
     <string name="notification">Notifications</string>
+    <string name="ahmad_abuhussein">Ahmad Abuhussein</string>
+    <string name="send_custom_request">Send you a custom request</string>
 
 
 </resources>
