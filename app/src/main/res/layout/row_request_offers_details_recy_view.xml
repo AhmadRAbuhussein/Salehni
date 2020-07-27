@@ -14,7 +14,7 @@
         android:id="@+id/item_name_Tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="90"
+        android:layout_weight="75"
         android:paddingLeft="@dimen/_3sdp"
         android:text="@string/item1"
         android:textColor="@color/white"
@@ -24,10 +24,11 @@
         android:id="@+id/item_price_Tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="10"
+        android:layout_weight="25"
         android:paddingLeft="@dimen/_3sdp"
         android:text="@string/jd_50"
         android:textColor="@color/white"
-        android:textSize="@dimen/_10ssp" />
+        android:textSize="@dimen/_10ssp"
+        android:gravity="center" />
 
 </LinearLayout>

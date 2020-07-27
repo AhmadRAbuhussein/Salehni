@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_bg"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:background="@drawable/splash_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <View
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_110sdp"
-            android:background="@drawable/circle_header" />
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_110sdp"
+                android:background="@drawable/circle_header" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/request_details"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                android:layout_gravity="center" />
+
+
+        </FrameLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,21 +39,11 @@
             android:background="@color/text_on_white_bg"
             android:orientation="vertical">
 
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/request_details"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
-                android:layout_gravity="center" />
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_25sdp"
                 android:layout_marginLeft="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@color/links_and_buttons"
                 android:gravity="center"
@@ -85,7 +92,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/carParts_Rv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="100"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp" />
 
@@ -93,7 +101,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_11sdp"
                 android:gravity="center_horizontal"
                 android:text="@string/all_right_reserved"
                 android:textColor="@color/text_on_black_bg" />
@@ -104,4 +113,4 @@
     </LinearLayout>
 
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>

@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,5 +77,15 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+        RequestOffersDetailsFragment requestOffersDetailsFragment = new RequestOffersDetailsFragment();
+        setFragment(requestOffersDetailsFragment);
+    }
+
+    public void setFragment(Fragment fragment) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

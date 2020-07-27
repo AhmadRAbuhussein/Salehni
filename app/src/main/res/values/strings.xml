@@ -79,6 +79,8 @@
     <string name="item_price">Item Price</string>
     <string name="item1">Item 1</string>
     <string name="total">Total</string>
+    <string name="accept_offer">Accept Offer</string>
+    <string name="num65">65 JD</string>
 
 
 </resources>
