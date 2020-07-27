@@ -59,15 +59,15 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:src="@drawable/recy_pin"
             android:layout_marginRight="@dimen/_3sdp" />
 
         <ImageView
             android:id="@+id/go_Iv"
-            android:layout_width="@dimen/_25sdp"
-            android:layout_height="@dimen/_25sdp"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
             android:src="@drawable/green_arrow" />
     </LinearLayout>
 
