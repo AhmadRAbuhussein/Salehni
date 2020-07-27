@@ -15,29 +15,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
-
-import com.salehni.salehni.data.model.ReuqestOffersModel;
-
-import com.salehni.salehni.data.model.WinchesListModel;
+import com.salehni.salehni.data.model.ClientNotificationModel;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
-import com.salehni.salehni.view.adapters.RequestOffersRecyViewAdapter;
-import com.salehni.salehni.view.adapters.WinchesListAdapter;
+import com.salehni.salehni.view.adapters.ClientNotificationAdapter;
 
 import java.util.ArrayList;
 
-public class WinchesListFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    RecyclerView winches_Rv;
-    WinchesListAdapter winchesListAdapter;
-    ArrayList<WinchesListModel> winchesListModels;
+public class ClientNotificationFragment extends Fragment implements AdapterView.OnItemClickListener {
+
+    RecyclerView notification_Rv;
+    ClientNotificationAdapter clientNotificationAdapter;
+    ArrayList<ClientNotificationModel> clientNotificationModels;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_winches_list, container, false);
-        winches_Rv = (RecyclerView) view.findViewById(R.id.winches_Rv);
-        winches_Rv.setNestedScrollingEnabled(false);
-        testingData();
+        View view = inflater.inflate(R.layout.fragment_client_notification, container, false);
 
+        notification_Rv = (RecyclerView) view.findViewById(R.id.notification_Rv);
+        testingData();
 
         return view;
     }
@@ -46,48 +42,44 @@ public class WinchesListFragment extends Fragment implements AdapterView.OnItemC
     public void onResume() {
         super.onResume();
 
-        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.winches_list));
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.notification));
     }
-
-    private void testingData() {
-
-        winchesListModels = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            WinchesListModel winchesListModel = new WinchesListModel();
-            winchesListModel.setId(i + 1);
-
-            winchesListModels.add(winchesListModel);
-        }
-
-        intiRecView(winchesListModels);
-    }
-
-    public void intiRecView(ArrayList<WinchesListModel> winchesListModels) {
-
-        winches_Rv.setHasFixedSize(false);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        winches_Rv.setLayoutManager(layoutManager);
-
-        winchesListAdapter = new WinchesListAdapter(getActivity(), winchesListModels, this);
-
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider_height));
-
-        winches_Rv.addItemDecoration(itemDecorator);
-
-
-        winches_Rv.setAdapter(winchesListAdapter);
-
-
-    }
-
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        ClientNotificationFragment clientNotificationFragment = new ClientNotificationFragment();
-        setFragment(clientNotificationFragment);
+
+    }
+
+    private void testingData() {
+
+        clientNotificationModels = new ArrayList<>();
+
+        for (int i = 0; i < 20; i++) {
+            ClientNotificationModel clientNotificationModel = new ClientNotificationModel();
+            clientNotificationModel.setId(i + 1);
+
+            clientNotificationModels.add(clientNotificationModel);
+        }
+
+        intiRecView(clientNotificationModels);
+    }
+
+    public void intiRecView(ArrayList<ClientNotificationModel> clientNotificationModels) {
+
+        notification_Rv.setHasFixedSize(false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        notification_Rv.setLayoutManager(layoutManager);
+
+        clientNotificationAdapter = new ClientNotificationAdapter(getActivity(), clientNotificationModels, this);
+
+        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider_height));
+
+        notification_Rv.addItemDecoration(itemDecorator);
+
+        notification_Rv.setAdapter(clientNotificationAdapter);
+
     }
 
     public void setFragment(Fragment fragment) {
@@ -97,4 +89,5 @@ public class WinchesListFragment extends Fragment implements AdapterView.OnItemC
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 }

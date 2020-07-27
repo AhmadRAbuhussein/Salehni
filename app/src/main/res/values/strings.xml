@@ -89,6 +89,9 @@
     <string name="my_request">My Request</string>
     <string name="request_offers">Request Offers</string>
     <string name="winches_list">Winches List</string>
+    <string name="mechanic_name">Mechanic Name</string>
+    <string name="send_offer">Send you an offer about you request</string>
+    <string name="notification">Notifications</string>
 
 
 </resources>
