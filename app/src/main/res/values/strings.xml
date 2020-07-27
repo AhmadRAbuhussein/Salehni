@@ -81,6 +81,14 @@
     <string name="total">Total</string>
     <string name="accept_offer">Accept Offer</string>
     <string name="num65">65 JD</string>
+    <string name="driver_name">Driver Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="call">Call</string>
+    <string name="driver1">Driver Name1</string>
+    <string name="numb079">079xxxxxxx</string>
+    <string name="my_request">My Request</string>
+    <string name="request_offers">Request Offers</string>
+    <string name="winches_list">Winches List</string>
 
 
 </resources>

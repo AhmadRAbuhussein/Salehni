@@ -278,7 +278,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/send_request_Ll"
+                    android:id="@+id/acceptOffer_Ll"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_marginTop="@dimen/_20sdp"
@@ -293,7 +293,6 @@
                         android:layout_width="@dimen/_15sdp"
                         android:layout_height="@dimen/_15sdp"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/_2sdp"
                         android:background="@drawable/check"
                         android:clickable="false"
                         android:focusable="false"

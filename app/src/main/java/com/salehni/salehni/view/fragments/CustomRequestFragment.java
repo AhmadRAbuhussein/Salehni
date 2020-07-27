@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.CustomRequestRecyViewAdapter;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.CustomRequestModel;
@@ -45,6 +46,13 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.send_request));
     }
 
     private void testingData() {

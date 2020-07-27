@@ -16,26 +16,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 
-import com.salehni.salehni.data.model.MyRequestModel;
+import com.salehni.salehni.data.model.ReuqestOffersModel;
 
+import com.salehni.salehni.data.model.WinchesListModel;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
-import com.salehni.salehni.view.adapters.MyRequestAdapter;
+import com.salehni.salehni.view.adapters.RequestOffersRecyViewAdapter;
+import com.salehni.salehni.view.adapters.WinchesListAdapter;
 
 import java.util.ArrayList;
 
+public class WinchesListFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-public class MyRequestFragment extends Fragment implements AdapterView.OnItemClickListener {
-
-    RecyclerView requests_Rv;
-    MyRequestAdapter myRequestAdapter;
-    ArrayList<MyRequestModel> myRequestModels;
+    RecyclerView winches_Rv;
+    WinchesListAdapter winchesListAdapter;
+    ArrayList<WinchesListModel> winchesListModels;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_request, container, false);
-
-        requests_Rv = (RecyclerView) view.findViewById(R.id.requests_Rv);
+        View view = inflater.inflate(R.layout.fragment_winches_list, container, false);
+        winches_Rv = (RecyclerView) view.findViewById(R.id.winches_Rv);
+        winches_Rv.setNestedScrollingEnabled(false);
         testingData();
+
 
         return view;
     }
@@ -44,47 +46,45 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     public void onResume() {
         super.onResume();
 
-        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.my_request));
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-        RequestOffersFragment requestOffersFragment = new RequestOffersFragment();
-        setFragment(requestOffersFragment);
-
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.winches_list));
     }
 
     private void testingData() {
 
-        myRequestModels = new ArrayList<>();
+        winchesListModels = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
-            MyRequestModel myRequestModel = new MyRequestModel();
-            myRequestModel.setId(i + 1);
+            WinchesListModel winchesListModel = new WinchesListModel();
+            winchesListModel.setId(i + 1);
 
-            myRequestModels.add(myRequestModel);
+            winchesListModels.add(winchesListModel);
         }
 
-        intiRecView(myRequestModels);
+        intiRecView(winchesListModels);
     }
 
-    public void intiRecView(ArrayList<MyRequestModel> myRequestModels) {
+    public void intiRecView(ArrayList<WinchesListModel> winchesListModels) {
 
-        requests_Rv.setHasFixedSize(false);
+        winches_Rv.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        requests_Rv.setLayoutManager(layoutManager);
+        winches_Rv.setLayoutManager(layoutManager);
 
-        myRequestAdapter = new MyRequestAdapter(getActivity(), myRequestModels, this);
+        winchesListAdapter = new WinchesListAdapter(getActivity(), winchesListModels, this);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider_height));
 
-        requests_Rv.addItemDecoration(itemDecorator);
+        winches_Rv.addItemDecoration(itemDecorator);
 
 
-        requests_Rv.setAdapter(myRequestAdapter);
+        winches_Rv.setAdapter(winchesListAdapter);
 
+
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
     }
 
@@ -95,5 +95,4 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 }

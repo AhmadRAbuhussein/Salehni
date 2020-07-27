@@ -18,6 +18,7 @@ import com.salehni.salehni.R;
 
 import com.salehni.salehni.data.model.ReuqestOffersModel;
 
+import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.RequestOffersDetailsAdapter;
 import com.salehni.salehni.view.adapters.RequestOffersRecyViewAdapter;
 
@@ -38,6 +39,13 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
 
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.request_offers));
     }
 
     private void testingData() {

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_25sdp"
+    android:background="@color/text_on_black_bg"
+    android:gravity="center"
+    android:id="@+id/container_Ll"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/_5sdp"
+    android:paddingRight="@dimen/_5sdp"
+    android:weightSum="100">
+
+    <TextView
+        android:id="@+id/driver_name_Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="60"
+        android:text="@string/driver1"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp" />
+
+    <TextView
+        android:id="@+id/phone_number_Tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="40"
+        android:text="@string/numb079"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp" />
+
+
+    <LinearLayout
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/details_Iv"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:src="@drawable/call" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
