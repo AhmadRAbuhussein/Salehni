@@ -103,6 +103,10 @@
     <string name="price_here">Price Here</string>
     <string name="send_voice_note">Send voice note</string>
     <string name="send_your_offer">Send your offer</string>
+    <string name="sound">Sound 00:30 |1|</string>
+    <string name="listen"><u>Listen</u></string>
+    <string name="clock">00:01</string>
+    <string name="clock1">00:30</string>
 
 
 </resources>
