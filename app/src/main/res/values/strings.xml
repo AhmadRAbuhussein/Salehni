@@ -98,6 +98,11 @@
     <string name="watch"><u>Watch</u></string>
     <string name="video">Video |</string>
     <string name="write_offer">Write your offer</string>
+    <string name="person_name">Person Name</string>
+    <string name="request11111">Request 111</string>
+    <string name="price_here">Price Here</string>
+    <string name="send_voice_note">Send voice note</string>
+    <string name="send_your_offer">Send your offer</string>
 
 
 </resources>
