@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
@@ -30,12 +31,23 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
     MechanicRequestAdapter mechanicRequestAdapter;
     ArrayList<MechanicRequestModel> mechanicRequestModels;
 
+    LinearLayout send_request_Ll;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mechanic_send_request, container, false);
 
         img_recycler_view = (RecyclerView) view.findViewById(R.id.img_recycler_view);
+        send_request_Ll = (LinearLayout) view.findViewById(R.id.send_request_Ll);
         testingData();
+
+        send_request_Ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                WriteYourOfferFragment writeYourOfferFragment = new WriteYourOfferFragment();
+                setFragment(writeYourOfferFragment);
+            }
+        });
 
         return view;
     }

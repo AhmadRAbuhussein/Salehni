@@ -92,7 +92,7 @@
                     <ImageView
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
-                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginLeft="@dimen/_4sdp"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:src="@drawable/note" />
 
@@ -103,7 +103,7 @@
                         android:gravity="top"
                         android:hint="@string/notes"
                         android:minLines="7"
-                        android:paddingLeft="@dimen/_30sdp"
+                        android:paddingLeft="@dimen/_27sdp"
                         android:paddingTop="@dimen/_10sdp"
                         android:textColor="@color/white"
                         android:textColorHint="@color/white"
