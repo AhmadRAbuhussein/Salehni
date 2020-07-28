@@ -50,6 +50,8 @@ public class MechanicNotificationFragment extends Fragment implements AdapterVie
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+        MechanicRequestFragment mechanicRequestFragment = new MechanicRequestFragment();
+        setFragment(mechanicRequestFragment);
 
     }
 
