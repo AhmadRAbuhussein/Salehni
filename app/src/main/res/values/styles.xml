@@ -8,4 +8,9 @@
         <item name="otpViewStyle">@style/OtpWidget.OtpView</item>
     </style>
 
+    <style name="MyRadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="buttonTint">@drawable/shape_radio_button</item>
+        <item name="background">@null</item>
+    </style>
+
 </resources>

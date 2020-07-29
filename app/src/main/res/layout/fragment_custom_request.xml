@@ -24,30 +24,45 @@
             android:paddingLeft="@dimen/_10sdp"
             android:paddingRight="@dimen/_10sdp">
 
-            <RadioGroup
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="100">
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:layout_width="0dp"
+                <RadioGroup
+                    android:id="@+id/radioGroup1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:text="@string/fix_at_your_location"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9ssp"
-                    app:buttonTint="@color/text_on_black_bg" />
+                    android:orientation="horizontal"
+                    android:background="@color/text_on_white_bg"
+                    android:weightSum="100">
 
-                <androidx.appcompat.widget.AppCompatRadioButton
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="50"
-                    android:text="@string/fix_at_mechanic_location"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_9ssp"
-                    app:buttonTint="@color/text_on_black_bg" />
-            </RadioGroup>
+                    <RadioButton
+                        android:id="@+id/radio0"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:button="@drawable/radio_checked"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="@string/fix_at_your_location"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8ssp" />
+
+                    <RadioButton
+                        android:id="@+id/radio1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:button="@drawable/radio_unchecked"
+                        android:paddingLeft="@dimen/_5sdp"
+                        android:text="@string/fix_at_mechanic_location"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_8ssp" />
+
+                </RadioGroup>
+
+            </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -86,7 +101,7 @@
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:text="@string/images3"
                     android:textColor="@color/text_on_black_bg"
-                    android:textSize="@dimen/_7ssp" />
+                    android:textSize="@dimen/_10ssp" />
 
 
             </FrameLayout>
@@ -140,7 +155,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/video1"
                         android:textColor="@color/text_on_black_bg"
-                        android:textSize="@dimen/_7ssp" />
+                        android:textSize="@dimen/_10ssp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -148,7 +163,7 @@
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/retake"
                         android:textColor="@color/blue"
-                        android:textSize="@dimen/_7ssp" />
+                        android:textSize="@dimen/_10ssp" />
 
 
                 </LinearLayout>
@@ -183,11 +198,11 @@
                 android:layout_height="wrap_content"
                 android:text="@string/amman_jordan"
                 android:textColor="@color/text_on_black_bg"
-                android:textSize="@dimen/_8ssp" />
+                android:textSize="@dimen/_10ssp" />
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_height="@dimen/_110sdp"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/shape_no_corners"
                 android:gravity="top"
@@ -204,11 +219,11 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_30sdp"
                 android:background="@drawable/shape_btn_red_bg"
-                android:gravity="center"
-                android:orientation="horizontal"
                 android:clickable="true"
+                android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:focusable="true">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
@@ -216,21 +231,21 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="@dimen/_4sdp"
                     android:background="@drawable/send_request_white"
-                    android:focusableInTouchMode="false"
+                    android:clickable="false"
                     android:focusable="false"
-                    android:clickable="false" />
+                    android:focusableInTouchMode="false" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:text="@string/send_request"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_11ssp"
-                    android:focusableInTouchMode="false"
-                    android:focusable="false"
-                    android:clickable="false" />
+                    android:textSize="@dimen/_11ssp" />
 
             </LinearLayout>
 

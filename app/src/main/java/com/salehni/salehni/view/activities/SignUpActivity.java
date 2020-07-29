@@ -1,5 +1,6 @@
 package com.salehni.salehni.view.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,12 +12,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.salehni.salehni.R;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 public class SignUpActivity extends AppCompatActivity {
 
     Button sign_up_Btn;
     ImageView remeberMeCheckbox;
 
     boolean isRemember = false;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

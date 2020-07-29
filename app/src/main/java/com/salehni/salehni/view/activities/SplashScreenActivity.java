@@ -1,5 +1,6 @@
 package com.salehni.salehni.view.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,7 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.salehni.salehni.R;
 import com.salehni.salehni.util.Constants;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 public class SplashScreenActivity extends AppCompatActivity {
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

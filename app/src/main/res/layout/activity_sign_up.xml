@@ -69,7 +69,7 @@
                         android:singleLine="true"
                         android:imeOptions="actionNext"
                         android:textCursorDrawable="@null"
-                        android:inputType="textCapWords" />
+                        android:inputType="textCapWords|textNoSuggestions" />
 
                     <ImageView
                         android:layout_width="@dimen/_12sdp"
@@ -375,6 +375,29 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_11ssp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_5sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/You_have_an_account_login."
+                    android:textColor="@color/white"
+                    android:layout_marginRight="@dimen/_1sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login."
+                    android:textColor="@color/links_and_buttons"
+                    android:layout_marginLeft="@dimen/_1sdp" />
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"

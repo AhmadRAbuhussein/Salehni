@@ -1,6 +1,7 @@
 package com.salehni.salehni.view.adapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,6 +74,15 @@ public class MyRequestAdapter extends
     public void onBindViewHolder(MyRequestAdapter.MyViewHolder holder, int position) {
 
         MyRequestModel myRequestModel = myRequestModels.get(position);
+
+        if (position == 0) {
+            holder.container_Ll.setBackground(context.getResources().getDrawable(R.drawable.shape_my_request_green));
+            holder.clock.setTextColor(context.getResources().getColor(R.color.green_cards));
+        } else {
+            holder.container_Ll.setBackground(context.getResources().getDrawable(R.drawable.shape_my_request));
+            holder.clock.setTextColor(context.getResources().getColor(R.color.clock_color));
+
+        }
 
     }
 

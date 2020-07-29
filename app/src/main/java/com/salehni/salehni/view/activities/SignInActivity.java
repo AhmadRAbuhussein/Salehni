@@ -1,5 +1,6 @@
 package com.salehni.salehni.view.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.salehni.salehni.R;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 public class SignInActivity extends AppCompatActivity {
 
     TextView sign_up_Tv;
@@ -19,6 +22,11 @@ public class SignInActivity extends AppCompatActivity {
     Button login_Btn;
 
     boolean isRemember = false;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
 
 
     @Override

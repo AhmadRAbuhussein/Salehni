@@ -107,6 +107,8 @@
     <string name="listen"><u>Listen</u></string>
     <string name="clock">00:01</string>
     <string name="clock1">00:30</string>
+    <string name="You_have_an_account_login.">You have an account?</string>
+    <string name="login."><u>Login.</u></string>
 
 
 </resources>

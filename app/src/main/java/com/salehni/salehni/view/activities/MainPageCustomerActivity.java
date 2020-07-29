@@ -1,12 +1,15 @@
 package com.salehni.salehni.view.activities;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,6 +19,8 @@ import com.salehni.salehni.view.fragments.CustomRequestFragment;
 import com.salehni.salehni.view.fragments.QuickRequestFragment;
 import com.salehni.salehni.R;
 
+import io.github.inflationx.viewpump.ViewPumpContextWrapper;
+
 public class MainPageCustomerActivity extends AppCompatActivity {
 
     ListView leftDrawer;
@@ -24,6 +29,11 @@ public class MainPageCustomerActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     FrameLayout mainFrameLayout;
     public static TextView title_Tv;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,21 +48,21 @@ public class MainPageCustomerActivity extends AppCompatActivity {
 
         CustomRequestFragment customRequestFragment = new CustomRequestFragment();
         setFragment(customRequestFragment);
+        menu_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-//        menu_Btn.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View view) {
-////
-////
-////                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-////                    drawerLayout.closeDrawer(GravityCompat.START);
-////                } else {
-////                    drawerLayout.openDrawer(GravityCompat.START);
-////
-////                }
-////            }
-////        });
+
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                } else {
+                    drawerLayout.openDrawer(GravityCompat.START);
+
+                }
+            }
+        });
     }
+
 
     public void setFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();

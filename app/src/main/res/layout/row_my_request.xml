@@ -5,8 +5,8 @@
     android:layout_height="@dimen/_50sdp"
     android:background="@drawable/shape_my_request"
     android:orientation="horizontal"
-    android:paddingLeft="@dimen/_5sdp"
-    android:paddingRight="@dimen/_5sdp">
+    android:paddingLeft="@dimen/_10sdp"
+    android:paddingRight="@dimen/_10sdp">
 
 
     <ImageView
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/am_11_30"
-            android:textColor="@color/white"
+            android:textColor="@color/clock_color"
             android:textSize="@dimen/_7ssp" />
 
     </LinearLayout>
