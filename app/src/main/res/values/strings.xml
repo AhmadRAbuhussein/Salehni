@@ -108,7 +108,27 @@
     <string name="clock">00:01</string>
     <string name="clock1">00:30</string>
     <string name="You_have_an_account_login.">You have an account?</string>
-    <string name="login."><u>Login.</u></string>
+    <string name="my_prof">My Profile</string>
+    <string name="privacy_policy">Privacy and Policy</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="language">Language</string>
+    <string name="logout">Logout</string>
+    <string name="ahmadabuhussein">Ahmad Abuhussein</string>
+    <string name="full_name">Full Name</string>
+    <string name="edit_profile"><u>Edit Profile</u></string>
+    <string name="message">Message</string>
+    <string name="areyousureyouwanttologout">Are you sure you want to logout ?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="chooselanguage">Choose Language</string>
+    <string name="terms_condition_text">Welcome to Salehni!
 
+These terms and conditions outline the rules and regulations for the use of Salehni application.
+
+By accessing this application we assume you accept these terms and conditions. Do not continue to use Salehni if you do not agree to take all of the terms and conditions stated on this page.
+
+The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice and all Agreements: “Client”, “You” and “Your” refers to you, the person log on this application and compliant to the Company\'s terms and conditions. “The Company”, “Ourselves”, “We”, “Our” and “Us”, refers to our Company. “Party”, “Parties”, or “Us”, refers to both the Client and ourselves. All terms refer to the offer, acceptance and consideration of payment necessary to undertake the process of our assistance to the Client in the most appropriate manner for the express purpose of meeting the Client\'s needs in respect of provision of the Company\'s stated services, in accordance with and subject to, prevailing law of Netherlands. Any use of the above terminology or other words in the singular, plural, capitalization and/or he/she or they, are taken as interchangeable and therefore as referring to same.</string>
+
+    <string name="send">send</string>
 
 </resources>

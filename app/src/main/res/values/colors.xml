@@ -16,6 +16,8 @@
     <color name="grey1">#313e4f</color>
     <color name="clock_color">#2b353f</color>
     <color name="green_cards">#b6e1c8</color>
+    <color name="orange">#ffa500</color>
+    <color name="edit_prof">#78bcff</color>
 
 
 </resources>
