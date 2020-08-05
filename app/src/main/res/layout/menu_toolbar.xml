@@ -8,17 +8,13 @@
     android:orientation="vertical">
 
 
-    <com.makeramen.roundedimageview.RoundedImageView
+    <ImageView
         android:id="@+id/my_prof_logo"
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_80sdp"
         android:layout_gravity="center"
         android:scaleType="fitXY"
-        android:src="@drawable/menu_logo"
-        app:riv_border_color="@color/white"
-        app:riv_border_width="@dimen/_2sdp"
-        app:riv_mutate_background="true"
-        app:riv_oval="true" />
+        android:src="@drawable/menu_logo" />
 
     <TextView
         android:layout_width="wrap_content"
