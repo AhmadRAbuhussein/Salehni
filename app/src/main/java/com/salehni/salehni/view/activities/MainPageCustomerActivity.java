@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 public class MainPageCustomerActivity extends AppCompatActivity {
 
     ListView leftDrawer;
-    Button menu_Btn;
+    LinearLayout menu_Btn;
     ListViewDrawerAdapter listViewDrawerAdapter;
     DrawerLayout drawerLayout;
     FrameLayout mainFrameLayout;

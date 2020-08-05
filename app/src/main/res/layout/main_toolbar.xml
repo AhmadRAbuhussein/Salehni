@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_40sdp"
-    android:paddingRight="@dimen/_10sdp"
-    android:paddingLeft="@dimen/_10sdp">
+    android:layout_height="@dimen/_40sdp">
 
-
-    <Button
+    <LinearLayout
         android:id="@+id/menu_Btn"
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_10sdp"
-        android:background="@drawable/menu_burger"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/_10sdp"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_10sdp"
+            android:background="@drawable/menu_burger" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/title_Tv"
@@ -29,7 +32,8 @@
         android:layout_height="@dimen/_20sdp"
         android:background="@drawable/notifications_bill"
         android:layout_centerVertical="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/_10sdp" />
 
 
 </RelativeLayout>
