@@ -151,13 +151,13 @@ public class SignUpActivity extends AppCompatActivity {
             Global.toast(this, getResources().getString(R.string.enter_your_ps));
             validation = false;
         } else if (TextUtils.isEmpty(confirm_ps_Et.getText().toString().trim())) {
-            Global.toast(this, getResources().getString(R.string.confrim_pass));
+            Global.toast(this, getResources().getString(R.string.confrim_ps));
             validation = false;
         } else if (password_Et.getText().toString().trim().length() <= 4) {
-            Global.toast(this, getResources().getString(R.string.confrim_pass));// sawee al toast
+            Global.toast(this, getResources().getString(R.string.password_more_than_4));// sawee al toast
             validation = false;
         } else if (!password_Et.getText().toString().trim().equalsIgnoreCase(confirm_ps_Et.getText().toString().trim())) {
-            Global.toast(this, getResources().getString(R.string.confrim_pass));// sawee al toast
+            Global.toast(this, getResources().getString(R.string.confrim_ps));// sawee al toast
             validation = false;
         }
 

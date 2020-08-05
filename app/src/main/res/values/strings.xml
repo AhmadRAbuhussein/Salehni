@@ -136,5 +136,6 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
     <string name="enter_your_number">Enter Your Number</string>
     <string name="enter_your_ps">Enter Your Password</string>
     <string name="confrim_ps">Confirm Your Password</string>
+    <string name="password_more_than_4">Password must be more than 4 characters</string>
 
 </resources>
