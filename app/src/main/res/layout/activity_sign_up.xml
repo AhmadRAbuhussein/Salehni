@@ -56,6 +56,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/fullName_Et"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
@@ -122,6 +123,7 @@
                             android:src="@drawable/jordan_icon" />
 
                         <TextView
+                            android:id="@+id/c_code_Tv"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/_5sdp"
@@ -155,6 +157,7 @@
                         android:orientation="horizontal">
 
                         <EditText
+                            android:id="@+id/phNo_Tv"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_gravity="center"
@@ -203,6 +206,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/email_Et"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
@@ -249,6 +253,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/password_Et"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"
@@ -295,6 +300,7 @@
                     android:orientation="horizontal">
 
                     <EditText
+                        android:id="@+id/confirm_ps_Et"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_centerVertical="true"

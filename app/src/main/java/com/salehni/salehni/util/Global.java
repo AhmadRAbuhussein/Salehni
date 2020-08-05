@@ -115,17 +115,18 @@ public class Global {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-//    public static void progress(Activity activity) {
-//        progressBar = ProgressDialog.show(activity, null, null, false, true);
-//        progressBar.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        progressBar.setContentView(R.layout.progressbar);
-//        progressBar.setCancelable(false);
-//    }
-//    public static void progressDismiss() {
-//        if (progressBar != null) {
-//            progressBar.dismiss();
-//        }
-//
-//    }
+    public static void progress(Activity activity) {
+        progressBar = ProgressDialog.show(activity, null, null, false, true);
+        progressBar.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        progressBar.setContentView(R.layout.progressbar);
+        progressBar.setCancelable(false);
+    }
+
+    public static void progressDismiss() {
+        if (progressBar != null) {
+            progressBar.dismiss();
+        }
+
+    }
 
 }
