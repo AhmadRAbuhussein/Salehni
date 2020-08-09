@@ -10,5 +10,8 @@ public class Constants {
     public static final String main_url = "https://api.mocki.io/v1/af0c4690/";
     public static final String signup_Url = "signup";
 
+    //putExtras
+    public static final String otp_key = "otp_key";
+
 
 }

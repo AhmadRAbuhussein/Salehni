@@ -138,4 +138,7 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
     <string name="confrim_ps">Confirm Your Password</string>
     <string name="password_more_than_4">Password must be more than 4 characters</string>
 
+    <string name="searchForCountry">Search for country</string>
+    <string name="check_privacy_and_policy">Please check privacy and policy</string>
+
 </resources>

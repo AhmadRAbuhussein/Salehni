@@ -11,17 +11,19 @@ import com.salehni.salehni.R;
 import com.salehni.salehni.data.api.ApiData;
 import com.salehni.salehni.data.api.InterfaceApi;
 import com.salehni.salehni.data.model.SignupModel;
+import com.salehni.salehni.data.model.SignupStatusModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
 
-    public MutableLiveData<Boolean> booleanMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<SignupStatusModel> signupStatusModelMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> showProgressDialogMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<String> showToastMutableLiveData = new MutableLiveData<>();
 
@@ -39,6 +41,8 @@ public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
 
             showProgressDialogMutableLiveData.setValue(true);
 
+            Map<String, String> headerParams = new HashMap<String, String>();
+
             JSONObject jsonObject = new JSONObject();
 
             try {
@@ -51,10 +55,11 @@ public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
                 e.printStackTrace();
             }
 
+            final String mRequestBody = jsonObject.toString();
 
             ApiData apiData = new ApiData();
 
-            apiData.getdata(this.getApplication(), this, Constants.main_url + Constants.signup_Url, null, jsonObject + "");
+            apiData.getdata(this.getApplication(), this, Constants.main_url + Constants.signup_Url, headerParams, mRequestBody);
 
 
         } else {
@@ -70,6 +75,8 @@ public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
 
         showProgressDialogMutableLiveData.setValue(false);
 
+        SignupStatusModel signupStatusModel = new SignupStatusModel();
+
         boolean status = false;
 
         try {
@@ -82,11 +89,14 @@ public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
             String token = dataJsonObject.getString("token");
             String otp = dataJsonObject.getString("otp");
 
+            signupStatusModel.setStatus(status);
+            signupStatusModel.setOtp(otp);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        booleanMutableLiveData.setValue(status);
+        signupStatusModelMutableLiveData.setValue(signupStatusModel);
 
     }
 
