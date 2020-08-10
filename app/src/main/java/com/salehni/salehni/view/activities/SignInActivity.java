@@ -132,7 +132,8 @@ public class SignInActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
 
-                }
+                } else
+                    Global.toast(SignInActivity.this, getResources().getString(R.string.enter_your_info));
             }
         });
 

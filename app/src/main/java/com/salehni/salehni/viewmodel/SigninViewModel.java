@@ -74,7 +74,8 @@ public class SigninViewModel extends AndroidViewModel implements InterfaceApi {
         boolean status = false;
 
         try {
-            JSONObject jsonObject = new JSONObject(response);
+            JSONObject jsonObject =
+                    new JSONObject(response);
 
             status = jsonObject.getBoolean("status");
 
