@@ -56,7 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     SignupViewModel signupViewModel;
 
-    static boolean isRemember = false;
+    boolean isRemember = false;
 
     TinyDB tinydb;
 

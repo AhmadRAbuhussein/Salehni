@@ -10,8 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.api.ApiData;
 import com.salehni.salehni.data.api.InterfaceApi;
-import com.salehni.salehni.data.model.SignupModel;
-import com.salehni.salehni.data.model.SignupStatusModel;
+import com.salehni.salehni.data.model.SigninModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 
@@ -21,21 +20,21 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
+public class SigninViewModel extends AndroidViewModel implements InterfaceApi {
 
-    public MutableLiveData<SignupStatusModel> signupStatusModelMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<Boolean> signinStatusModelMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> showProgressDialogMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<String> showToastMutableLiveData = new MutableLiveData<>();
 
     Context context;
 
-    public SignupViewModel(@NonNull Application application) {
+    public SigninViewModel(@NonNull Application application) {
         super(application);
 
         this.context = application.getApplicationContext();
     }
 
-    public void getData(SignupModel signupModel) {
+    public void getData(SigninModel signinModel) {
 
         if (Global.isNetworkAvailable(context)) {
 
@@ -46,11 +45,9 @@ public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
             JSONObject jsonObject = new JSONObject();
 
             try {
-                jsonObject.put("full_name", signupModel.getName());
-                jsonObject.put("mobile_number", signupModel.getPh_no());
-                jsonObject.put("country_code", signupModel.getC_code());
-                jsonObject.put("email", signupModel.getEmail());
-                jsonObject.put("password", signupModel.getPassword());
+                jsonObject.put("mobile_number", signinModel.getPhoneNumber());
+                jsonObject.put("country_code", signinModel.getCountry_code());
+                jsonObject.put("password", signinModel.getPassword());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -59,8 +56,7 @@ public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
 
             ApiData apiData = new ApiData();
 
-            apiData.getdata(this.getApplication(), this, Constants.main_url + Constants.signup_Url, headerParams, mRequestBody);
-
+            apiData.getdata(this.getApplication(), this, Constants.main_url + Constants.signin_Url, headerParams, mRequestBody);
 
         } else {
 
@@ -75,8 +71,6 @@ public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
 
         showProgressDialogMutableLiveData.setValue(false);
 
-        SignupStatusModel signupStatusModel = new SignupStatusModel();
-
         boolean status = false;
 
         try {
@@ -87,10 +81,6 @@ public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
             JSONObject dataJsonObject = jsonObject.getJSONObject("data");
 
             String token = dataJsonObject.getString("token");
-            String otp = dataJsonObject.getString("otp");
-
-            signupStatusModel.setStatus(status);
-            signupStatusModel.setOtp(otp);
 
             //TODO add token to tiny_DB
 
@@ -98,7 +88,7 @@ public class SignupViewModel extends AndroidViewModel implements InterfaceApi {
             e.printStackTrace();
         }
 
-        signupStatusModelMutableLiveData.setValue(signupStatusModel);
+        signinStatusModelMutableLiveData.setValue(status);
 
     }
 
