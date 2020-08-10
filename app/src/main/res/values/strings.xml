@@ -140,5 +140,7 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
 
     <string name="searchForCountry">Search for country</string>
     <string name="check_privacy_and_policy">Please check privacy and policy</string>
+    <string name="reset_code"><u>reset code</u></string>
+    <string name="otp_code">Code is Invalid</string>
 
 </resources>

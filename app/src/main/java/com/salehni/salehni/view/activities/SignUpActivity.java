@@ -176,6 +176,7 @@ public class SignUpActivity extends AppCompatActivity {
                     Intent intent = new Intent(SignUpActivity.this, VerifyAccountActivity.class);
                     intent.putExtra(Constants.otp_key, signupStatusModel.getOtp());
                     startActivity(intent);
+                    finish();
 
                 }
 
@@ -313,6 +314,13 @@ public class SignUpActivity extends AppCompatActivity {
         Global.dimBehind(popupWindow);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(SignUpActivity.this, SignInActivity.class);
+        startActivity(i);
+        finish();
+    }
 }
 
 
