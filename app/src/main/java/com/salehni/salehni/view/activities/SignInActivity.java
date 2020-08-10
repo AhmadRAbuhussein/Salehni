@@ -133,7 +133,7 @@ public class SignInActivity extends AppCompatActivity {
                     finish();
 
                 } else
-                    Global.toast(SignInActivity.this, getResources().getString(R.string.enter_your_info));
+                    Global.toast(SignInActivity.this, getResources().getString(R.string.loginWrong));
             }
         });
 

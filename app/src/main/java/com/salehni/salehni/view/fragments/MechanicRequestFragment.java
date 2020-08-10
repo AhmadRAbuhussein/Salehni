@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
@@ -17,10 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
-import com.salehni.salehni.data.model.CustomRequestModel;
 import com.salehni.salehni.data.model.MechanicRequestModel;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
-import com.salehni.salehni.view.adapters.CustomRequestRecyViewAdapter;
 import com.salehni.salehni.view.adapters.MechanicRequestAdapter;
 
 import java.util.ArrayList;

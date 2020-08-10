@@ -11,13 +11,13 @@ import android.widget.ImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
-import com.salehni.salehni.data.model.CustomRequestModel;
+import com.salehni.salehni.data.model.AccedentImagesModel;
 
 import java.util.ArrayList;
 
 public class CustomRequestRecyViewAdapter extends
         RecyclerView.Adapter<CustomRequestRecyViewAdapter.MyViewHolder> {
-    ArrayList<CustomRequestModel> customRequestModels;
+    ArrayList<AccedentImagesModel> customRequestModelRecyViews;
     private AdapterView.OnItemClickListener onItemClickListener;
 
     Context context;
@@ -53,10 +53,10 @@ public class CustomRequestRecyViewAdapter extends
     }
 
     public CustomRequestRecyViewAdapter(Context context,
-                                        ArrayList<CustomRequestModel> customRequestModels,
+                                        ArrayList<AccedentImagesModel> customRequestModelRecyViews,
                                         AdapterView.OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.customRequestModels = customRequestModels;
+        this.customRequestModelRecyViews = customRequestModelRecyViews;
         this.onItemClickListener = onItemClickListener;
 
     }
@@ -64,7 +64,7 @@ public class CustomRequestRecyViewAdapter extends
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        CustomRequestModel customRequestModel = customRequestModels.get(position);
+        AccedentImagesModel customRequestModelRecyView = customRequestModelRecyViews.get(position);
 
 //        holder.fix_pic_Iv.setImageBitmap(Global.convertStringToBitmap(fixingPicturesModel.getImg()));
 
@@ -73,7 +73,7 @@ public class CustomRequestRecyViewAdapter extends
 
     @Override
     public int getItemCount() {
-        return customRequestModels.size();
+        return customRequestModelRecyViews.size();
     }
 
     @Override
