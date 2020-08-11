@@ -64,6 +64,10 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
     FrameLayout video_Fl;
     PopupWindow popupWindow;
     TextView images_number;
+    TextView your_video_Tv;
+    TextView retake_Tv;
+
+    String selectedVideoPath = "";
 
     CustomRequestViewModel customRequestViewModel;
 
@@ -79,7 +83,32 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         images_number = (TextView) view.findViewById(R.id.images_number);
         video_Fl = (FrameLayout) view.findViewById(R.id.video_Fl);
 
+        your_video_Tv = (TextView) view.findViewById(R.id.your_video_Tv);
+        retake_Tv = (TextView) view.findViewById(R.id.retake_Tv);
+
         accedentImagesModels = new ArrayList<>();
+
+        your_video_Tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selectedVideoPath.length() > 0) {
+                    Intent intent = new Intent(getActivity(), VideoActivity.class);
+                    intent.putExtra(Constants.selectedVideoPath, selectedVideoPath);
+                    startActivity(intent);
+
+                }
+            }
+        });
+
+        retake_Tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                if (takeVideoIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivityForResult(takeVideoIntent, Constants.openVideo);
+                }
+            }
+        });
 
         takeImages_Fl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,9 +117,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
                 if (isCameraPermissionGranted()) {
 
                     takeImagePopup();
-
                 }
-
             }
         });
 
@@ -324,13 +351,16 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
             } else if (requestCode == Constants.openVideo) {
 
                 Uri selectedVideoUri = data.getData();
-                String selectedVideoPath = getRealPathFromURI(selectedVideoUri);
+                selectedVideoPath = getRealPathFromURI(selectedVideoUri);
                 Toast.makeText(getActivity(), selectedVideoPath, Toast.LENGTH_LONG).show();
 
                 if (selectedVideoPath.length() > 0) {
                     Intent intent = new Intent(getActivity(), VideoActivity.class);
                     intent.putExtra(Constants.selectedVideoPath, selectedVideoPath);
                     startActivity(intent);
+
+                    retake_Tv.setVisibility(View.VISIBLE);
+                    your_video_Tv.setText(getResources().getString(R.string.video1));
                 }
             }
 
