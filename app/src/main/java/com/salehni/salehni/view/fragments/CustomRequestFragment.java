@@ -214,7 +214,17 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+        int sremovePic_Iv_ID = R.id.removePic_Iv;
+
+        if (view.getId() == sremovePic_Iv_ID) {
+
+            accedentImagesModels.remove(position);
+
+            customRequestRecyViewAdapter.notifyDataSetChanged();
+
+        }
 
     }
 
@@ -346,6 +356,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
             }
 
         }
+
 
     }
 
