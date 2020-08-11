@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -46,6 +47,8 @@ import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.AccedentImagesModel;
 import com.salehni.salehni.viewmodel.CustomRequestViewModel;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -66,6 +69,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
     FrameLayout takeImages_Fl;
     PopupWindow popupWindow;
+    TextView images_number;
 
     CustomRequestViewModel customRequestViewModel;
 
@@ -78,6 +82,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         send_request_Ll = (LinearLayout) view.findViewById(R.id.send_request_Ll);
         img_recycler_view = (RecyclerView) view.findViewById(R.id.img_recycler_view);
         takeImages_Fl = (FrameLayout) view.findViewById(R.id.takeImages_Fl);
+        images_number = (TextView) view.findViewById(R.id.images_number);
 
         accedentImagesModels = new ArrayList<>();
 
@@ -356,6 +361,8 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
             }
 
         }
+
+        images_number.setText(accedentImagesModels.size() + " images");
 
 
     }
