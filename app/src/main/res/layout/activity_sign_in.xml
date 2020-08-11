@@ -77,7 +77,7 @@
                             android:layout_marginTop="@dimen/_5sdp"
                             android:text="@string/jo_num"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_9ssp" />
+                            android:textSize="@dimen/_10ssp" />
 
                     </LinearLayout>
 
@@ -115,7 +115,7 @@
                             android:paddingTop="@dimen/_5sdp"
                             android:textColor="@color/white"
                             android:textColorHint="@color/text_on_black_bg"
-                            android:textSize="@dimen/_11ssp"
+                            android:textSize="@dimen/_10ssp"
                             android:textCursorDrawable="@null" />
 
                         <ImageView

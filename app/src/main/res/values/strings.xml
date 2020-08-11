@@ -143,5 +143,8 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
     <string name="reset_code"><u>reset code</u></string>
     <string name="otp_code">Code is Invalid</string>
     <string name="loginWrong">Please check your mobile or password!</string>
+    <string name="selectyourphoto">Select your photo</string>
+    <string name="opencamera">Open Camera</string>
+    <string name="choosefromgallery">Choose from gallery</string>
 
 </resources>

@@ -15,5 +15,9 @@ public class Constants {
     //putExtras
     public static final String otp_key = "otp_key";
 
+    //requestCode
+    public static final int openCamera = 1;
+    public static final int openGallery = 2;
+
 
 }

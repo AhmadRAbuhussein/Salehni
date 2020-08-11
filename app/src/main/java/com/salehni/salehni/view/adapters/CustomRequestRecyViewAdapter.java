@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.AccedentImagesModel;
+import com.salehni.salehni.util.Global;
 
 import java.util.ArrayList;
 
@@ -64,9 +65,9 @@ public class CustomRequestRecyViewAdapter extends
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        AccedentImagesModel customRequestModelRecyView = customRequestModelRecyViews.get(position);
+        AccedentImagesModel accedentImagesModel = customRequestModelRecyViews.get(position);
 
-//        holder.fix_pic_Iv.setImageBitmap(Global.convertStringToBitmap(fixingPicturesModel.getImg()));
+        holder.fix_pic_Iv.setImageBitmap(Global.convertStringToBitmap(accedentImagesModel.getImg()));
 
 
     }
