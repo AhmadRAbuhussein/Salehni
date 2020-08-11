@@ -14,10 +14,13 @@ public class Constants {
 
     //putExtras
     public static final String otp_key = "otp_key";
+    public static final String selectedVideoPath = "selectedVideoPath";
+
 
     //requestCode
     public static final int openCamera = 1;
     public static final int openGallery = 2;
+    public static final int openVideo = 3;
 
 
 }

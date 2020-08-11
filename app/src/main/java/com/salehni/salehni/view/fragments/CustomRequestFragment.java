@@ -12,7 +12,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Display;
@@ -26,6 +25,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -42,23 +42,16 @@ import com.salehni.salehni.data.model.CustomRequestModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
+import com.salehni.salehni.view.activities.VideoActivity;
 import com.salehni.salehni.view.adapters.CustomRequestRecyViewAdapter;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.AccedentImagesModel;
 import com.salehni.salehni.viewmodel.CustomRequestViewModel;
 
-import org.w3c.dom.Text;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
-import static android.content.ContentValues.TAG;
 
 public class CustomRequestFragment extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -68,6 +61,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
     LinearLayout send_request_Ll;
 
     FrameLayout takeImages_Fl;
+    FrameLayout video_Fl;
     PopupWindow popupWindow;
     TextView images_number;
 
@@ -83,6 +77,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         img_recycler_view = (RecyclerView) view.findViewById(R.id.img_recycler_view);
         takeImages_Fl = (FrameLayout) view.findViewById(R.id.takeImages_Fl);
         images_number = (TextView) view.findViewById(R.id.images_number);
+        video_Fl = (FrameLayout) view.findViewById(R.id.video_Fl);
 
         accedentImagesModels = new ArrayList<>();
 
@@ -96,6 +91,16 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
                 }
 
+            }
+        });
+
+        video_Fl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                if (takeVideoIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+                    startActivityForResult(takeVideoIntent, Constants.openVideo);
+                }
             }
         });
 
@@ -227,6 +232,8 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
             accedentImagesModels.remove(position);
 
+            images_number.setText(accedentImagesModels.size() + " images");
+
             customRequestRecyViewAdapter.notifyDataSetChanged();
 
         }
@@ -259,16 +266,6 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         open_cam_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                File f = new File(Environment.getExternalStorageDirectory(), "temp.jpg");
-////                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
-//                try {
-//                    intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(createImageFile()));
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                startActivityForResult(intent, Constants.openCamera);
 
                 Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
@@ -324,9 +321,32 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 //                IDProf.setImageBitmap(thumbnail);
                 String mImageString = Global.convertBitmabToString(thumbnail);
                 sendImageToRecyView(mImageString);
+            } else if (requestCode == Constants.openVideo) {
+
+                Uri selectedVideoUri = data.getData();
+                String selectedVideoPath = getRealPathFromURI(selectedVideoUri);
+                Toast.makeText(getActivity(), selectedVideoPath, Toast.LENGTH_LONG).show();
+
+                if (selectedVideoPath.length() > 0) {
+                    Intent intent = new Intent(getActivity(), VideoActivity.class);
+                    intent.putExtra(Constants.selectedVideoPath, selectedVideoPath);
+                    startActivity(intent);
+                }
             }
+
+        } else if (resultCode == RESULT_CANCELED) {
+
+            // User cancelled the video capture
+            Toast.makeText(getActivity(), "User cancelled the video capture.", Toast.LENGTH_LONG).show();
+
+        } else {
+            // Video capture failed, advise user
+            Toast.makeText(getActivity(), "Video capture failed.", Toast.LENGTH_LONG).show();
         }
+
+
     }
+
 
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
@@ -363,8 +383,21 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         }
 
         images_number.setText(accedentImagesModels.size() + " images");
+    }
 
-
+    public String getRealPathFromURI(Uri uri) {
+        if (uri == null) {
+            return null;
+        }
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            int column_index = cursor
+                    .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+        return uri.getPath();
     }
 
 }

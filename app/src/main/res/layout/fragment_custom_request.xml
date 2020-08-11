@@ -101,7 +101,7 @@
                     android:layout_gravity="right|bottom"
                     android:layout_marginEnd="@dimen/_5sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:text="@string/images3"
+                    android:text="@string/images0"
                     android:textColor="@color/text_on_black_bg"
                     android:textSize="@dimen/_10ssp" />
 
@@ -117,6 +117,7 @@
 
 
             <FrameLayout
+                android:id="@+id/video_Fl"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginTop="@dimen/_10sdp"
