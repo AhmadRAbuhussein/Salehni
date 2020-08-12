@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -335,6 +336,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         final View layout = inflater.inflate(R.layout.choose_photo_popup, null);
 
         popupWindow = new PopupWindow(layout);
+        popupWindow.setAnimationStyle(R.style.popup_window_animation);
         popupWindow.setWidth(width - 30);
         popupWindow.setHeight(height - 20);
         popupWindow.setFocusable(true);
@@ -345,6 +347,14 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
         Button open_cam_Btn = (Button) layout.findViewById(R.id.open_cam_Btn);
         Button gallery_Btn = (Button) layout.findViewById(R.id.gallery_Btn);
+        ImageView popupDismiss_Iv = (ImageView) layout.findViewById(R.id.popupDismiss_Iv);
+
+        popupDismiss_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
 
         open_cam_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
