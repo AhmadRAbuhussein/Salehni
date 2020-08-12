@@ -38,11 +38,12 @@ public class CustomRequestRecyViewAdapter extends
 
 
             container_Fl = (FrameLayout) view.findViewById(R.id.container_Fl);
-            fix_pic_Iv = (ImageView) view.findViewById(R.id.fix_pic_Iv);
+            fix_pic_Iv = (ImageView) view.findViewById(R.id.accedant_pic_Iv);
             removePic_Iv = (ImageView) view.findViewById(R.id.removePic_Iv);
 
             container_Fl.setOnClickListener(this);
             removePic_Iv.setOnClickListener(this);
+            fix_pic_Iv.setOnClickListener(this);
 
         }
 

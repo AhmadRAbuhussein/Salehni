@@ -53,7 +53,7 @@
                 android:text="@string/choosefromgallery"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
-                android:layout_marginTop="@dimen/_5sdp" />
+                android:layout_marginTop="@dimen/_10sdp" />
 
         </LinearLayout>
 

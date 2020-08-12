@@ -36,7 +36,7 @@ public class MechanicRequestAdapter extends
 
 
             container_Fl = (LinearLayout) view.findViewById(R.id.container_Fl);
-            fix_pic_Iv = (ImageView) view.findViewById(R.id.fix_pic_Iv);
+            fix_pic_Iv = (ImageView) view.findViewById(R.id.accedant_pic_Iv);
 
             container_Fl.setOnClickListener(this);
 

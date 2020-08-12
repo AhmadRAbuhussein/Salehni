@@ -301,15 +301,20 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-        int sremovePic_Iv_ID = R.id.removePic_Iv;
+        int removePic_Iv_ID = R.id.removePic_Iv;
+        int accedant_pic_Iv_ID = R.id.accedant_pic_Iv;
 
-        if (view.getId() == sremovePic_Iv_ID) {
+        if (view.getId() == removePic_Iv_ID) {
 
             accedentImagesModels.remove(position);
 
             images_number.setText(accedentImagesModels.size() + " images");
 
             customRequestRecyViewAdapter.notifyDataSetChanged();
+
+        } else if (view.getId() == accedant_pic_Iv_ID) {
+
+            showImage_popup(accedentImagesModels.get(position).getImg(), position);
 
         }
 
@@ -337,8 +342,8 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
         popupWindow = new PopupWindow(layout);
         popupWindow.setAnimationStyle(R.style.popup_window_animation);
-        popupWindow.setWidth(width - 30);
-        popupWindow.setHeight(height - 20);
+        popupWindow.setWidth(width);
+        popupWindow.setHeight(height);
         popupWindow.setFocusable(true);
         popupWindow.setTouchable(true);
         popupWindow.setOutsideTouchable(false);
@@ -541,6 +546,34 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
                 locationAddress_Tv.setText(Global.getAddressFromLatLon(getActivity(), latitude, longitude));
             }
         }
+    }
+
+    public void showImage_popup(String img, int position) {
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.show_image_popup, null);
+
+        popupWindow = new PopupWindow(layout);
+        popupWindow.setAnimationStyle(R.style.popup_window_animation);
+        popupWindow.setWidth(width);
+        popupWindow.setHeight(height);
+        popupWindow.setFocusable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+        popupWindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+
+        ImageView accident_Iv = (ImageView) layout.findViewById(R.id.accident_Iv);
+
+        accident_Iv.setImageBitmap(Global.convertStringToBitmap(img));
+
+        Global.dimBehind(popupWindow);
+
     }
 }
 
