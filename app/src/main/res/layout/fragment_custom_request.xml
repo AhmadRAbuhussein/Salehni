@@ -177,6 +177,7 @@
             </FrameLayout>
 
             <LinearLayout
+                android:id="@+id/location_Ll"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_marginTop="@dimen/_15sdp"
@@ -201,9 +202,9 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/locationAddress_Tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/amman_jordan"
                 android:textColor="@color/text_on_black_bg"
                 android:textSize="@dimen/_10ssp" />
 

@@ -9,10 +9,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -49,9 +53,11 @@ import com.salehni.salehni.data.model.AccedentImagesModel;
 import com.salehni.salehni.viewmodel.CustomRequestViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.LOCATION_SERVICE;
 
 public class CustomRequestFragment extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -66,12 +72,19 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
     TextView images_number;
     TextView your_video_Tv;
     TextView retake_Tv;
+    TextView locationAddress_Tv;
+    LinearLayout location_Ll;
+
+    private LocationManager locationManager;
+
+    double latitude = 0;
+    double longitude = 0;
+
+    boolean enabled;
 
     String selectedVideoPath = "";
 
     CustomRequestViewModel customRequestViewModel;
-
-    String mCurrentPhotoPath = "";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -82,11 +95,43 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         takeImages_Fl = (FrameLayout) view.findViewById(R.id.takeImages_Fl);
         images_number = (TextView) view.findViewById(R.id.images_number);
         video_Fl = (FrameLayout) view.findViewById(R.id.video_Fl);
-
+        location_Ll = (LinearLayout) view.findViewById(R.id.location_Ll);
         your_video_Tv = (TextView) view.findViewById(R.id.your_video_Tv);
         retake_Tv = (TextView) view.findViewById(R.id.retake_Tv);
+        locationAddress_Tv = (TextView) view.findViewById(R.id.locationAddress_Tv);
 
         accedentImagesModels = new ArrayList<>();
+
+        location_Ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                LocationManager service = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
+                enabled = service
+                        .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                if (!enabled) {
+                    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                } else {
+
+                    if (ContextCompat.checkSelfPermission(getActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                                Manifest.permission.ACCESS_FINE_LOCATION)) {
+                            ActivityCompat.requestPermissions(getActivity(),
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.openLocation);
+                        } else {
+                            ActivityCompat.requestPermissions(getActivity(),
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.openLocation);
+                        }
+                    } else {
+                        getCurrentLocation(getActivity());
+                    }
+                }
+
+            }
+        });
 
         your_video_Tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,6 +265,18 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
             }
+        } else if (requestCode == Constants.openLocation) {
+
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(getActivity(),
+                        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(), "Permission Granted", Toast.LENGTH_SHORT).show();
+
+                    getCurrentLocation(getActivity());
+                }
+            } else {
+                Toast.makeText(getActivity(), "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -236,18 +293,8 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
         img_recycler_view.addItemDecoration(itemDecorator);
 
-
         img_recycler_view.setAdapter(customRequestRecyViewAdapter);
 
-
-    }
-
-    public void setFragment(Fragment fragment) {
-        FragmentManager manager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainFrameLayout, fragment, null);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
     @Override
@@ -266,6 +313,15 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         }
 
     }
+
+    public void setFragment(Fragment fragment) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
 
     private void takeImagePopup() {
 
@@ -430,4 +486,51 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         return uri.getPath();
     }
 
+    public void getCurrentLocation(Context con) {
+        Log.d("Find Location", "in find_location");
+        String location_context = Context.LOCATION_SERVICE;
+        locationManager = (LocationManager) con.getSystemService(location_context);
+        List<String> providers = locationManager.getProviders(true);
+        for (String provider : providers) {
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            locationManager.requestLocationUpdates(provider, 1000, 0,
+                    new LocationListener() {
+
+                        public void onLocationChanged(Location location) {
+
+                            latitude = location.getLatitude();
+                            longitude = location.getLongitude();
+
+                            locationAddress_Tv.setText(Global.getAddressFromLatLon(getActivity(), latitude, longitude));
+                        }
+
+                        public void onProviderDisabled(String provider) {
+                        }
+
+                        public void onProviderEnabled(String provider) {
+                        }
+
+                        public void onStatusChanged(String provider, int status,
+                                                    Bundle extras) {
+                        }
+                    });
+            Location location = locationManager.getLastKnownLocation(provider);
+            if (location != null) {
+                latitude = location.getLatitude();
+                longitude = location.getLongitude();
+
+                locationAddress_Tv.setText(Global.getAddressFromLatLon(getActivity(), latitude, longitude));
+            }
+        }
+    }
 }
+
