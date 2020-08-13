@@ -14,7 +14,7 @@
         android:id="@+id/driver_name_Tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="60"
+        android:layout_weight="65"
         android:text="@string/driver1"
         android:textColor="@color/white"
         android:textSize="@dimen/_10ssp" />
@@ -23,7 +23,7 @@
         android:id="@+id/phone_number_Tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="40"
+        android:layout_weight="35"
         android:text="@string/numb079"
         android:textColor="@color/white"
         android:textSize="@dimen/_10ssp" />
@@ -32,7 +32,6 @@
     <LinearLayout
         android:layout_width="@dimen/_40sdp"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:orientation="horizontal"
         android:paddingRight="@dimen/_5sdp">
 
