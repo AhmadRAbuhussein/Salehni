@@ -548,7 +548,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         }
     }
 
-    public void showImage_popup(String img, int position) {
+    public void showImage_popup(String img, final int position) {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -559,7 +559,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         final View layout = inflater.inflate(R.layout.show_image_popup, null);
 
         popupWindow = new PopupWindow(layout);
-        popupWindow.setAnimationStyle(R.style.popup_window_animation);
+        popupWindow.setAnimationStyle(R.style.popup_window_animation_zoom);
         popupWindow.setWidth(width);
         popupWindow.setHeight(height);
         popupWindow.setFocusable(true);
@@ -569,8 +569,24 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         popupWindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
 
         ImageView accident_Iv = (ImageView) layout.findViewById(R.id.accident_Iv);
+        Button remove_Btn = (Button) layout.findViewById(R.id.remove_Btn);
+        Button close_Btn = (Button) layout.findViewById(R.id.close_Btn);
 
         accident_Iv.setImageBitmap(Global.convertStringToBitmap(img));
+
+        close_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+
+        remove_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                accedentImagesModels.remove(position);
+            }
+        });
 
         Global.dimBehind(popupWindow);
 

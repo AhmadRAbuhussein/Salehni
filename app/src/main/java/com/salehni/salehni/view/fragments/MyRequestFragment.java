@@ -10,16 +10,23 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.salehni.salehni.R;
 
+import com.salehni.salehni.data.model.CustomRequestModel;
+import com.salehni.salehni.data.model.MyRequestFragModel;
 import com.salehni.salehni.data.model.MyRequestModel;
 
+import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.MyRequestAdapter;
+import com.salehni.salehni.viewmodel.MyRequestViewModel;
 
 import java.util.ArrayList;
 
@@ -30,13 +37,46 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     MyRequestAdapter myRequestAdapter;
     ArrayList<MyRequestModel> myRequestModels;
 
+    MyRequestViewModel myRequestViewModel;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_request, container, false);
 
         requests_Rv = (RecyclerView) view.findViewById(R.id.requests_Rv);
-        testingData();
+        //testingData();
 
+        myRequestViewModel = ViewModelProviders.of(getActivity()).get(MyRequestViewModel.class);
+        myRequestViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+
+                if (aBoolean) {
+                    Global.progress(getActivity());
+                } else {
+                    Global.progressDismiss();
+                }
+
+            }
+        });
+
+        myRequestViewModel.showToastMutableLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                Global.toast(getActivity().getApplicationContext(), s);
+
+            }
+        });
+
+        myRequestViewModel.arrayListMutableLiveData.observe(this, new Observer<MyRequestFragModel>() {
+            @Override
+            public void onChanged(MyRequestFragModel myRequestFragModel) {
+
+            }
+
+
+        });
         return view;
     }
 
@@ -94,6 +134,12 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
         transaction.replace(R.id.mainFrameLayout, fragment, null);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void setData(MyRequestFragModel myRequestFragModel) {
+        // team_name_tv.setText(myRequestFragModel.team_name);
+
+
     }
 
 }
