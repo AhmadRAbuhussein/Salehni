@@ -16,10 +16,8 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.salehni.salehni.R;
 
-import com.salehni.salehni.data.model.CustomRequestModel;
 import com.salehni.salehni.data.model.MyRequestFragModel;
 import com.salehni.salehni.data.model.MyRequestModel;
 
@@ -36,8 +34,10 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     RecyclerView requests_Rv;
     MyRequestAdapter myRequestAdapter;
     ArrayList<MyRequestModel> myRequestModels;
+    ArrayList<MyRequestFragModel> myRequestFragModels;
 
     MyRequestViewModel myRequestViewModel;
+    MyRequestFragModel myRequestFragModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -69,10 +69,24 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
             }
         });
 
-        myRequestViewModel.arrayListMutableLiveData.observe(this, new Observer<MyRequestFragModel>() {
+        myRequestViewModel.arrayListMutableLiveData.observe(this, new Observer<ArrayList<MyRequestModel>>() {
             @Override
-            public void onChanged(MyRequestFragModel myRequestFragModel) {
+            public void onChanged(ArrayList<MyRequestModel> leagueModelArrayList) {
+                if (leagueModelArrayList != null) {
 
+                    myRequestModels = leagueModelArrayList;
+
+
+                    if (myRequestAdapter != null) {
+
+
+                        myRequestAdapter.notifyDataSetChanged();
+                    } else {
+
+                        intiRecView(leagueModelArrayList);
+                    }
+
+                }
             }
 
 
@@ -84,7 +98,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     public void onResume() {
         super.onResume();
 
-        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.my_request));
+        myRequestViewModel.getData(myRequestFragModel);
     }
 
     @Override
@@ -95,19 +109,19 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
     }
 
-    private void testingData() {
-
-        myRequestModels = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            MyRequestModel myRequestModel = new MyRequestModel();
-            myRequestModel.setId(i + 1);
-
-            myRequestModels.add(myRequestModel);
-        }
-
-        intiRecView(myRequestModels);
-    }
+//    private void testingData() {
+//
+//        myRequestFragModels = new ArrayList<>();
+//
+//        for (int i = 0; i < 20; i++) {
+//            MyRequestModel myRequestModel = new MyRequestModel();
+//            myRequestModel.setId(i + 1);
+//
+//            myRequestFragModels.add(myRequestModel);
+//        }
+//
+//        intiRecView(myRequestFragModels);
+//    }
 
     public void intiRecView(ArrayList<MyRequestModel> myRequestModels) {
 
