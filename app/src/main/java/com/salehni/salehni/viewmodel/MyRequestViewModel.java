@@ -100,11 +100,9 @@ public class MyRequestViewModel extends AndroidViewModel implements InterfaceApi
 
                     myRequestModels.add(myRequestModel);
 
-                    showProgressDialogMutableLiveData.setValue(false);
                 }
             } else {
                 showToastMutableLiveData.setValue(error);
-                showProgressDialogMutableLiveData.setValue(false);
             }
 
         } catch (JSONException e) {

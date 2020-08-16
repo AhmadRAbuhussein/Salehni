@@ -20,6 +20,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -52,6 +54,8 @@ import com.salehni.salehni.view.adapters.CustomRequestRecyViewAdapter;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.AccedentImagesModel;
 import com.salehni.salehni.viewmodel.CustomRequestViewModel;
+
+import net.skoumal.fragmentback.BackFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,6 +90,46 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
     String selectedVideoPath = "";
 
     CustomRequestViewModel customRequestViewModel;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        customRequestViewModel = ViewModelProviders.of(getActivity()).get(CustomRequestViewModel.class);
+        customRequestViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+
+                if (aBoolean) {
+                    Global.progress(getActivity());
+                } else {
+                    Global.progressDismiss();
+                }
+
+            }
+        });
+
+        customRequestViewModel.showToastMutableLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                Global.toast(getActivity().getApplicationContext(), s);
+
+            }
+        });
+
+        customRequestViewModel.customRequestStatusModelMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean status) {
+
+                if (status) {
+                    MyRequestFragment myRequestFragment = new MyRequestFragment();
+                    setFragment(myRequestFragment, "myRequestFragment");
+
+                }
+            }
+        });
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -196,41 +240,6 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
             }
         });
 
-        customRequestViewModel = ViewModelProviders.of(getActivity()).get(CustomRequestViewModel.class);
-        customRequestViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-
-                if (aBoolean) {
-                    Global.progress(getActivity());
-                } else {
-                    Global.progressDismiss();
-                }
-
-            }
-        });
-
-        customRequestViewModel.showToastMutableLiveData.observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-
-                Global.toast(getActivity().getApplicationContext(), s);
-
-            }
-        });
-
-        customRequestViewModel.customRequestStatusModelMutableLiveData.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean status) {
-
-                if (status) {
-                    MyRequestFragment myRequestFragment = new MyRequestFragment();
-                    setFragment(myRequestFragment);
-
-                }
-            }
-        });
-
         return view;
     }
 
@@ -320,14 +329,14 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
     }
 
-    public void setFragment(Fragment fragment) {
+    private void setFragment(Fragment fragment, String tag) {
+
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.replace(R.id.mainFrameLayout, fragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
     }
-
 
     private void takeImagePopup() {
 
@@ -338,7 +347,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         int height = size.y;
 
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View layout = inflater.inflate(R.layout.choose_photo_popup, null);
+        final View layout = inflater.inflate(R.layout.popup_choose_photo, null);
 
         popupWindow = new PopupWindow(layout);
         popupWindow.setAnimationStyle(R.style.popup_window_animation);
@@ -599,5 +608,6 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
         customRequestRecyViewAdapter.notifyDataSetChanged();
     }
+
 }
 

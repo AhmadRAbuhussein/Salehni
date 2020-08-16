@@ -50,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText password_Et;
     EditText confirm_ps_Et;
     TextView c_code_Tv;
+    TextView login_Tv;
     LinearLayout countryCode_LL;
 
     PopupWindow popupWindow;
@@ -88,10 +89,19 @@ public class SignUpActivity extends AppCompatActivity {
         email_Et = findViewById(R.id.email_Et);
         password_Et = findViewById(R.id.password_Et);
         confirm_ps_Et = findViewById(R.id.confirm_ps_Et);
+        login_Tv = findViewById(R.id.login_Tv);
 
         remeberMeCheckbox = findViewById(R.id.remeberMeCheckbox);
 
         getDefaultCountryCodeValue();
+
+        login_Tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+                startActivity(intent);
+            }
+        });
 
         sign_up_Btn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,11 +1,10 @@
 package com.salehni.salehni.view.activities;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -33,9 +32,10 @@ import com.salehni.salehni.view.fragments.ContactUsFragment;
 import com.salehni.salehni.view.fragments.CustomRequestFragment;
 import com.salehni.salehni.view.fragments.MyAccountFragment;
 import com.salehni.salehni.view.fragments.PrivacyPolicyFragment;
-import com.salehni.salehni.view.fragments.QuickRequestFragment;
 import com.salehni.salehni.R;
 import com.salehni.salehni.view.fragments.TermsConditionFragment;
+
+import net.skoumal.fragmentback.BackFragmentHelper;
 
 import java.util.ArrayList;
 
@@ -51,6 +51,8 @@ public class MainPageCustomerActivity extends AppCompatActivity {
     public static TextView title_Tv;
 
     PopupWindow popupWindow;
+
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -69,7 +71,8 @@ public class MainPageCustomerActivity extends AppCompatActivity {
         title_Tv = findViewById(R.id.title_Tv);
 
         CustomRequestFragment customRequestFragment = new CustomRequestFragment();
-        setFragment(customRequestFragment);
+        replaceFragment(customRequestFragment, "customRequestFragment");
+
         menu_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,16 +138,16 @@ public class MainPageCustomerActivity extends AppCompatActivity {
                 }
                 if (position == 1) {
                     MyAccountFragment myAccountFragment = new MyAccountFragment();
-                    setFragment(myAccountFragment);
+                    replaceFragment(myAccountFragment, "myAccountFragment");
                 } else if (position == 2) {
                     TermsConditionFragment termsConditionFragment = new TermsConditionFragment();
-                    setFragment(termsConditionFragment);
+                    replaceFragment(termsConditionFragment, "termsConditionFragment");
                 } else if (position == 3) {
                     PrivacyPolicyFragment privacyPolicyFragment = new PrivacyPolicyFragment();
-                    setFragment(privacyPolicyFragment);
+                    replaceFragment(privacyPolicyFragment, "privacyPolicyFragment");
                 } else if (position == 4) {
                     ContactUsFragment contactUsFragment = new ContactUsFragment();
-                    setFragment(contactUsFragment);
+                    replaceFragment(contactUsFragment, "contactUsFragment");
                 } else if (position == 5) {
                     langPopup();
                 } else if (position == 6) {
@@ -156,14 +159,31 @@ public class MainPageCustomerActivity extends AppCompatActivity {
 
     }
 
+//    private void addFragment(Fragment fragment, String tag) {
+//
+//        FragmentManager manager = getSupportFragmentManager();
+//        FragmentTransaction transaction = manager.beginTransaction();
+//        transaction.add(R.id.mainFrameLayout, fragment, tag);
+//        transaction.addToBackStack(tag);
+//        transaction.commit();
+//    }
 
-    public void setFragment(Fragment fragment) {
+    private void replaceFragment(Fragment fragment, String tag) {
+
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.replace(R.id.mainFrameLayout, fragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+//    public void setFragment(Fragment fragment) {
+//        FragmentManager manager = getSupportFragmentManager();
+//        FragmentTransaction transaction = manager.beginTransaction();
+//        transaction.replace(R.id.mainFrameLayout, fragment, null);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+//    }
 
     private void logoutPopup() {
 
@@ -275,5 +295,50 @@ public class MainPageCustomerActivity extends AppCompatActivity {
 //        });
 
         Global.dimBehind(popupWindow);
+    }
+
+    public void clearStack() {
+        //Here we are clearing back stack fragment entries
+        int backStackEntry = getSupportFragmentManager().getBackStackEntryCount();
+        if (backStackEntry > 0) {
+            for (int i = 0; i < backStackEntry; i++) {
+                getSupportFragmentManager().popBackStackImmediate();
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+
+//            if(!BackFragmentHelper.fireOnBackPressedEvent(this)) {
+//                // lets do the default back action if fragments don't consume it
+//                if (doubleBackToExitPressedOnce) {
+//                    super.onBackPressed();
+//                    return;
+//                }
+//
+//                this.doubleBackToExitPressedOnce = true;
+//                Global.toast(MainPageCustomerActivity.this, getResources().getString(R.string.clickAgainToExit));
+//
+//                new Handler().postDelayed(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        doubleBackToExitPressedOnce=false;
+//                    }
+//                }, 2000);
+//            }
+
+            FragmentManager fm = getSupportFragmentManager();
+            if (fm.getBackStackEntryCount() > 1) {
+                fm.popBackStack();
+            } else {
+                super.onBackPressed();
+                finish();
+            }
+        }
     }
 }

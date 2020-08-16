@@ -1,6 +1,7 @@
 package com.salehni.salehni.view.fragments;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +49,14 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.request_offers));
     }
 
+    public void setFragment(Fragment fragment, String tag) {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.replace(R.id.mainFrameLayout, fragment, tag);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     private void testingData() {
 
         reuqestOffersModels = new ArrayList<>();
@@ -86,14 +95,14 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
         RequestOffersDetailsFragment requestOffersDetailsFragment = new RequestOffersDetailsFragment();
-        setFragment(requestOffersDetailsFragment);
+        setFragment(requestOffersDetailsFragment, "requestOffersDetailsFragment");
     }
 
-    public void setFragment(Fragment fragment) {
-        FragmentManager manager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainFrameLayout, fragment, null);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
+//    public void setFragment(Fragment fragment) {
+//        FragmentManager manager = getActivity().getSupportFragmentManager();
+//        FragmentTransaction transaction = manager.beginTransaction();
+//        transaction.replace(R.id.mainFrameLayout, fragment, null);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
+//    }
 }

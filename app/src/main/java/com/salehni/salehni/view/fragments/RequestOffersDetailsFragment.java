@@ -1,6 +1,7 @@
 package com.salehni.salehni.view.fragments;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
             @Override
             public void onClick(View view) {
                 WinchesListFragment winchesListFragment = new WinchesListFragment();
-                setFragment(winchesListFragment);
+                setFragment(winchesListFragment, "winchesListFragment");
             }
         });
 
@@ -59,6 +60,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         super.onResume();
 
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.request_details));
+
     }
 
     private void testingData() {
@@ -99,10 +101,10 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
 
     }
 
-    public void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment, String tag) {
         FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.replace(R.id.mainFrameLayout, fragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
     }

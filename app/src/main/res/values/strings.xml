@@ -151,5 +151,6 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
     <string name="video0">0 video</string>
     <string name="remove">remove</string>
     <string name="close">close</string>
+    <string name="clickAgainToExit">Click again to exit!</string>
 
 </resources>

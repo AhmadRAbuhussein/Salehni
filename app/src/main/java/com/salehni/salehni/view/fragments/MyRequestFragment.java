@@ -1,11 +1,14 @@
 package com.salehni.salehni.view.fragments;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,6 +29,8 @@ import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.MyRequestAdapter;
 import com.salehni.salehni.viewmodel.MyRequestViewModel;
 
+import net.skoumal.fragmentback.BackFragment;
+
 import java.util.ArrayList;
 
 
@@ -33,11 +38,16 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
     RecyclerView requests_Rv;
     MyRequestAdapter myRequestAdapter;
-    ArrayList<MyRequestModel> myRequestModels;
+    ArrayList<MyRequestModel> requestModels;
     ArrayList<MyRequestFragModel> myRequestFragModels;
 
     MyRequestViewModel myRequestViewModel;
     MyRequestFragModel myRequestFragModel;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -46,7 +56,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
         requests_Rv = (RecyclerView) view.findViewById(R.id.requests_Rv);
         //testingData();
 
-        myRequestViewModel = ViewModelProviders.of(getActivity()).get(MyRequestViewModel.class);
+        myRequestViewModel = ViewModelProviders.of(requireActivity()).get(MyRequestViewModel.class);
         myRequestViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -74,14 +84,14 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
             public void onChanged(ArrayList<MyRequestModel> myRequestModels) {
                 if (myRequestModels != null) {
 
+                    requestModels = new ArrayList<>(myRequestModels);
 
                     if (myRequestAdapter != null) {
-
 
                         myRequestAdapter.notifyDataSetChanged();
                     } else {
 
-                        intiRecView(myRequestModels);
+                        intiRecView(requestModels);
                     }
 
                 }
@@ -89,6 +99,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
 
         });
+
         return view;
     }
 
@@ -97,13 +108,15 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
         super.onResume();
 
         myRequestViewModel.getData();
+
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.my_request));
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
         RequestOffersFragment requestOffersFragment = new RequestOffersFragment();
-        setFragment(requestOffersFragment);
+        setFragment(requestOffersFragment, "requestOffersFragment");
 
     }
 
@@ -140,10 +153,10 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
     }
 
-    public void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment, String tag) {
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.replace(R.id.mainFrameLayout, fragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -153,5 +166,4 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
 
     }
-
 }

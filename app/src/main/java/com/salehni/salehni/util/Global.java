@@ -123,10 +123,22 @@ public class Global {
     }
 
     public static void progress(Activity activity) {
-        progressBar = ProgressDialog.show(activity, null, null, false, true);
-        progressBar.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        progressBar.setContentView(R.layout.progressbar);
-        progressBar.setCancelable(false);
+
+        if (progressBar != null) {
+            if (!progressBar.isShowing()) {
+                progressBar = ProgressDialog.show(activity, null, null, false, true);
+                progressBar.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                progressBar.setContentView(R.layout.progressbar);
+                progressBar.setCancelable(false);
+            }
+
+        } else {
+            progressBar = ProgressDialog.show(activity, null, null, false, true);
+            progressBar.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            progressBar.setContentView(R.layout.progressbar);
+            progressBar.setCancelable(false);
+        }
+
     }
 
     public static void progressDismiss() {
