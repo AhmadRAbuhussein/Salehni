@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.salehni.salehni.R;
 
 import com.salehni.salehni.data.model.MyRequestFragModel;
@@ -44,6 +45,8 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     MyRequestViewModel myRequestViewModel;
     MyRequestFragModel myRequestFragModel;
 
+    PullRefreshLayout swipeRefreshLayout;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,21 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
         requests_Rv = (RecyclerView) view.findViewById(R.id.requests_Rv);
         //testingData();
+
+        swipeRefreshLayout = (PullRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+
+// listen refresh event
+        swipeRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                myRequestViewModel.getData();
+            }
+        });
+
+        swipeRefreshLayout.setColorSchemeColors(R.color.orange,
+                R.color.orange,
+                R.color.orange,
+                R.color.orange);
 
         myRequestViewModel = ViewModelProviders.of(requireActivity()).get(MyRequestViewModel.class);
         myRequestViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
@@ -76,12 +94,16 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
                 Global.toast(getActivity().getApplicationContext(), s);
 
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
         myRequestViewModel.arrayListMutableLiveData.observe(this, new Observer<ArrayList<MyRequestModel>>() {
             @Override
             public void onChanged(ArrayList<MyRequestModel> myRequestModels) {
+
+                swipeRefreshLayout.setRefreshing(false);
+
                 if (myRequestModels != null) {
 
                     requestModels = new ArrayList<>(myRequestModels);
@@ -95,6 +117,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
                     }
 
                 }
+
             }
 
 
