@@ -296,6 +296,8 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
         img_recycler_view.setAdapter(customRequestRecyViewAdapter);
 
+        refreshDataViews(accedentImagesModels.size());
+
     }
 
     @Override
@@ -308,9 +310,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
             accedentImagesModels.remove(position);
 
-            images_number.setText(accedentImagesModels.size() + " images");
-
-            customRequestRecyViewAdapter.notifyDataSetChanged();
+            refreshDataViews(accedentImagesModels.size());
 
         } else if (view.getId() == accedant_pic_Iv_ID) {
 
@@ -475,15 +475,13 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
             if (customRequestRecyViewAdapter != null) {
 
-                customRequestRecyViewAdapter.notifyDataSetChanged();
+                refreshDataViews(accedentImagesModels.size());
             } else {
 
                 intiRecView(accedentImagesModels);
             }
 
         }
-
-        images_number.setText(accedentImagesModels.size() + " images");
     }
 
     public String getRealPathFromURI(Uri uri) {
@@ -585,11 +583,21 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
                 accedentImagesModels.remove(position);
+
+                refreshDataViews(accedentImagesModels.size());
+
+                popupWindow.dismiss();
             }
         });
 
         Global.dimBehind(popupWindow);
 
+    }
+
+    private void refreshDataViews(int size) {
+        images_number.setText(size + " " + getResources().getString(R.string.images2));
+
+        customRequestRecyViewAdapter.notifyDataSetChanged();
     }
 }
 

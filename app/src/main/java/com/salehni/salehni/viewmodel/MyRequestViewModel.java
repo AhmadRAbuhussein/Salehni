@@ -11,6 +11,7 @@ import com.salehni.salehni.R;
 import com.salehni.salehni.data.api.ApiData;
 import com.salehni.salehni.data.api.InterfaceApi;
 import com.salehni.salehni.data.model.MyRequestFragModel;
+import com.salehni.salehni.data.model.MyRequestModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 
@@ -24,11 +25,11 @@ import java.util.Map;
 
 public class MyRequestViewModel extends AndroidViewModel implements InterfaceApi {
 
-    public MutableLiveData arrayListMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<MyRequestModel>> arrayListMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> showProgressDialogMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<String> showToastMutableLiveData = new MutableLiveData<>();
 
-    ArrayList<MyRequestFragModel> myRequestFragModels;
+
     Context context;
 
     public MyRequestViewModel(@NonNull Application application) {
@@ -37,7 +38,7 @@ public class MyRequestViewModel extends AndroidViewModel implements InterfaceApi
         this.context = application.getApplicationContext();
     }
 
-    public void getData(MyRequestFragModel myRequestFragModel) {
+    public void getData() {
 
         if (Global.isNetworkAvailable(context)) {
 
@@ -48,7 +49,8 @@ public class MyRequestViewModel extends AndroidViewModel implements InterfaceApi
             JSONObject jsonObject = new JSONObject();
 
             try {
-                jsonObject.put("user_id", myRequestFragModel.getUser_id());
+                //TODO get user id from tiny db
+                jsonObject.put("user_id", "");
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -75,6 +77,7 @@ public class MyRequestViewModel extends AndroidViewModel implements InterfaceApi
 
         boolean status = false;
         String error = "";
+        ArrayList<MyRequestModel> myRequestModels = new ArrayList<>();
 
         try {
             JSONObject jsonObject = new JSONObject(response);
@@ -84,17 +87,18 @@ public class MyRequestViewModel extends AndroidViewModel implements InterfaceApi
             JSONObject data = jsonObject.getJSONObject("data");
 
             if (status) {
+
                 JSONArray requestsArray = data.getJSONArray("requests");
                 for (int i = 0; i < requestsArray.length(); i++) {
 
                     JSONObject temp = requestsArray.getJSONObject(i);
 
-                    MyRequestFragModel myRequestFragModel = new MyRequestFragModel();
+                    MyRequestModel myRequestModel = new MyRequestModel();
 
-                    myRequestFragModel.setUser_id(temp.getInt("id"));
-                    myRequestFragModel.setTime(temp.getString("time"));
+                    myRequestModel.setId(temp.getInt("id"));
+                    myRequestModel.setTime(temp.getString("time"));
 
-                    myRequestFragModels.add(myRequestFragModel);
+                    myRequestModels.add(myRequestModel);
 
                     showProgressDialogMutableLiveData.setValue(false);
                 }
@@ -107,7 +111,7 @@ public class MyRequestViewModel extends AndroidViewModel implements InterfaceApi
             e.printStackTrace();
         }
 
-        arrayListMutableLiveData.setValue(myRequestFragModels);
+        arrayListMutableLiveData.setValue(myRequestModels);
 
     }
 

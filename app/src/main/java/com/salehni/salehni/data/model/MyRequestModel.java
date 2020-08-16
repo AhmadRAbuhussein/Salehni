@@ -5,7 +5,7 @@ public class MyRequestModel {
     String request_img;
     String request;
     String request_type;
-    String clock;
+    String time;
 
     public int getId() {
         return id;
@@ -39,11 +39,11 @@ public class MyRequestModel {
         this.request_type = request_type;
     }
 
-    public String getClock() {
-        return clock;
+    public String getTime() {
+        return time;
     }
 
-    public void setClock(String clock) {
-        this.clock = clock;
+    public void setTime(String time) {
+        this.time = time;
     }
 }

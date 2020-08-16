@@ -71,10 +71,8 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
         myRequestViewModel.arrayListMutableLiveData.observe(this, new Observer<ArrayList<MyRequestModel>>() {
             @Override
-            public void onChanged(ArrayList<MyRequestModel> leagueModelArrayList) {
-                if (leagueModelArrayList != null) {
-
-                    myRequestModels = leagueModelArrayList;
+            public void onChanged(ArrayList<MyRequestModel> myRequestModels) {
+                if (myRequestModels != null) {
 
 
                     if (myRequestAdapter != null) {
@@ -83,7 +81,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
                         myRequestAdapter.notifyDataSetChanged();
                     } else {
 
-                        intiRecView(leagueModelArrayList);
+                        intiRecView(myRequestModels);
                     }
 
                 }
@@ -98,7 +96,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     public void onResume() {
         super.onResume();
 
-        myRequestViewModel.getData(myRequestFragModel);
+        myRequestViewModel.getData();
     }
 
     @Override

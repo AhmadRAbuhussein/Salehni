@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
-import com.salehni.salehni.data.model.ClientNotificationModel;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
 
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ public class MechanicNotificationAdapter extends
             go_Iv = (ImageView) view.findViewById(R.id.go_Iv);
             client_name_Tv = (TextView) view.findViewById(R.id.request_Tv);
             description_Tv = (TextView) view.findViewById(R.id.description_Tv);
-            clock = (TextView) view.findViewById(R.id.clock_Tv);
+            clock = (TextView) view.findViewById(R.id.time_Tv);
 
             container_Ll.setOnClickListener(this);
 

@@ -43,7 +43,7 @@
             android:textSize="@dimen/_9ssp" />
 
         <TextView
-            android:id="@+id/clock_Tv"
+            android:id="@+id/time_Tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/am_11_30"

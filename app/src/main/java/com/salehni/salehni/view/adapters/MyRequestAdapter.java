@@ -1,7 +1,6 @@
 package com.salehni.salehni.view.adapters;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +33,7 @@ public class MyRequestAdapter extends
         public ImageView go_Iv;
         public TextView request;
         public TextView request_type;
-        public TextView clock;
+        public TextView time;
         public LinearLayout container_Ll;
 
         public MyViewHolder(View view) {
@@ -46,7 +45,7 @@ public class MyRequestAdapter extends
             go_Iv = (ImageView) view.findViewById(R.id.go_Iv);
             request = (TextView) view.findViewById(R.id.request_Tv);
             request_type = (TextView) view.findViewById(R.id.request_type_Tv);
-            clock = (TextView) view.findViewById(R.id.clock_Tv);
+            time = (TextView) view.findViewById(R.id.time_Tv);
 
             container_Ll.setOnClickListener(this);
 
@@ -62,10 +61,10 @@ public class MyRequestAdapter extends
     }
 
     public MyRequestAdapter(Context context,
-                            ArrayList<MyRequestModel> carPartsOffersModels,
+                            ArrayList<MyRequestModel> myRequestModels,
                             AdapterView.OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.myRequestModels = carPartsOffersModels;
+        this.myRequestModels = myRequestModels;
         this.onItemClickListener = onItemClickListener;
 
     }
@@ -75,12 +74,16 @@ public class MyRequestAdapter extends
 
         MyRequestModel myRequestModel = myRequestModels.get(position);
 
+        holder.request.setText(context.getResources().getString(R.string.request) + " " + myRequestModel.getId());
+        holder.time.setText(myRequestModel.getTime());
+
+        //TODO remove this when live data
         if (position == 0) {
             holder.container_Ll.setBackground(context.getResources().getDrawable(R.drawable.shape_my_request_green));
-            holder.clock.setTextColor(context.getResources().getColor(R.color.green_cards));
+            holder.time.setTextColor(context.getResources().getColor(R.color.green_cards));
         } else {
             holder.container_Ll.setBackground(context.getResources().getDrawable(R.drawable.shape_my_request));
-            holder.clock.setTextColor(context.getResources().getColor(R.color.clock_color));
+            holder.time.setTextColor(context.getResources().getColor(R.color.clock_color));
 
         }
 

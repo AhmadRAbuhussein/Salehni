@@ -2,7 +2,7 @@
 <LinearLayout android:id="@+id/container_Ll"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_50sdp"
+    android:layout_height="@dimen/_55sdp"
     android:background="@drawable/shape_my_request"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/_10sdp"
@@ -30,9 +30,9 @@
             android:id="@+id/request_Tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/request_1"
+            android:text="@string/request"
             android:textColor="@color/white"
-            android:textSize="@dimen/_11ssp" />
+            android:textSize="@dimen/_10ssp" />
 
         <TextView
             android:id="@+id/request_type_Tv"
@@ -40,15 +40,15 @@
             android:layout_height="wrap_content"
             android:text="@string/custom_request"
             android:textColor="@color/white"
-            android:textSize="@dimen/_9ssp" />
+            android:textSize="@dimen/_8ssp" />
 
         <TextView
-            android:id="@+id/clock_Tv"
+            android:id="@+id/time_Tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/am_11_30"
             android:textColor="@color/clock_color"
-            android:textSize="@dimen/_7ssp" />
+            android:textSize="@dimen/_6ssp" />
 
     </LinearLayout>
 

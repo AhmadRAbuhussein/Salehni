@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.ClientNotificationModel;
-import com.salehni.salehni.data.model.MyRequestModel;
 
 import java.util.ArrayList;
 
@@ -46,7 +45,7 @@ public class ClientNotificationAdapter extends
             go_Iv = (ImageView) view.findViewById(R.id.go_Iv);
             request = (TextView) view.findViewById(R.id.request_Tv);
             request_type = (TextView) view.findViewById(R.id.request_type_Tv);
-            clock = (TextView) view.findViewById(R.id.clock_Tv);
+            clock = (TextView) view.findViewById(R.id.time_Tv);
 
             container_Ll.setOnClickListener(this);
 

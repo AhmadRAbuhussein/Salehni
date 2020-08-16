@@ -63,7 +63,7 @@
     <string name="details">Details</string>
     <string name="autohub">autohub</string>
     <string name="jd_50">50 JD</string>
-    <string name="request_1">Request 1</string>
+    <string name="request">Request</string>
     <string name="custome_resquest">Custom Request</string>
     <string name="am_11_30">11:30 am</string>
     <string name="request_details">Your Request Offers Detail</string>
@@ -95,6 +95,7 @@
     <string name="ahmad_abuhussein">Ahmad Abuhussein</string>
     <string name="send_custom_request">Send you a custom request</string>
     <string name="images">Images |</string>
+    <string name="images2">Images</string>
     <string name="watch"><u>Watch</u></string>
     <string name="video">Video |</string>
     <string name="write_offer">Write your offer</string>
