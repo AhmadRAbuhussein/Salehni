@@ -24,11 +24,10 @@
             android:paddingLeft="@dimen/_20sdp"
             android:paddingRight="@dimen/_20sdp">
 
-            <com.baoyz.widget.PullRefreshLayout
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/swipeRefreshLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:refreshType="circles"
                 android:layout_weight="100">
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -36,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-            </com.baoyz.widget.PullRefreshLayout>
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             <TextView
                 android:layout_width="wrap_content"

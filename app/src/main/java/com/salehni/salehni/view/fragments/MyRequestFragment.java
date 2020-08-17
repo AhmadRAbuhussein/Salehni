@@ -18,8 +18,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.baoyz.widget.PullRefreshLayout;
 import com.salehni.salehni.R;
 
 import com.salehni.salehni.data.model.MyRequestFragModel;
@@ -45,7 +45,9 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     MyRequestViewModel myRequestViewModel;
     MyRequestFragModel myRequestFragModel;
 
-    PullRefreshLayout swipeRefreshLayout;
+    SwipeRefreshLayout swipeRefreshLayout;
+
+    boolean progress = true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -59,17 +61,18 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
         requests_Rv = (RecyclerView) view.findViewById(R.id.requests_Rv);
         //testingData();
 
-        swipeRefreshLayout = (PullRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
 // listen refresh event
-        swipeRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                progress = false;
                 myRequestViewModel.getData();
             }
         });
 
-        swipeRefreshLayout.setColorSchemeColors(R.color.orange,
+        swipeRefreshLayout.setColorSchemeResources(R.color.orange,
                 R.color.orange,
                 R.color.orange,
                 R.color.orange);
@@ -79,7 +82,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
             @Override
             public void onChanged(Boolean aBoolean) {
 
-                if (aBoolean) {
+                if (aBoolean && progress) {
                     Global.progress(getActivity());
                 } else {
                     Global.progressDismiss();
