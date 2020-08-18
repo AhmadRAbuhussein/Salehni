@@ -20,7 +20,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,8 +54,6 @@ import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.AccedentImagesModel;
 import com.salehni.salehni.viewmodel.CustomRequestViewModel;
 
-import net.skoumal.fragmentback.BackFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,6 +76,12 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
     TextView retake_Tv;
     TextView locationAddress_Tv;
     LinearLayout location_Ll;
+
+    LinearLayout atLocation_Ll;
+    LinearLayout atMechanic_Ll;
+
+    ImageView atLocation_Iv;
+    ImageView atMechanic_Iv;
 
     private LocationManager locationManager;
 
@@ -145,7 +148,35 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
         retake_Tv = (TextView) view.findViewById(R.id.retake_Tv);
         locationAddress_Tv = (TextView) view.findViewById(R.id.locationAddress_Tv);
 
+        atLocation_Iv = (ImageView) view.findViewById(R.id.atLocation_Iv);
+        atMechanic_Iv = (ImageView) view.findViewById(R.id.atMechanic_Iv);
+
+        atLocation_Ll = (LinearLayout) view.findViewById(R.id.atLocation_Ll);
+        atMechanic_Ll = (LinearLayout) view.findViewById(R.id.atMechanic_Ll);
+
+        send_request_Ll.requestFocus();
+
         accedentImagesModels = new ArrayList<>();
+
+        atLocation_Ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.radio_checked));
+
+                atMechanic_Iv.setBackground(getResources().getDrawable(R.drawable.radio_unchecked));
+            }
+        });
+
+        atMechanic_Ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                atMechanic_Iv.setBackground(getResources().getDrawable(R.drawable.radio_checked));
+
+                atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.radio_unchecked));
+            }
+        });
 
         location_Ll.setOnClickListener(new View.OnClickListener() {
             @Override

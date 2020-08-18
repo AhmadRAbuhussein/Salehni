@@ -36,6 +36,8 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
 
         img_recycler_view = (RecyclerView) view.findViewById(R.id.img_recycler_view);
         send_request_Ll = (LinearLayout) view.findViewById(R.id.send_request_Ll);
+        send_request_Ll.requestFocus();
+
         testingData();
 
         send_request_Ll.setOnClickListener(new View.OnClickListener() {

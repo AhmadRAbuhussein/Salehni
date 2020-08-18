@@ -40,6 +40,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         View view = inflater.inflate(R.layout.fragment_request_offers_details, container, false);
         items_Rv = (RecyclerView) view.findViewById(R.id.items_Rv);
         acceptOffer_Ll = (LinearLayout) view.findViewById(R.id.acceptOffer_Ll);
+        acceptOffer_Ll.requestFocus();
 
         testingData();
 
