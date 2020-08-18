@@ -53,6 +53,7 @@ import com.salehni.salehni.view.adapters.CustomRequestRecyViewAdapter;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.AccedentImagesModel;
 import com.salehni.salehni.viewmodel.CustomRequestViewModel;
+import com.vatsal.imagezoomer.ZoomAnimation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +90,7 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
     double longitude = 0;
 
     boolean enabled;
+    boolean zoomIn = true;
 
     String selectedVideoPath = "";
 
