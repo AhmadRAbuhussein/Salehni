@@ -52,6 +52,8 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestModels = new ArrayList<>();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +62,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
         requests_Rv = (RecyclerView) view.findViewById(R.id.requests_Rv);
         //testingData();
+
 
         swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
 
@@ -82,11 +85,14 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
             @Override
             public void onChanged(Boolean aBoolean) {
 
-                if (aBoolean && progress) {
-                    Global.progress(getActivity());
-                } else {
-                    Global.progressDismiss();
+                if (progress) {
+                    if (aBoolean) {
+                        Global.progress(getActivity());
+                    } else {
+                        Global.progressDismiss();
+                    }
                 }
+
 
             }
         });
@@ -109,7 +115,9 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
                 if (myRequestModels != null) {
 
-                    requestModels = new ArrayList<>(myRequestModels);
+                    requestModels.clear();
+
+                    requestModels.addAll(myRequestModels);
 
                     if (myRequestAdapter != null) {
 
@@ -180,6 +188,8 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     }
 
     public void setFragment(Fragment fragment, String tag) {
+
+        myRequestAdapter = null;
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.mainFrameLayout, fragment, tag);
