@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.salehni.salehni.R;
 ;
 import com.salehni.salehni.data.model.RequestOffersDetailsModel;
-import com.salehni.salehni.data.model.ReuqestOffersModel;
 
 import java.util.ArrayList;
 

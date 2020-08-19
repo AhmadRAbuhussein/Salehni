@@ -1,7 +1,6 @@
 package com.salehni.salehni.view.fragments;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.salehni.salehni.R;
 
 import com.salehni.salehni.data.model.RequestOffersDetailsModel;
-import com.salehni.salehni.data.model.ReuqestOffersModel;
 
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.RequestOffersDetailsAdapter;
@@ -31,7 +29,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
 
     RecyclerView items_Rv;
     RequestOffersDetailsAdapter requestOffersDetailsAdapter;
-    ArrayList<RequestOffersDetailsModel> reuqestOffersDetailsModels;
+    ArrayList<RequestOffersDetailsModel> requestOffersDetailsModels;
 
     LinearLayout acceptOffer_Ll;
 
@@ -66,16 +64,16 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
 
     private void testingData() {
 
-        reuqestOffersDetailsModels = new ArrayList<>();
+        requestOffersDetailsModels = new ArrayList<>();
 
         for (int i = 0; i < 20; i++) {
             RequestOffersDetailsModel reuqestOffersDetailsModel = new RequestOffersDetailsModel();
             reuqestOffersDetailsModel.setId(i + 1);
 
-            reuqestOffersDetailsModels.add(reuqestOffersDetailsModel);
+            requestOffersDetailsModels.add(reuqestOffersDetailsModel);
         }
 
-        intiRecView(reuqestOffersDetailsModels);
+        intiRecView(requestOffersDetailsModels);
     }
 
     public void intiRecView(ArrayList<RequestOffersDetailsModel> reuqestOffersDetailsModels) {

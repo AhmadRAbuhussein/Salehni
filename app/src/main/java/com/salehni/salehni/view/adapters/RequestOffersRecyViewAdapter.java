@@ -13,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 ;
-import com.salehni.salehni.data.model.ReuqestOffersModel;
+import com.salehni.salehni.data.model.RequestOffersModel;
 
 import java.util.ArrayList;
 
 public class RequestOffersRecyViewAdapter extends
         RecyclerView.Adapter<RequestOffersRecyViewAdapter.MyViewHolder> {
-    ArrayList<ReuqestOffersModel> reuqestOffersModels;
+    ArrayList<RequestOffersModel> requestOffersModels;
     private AdapterView.OnItemClickListener onItemClickListener;
 
     Context context;
@@ -58,10 +58,10 @@ public class RequestOffersRecyViewAdapter extends
     }
 
     public RequestOffersRecyViewAdapter(Context context,
-                                        ArrayList<ReuqestOffersModel> reuqestOffersModels,
+                                        ArrayList<RequestOffersModel> requestOffersModels,
                                         AdapterView.OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.reuqestOffersModels = reuqestOffersModels;
+        this.requestOffersModels = requestOffersModels;
         this.onItemClickListener = onItemClickListener;
 
     }
@@ -69,14 +69,17 @@ public class RequestOffersRecyViewAdapter extends
     @Override
     public void onBindViewHolder(RequestOffersRecyViewAdapter.MyViewHolder holder, int position) {
 
-        ReuqestOffersModel reuqestOffersModel = reuqestOffersModels.get(position);
+        RequestOffersModel requestOffersModel = requestOffersModels.get(position);
 
+        holder.provider_Tv.setText(requestOffersModel.getProvider_name());
+        holder.price_Tv.setText(requestOffersModel.getTotal_price());
+        holder.working_days_Tv.setText(requestOffersModel.getWorking_days());
 
     }
 
     @Override
     public int getItemCount() {
-        return reuqestOffersModels.size();
+        return requestOffersModels.size();
     }
 
     @Override

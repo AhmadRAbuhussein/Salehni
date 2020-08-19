@@ -1,7 +1,6 @@
 package com.salehni.salehni.view.fragments;
 
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +10,22 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 
-import com.salehni.salehni.data.model.ReuqestOffersModel;
+import com.salehni.salehni.data.model.MyRequestModel;
+import com.salehni.salehni.data.model.RequestOffersModel;
 
+import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
-import com.salehni.salehni.view.adapters.RequestOffersDetailsAdapter;
 import com.salehni.salehni.view.adapters.RequestOffersRecyViewAdapter;
+import com.salehni.salehni.viewmodel.MyRequestViewModel;
+import com.salehni.salehni.viewmodel.RequestOffersViewModel;
 
 import java.util.ArrayList;
 
@@ -29,14 +33,66 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
 
     RecyclerView carParts_Rv;
     RequestOffersRecyViewAdapter requestOffersRecyViewAdapter;
-    ArrayList<ReuqestOffersModel> reuqestOffersModels;
+    ArrayList<RequestOffersModel> requestOffersModelArrayList;
+
+    RequestOffersViewModel requestOffersViewModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_offers, container, false);
         carParts_Rv = (RecyclerView) view.findViewById(R.id.carParts_Rv);
         carParts_Rv.setNestedScrollingEnabled(false);
-        testingData();
+        //testingData();
+
+        requestOffersModelArrayList = new ArrayList<>();
+
+        requestOffersViewModel = ViewModelProviders.of(requireActivity()).get(RequestOffersViewModel.class);
+        requestOffersViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+
+                if (aBoolean) {
+                    Global.progress(getActivity());
+                } else {
+                    Global.progressDismiss();
+                }
+
+            }
+        });
+
+        requestOffersViewModel.showToastMutableLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                Global.toast(getActivity().getApplicationContext(), s);
+
+            }
+        });
+
+        requestOffersViewModel.arrayListMutableLiveData.observe(this, new Observer<ArrayList<RequestOffersModel>>() {
+            @Override
+            public void onChanged(ArrayList<RequestOffersModel> requestOffersModels) {
+
+                if (requestOffersModels != null) {
+
+                    requestOffersModelArrayList.clear();
+
+                    requestOffersModelArrayList.addAll(requestOffersModels);
+
+                    if (requestOffersRecyViewAdapter != null) {
+
+                        requestOffersRecyViewAdapter.notifyDataSetChanged();
+                    } else {
+
+                        intiRecView(requestOffersModelArrayList);
+                    }
+
+                }
+
+            }
+
+
+        });
 
 
         return view;
@@ -45,6 +101,8 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
     @Override
     public void onResume() {
         super.onResume();
+
+        requestOffersViewModel.getData();
 
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.request_offers));
     }
@@ -57,27 +115,27 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
         transaction.commit();
     }
 
-    private void testingData() {
+//    private void testingData() {
+//
+//        requestOffersModels = new ArrayList<>();
+//
+//        for (int i = 0; i < 20; i++) {
+//            RequestOffersModel reuqestOffersDetailsModel = new RequestOffersModel();
+//            reuqestOffersDetailsModel.setId(i + 1);
+//
+//            requestOffersModels.add(reuqestOffersDetailsModel);
+//        }
+//
+//        intiRecView(requestOffersModels);
+//    }
 
-        reuqestOffersModels = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            ReuqestOffersModel reuqestOffersDetailsModel = new ReuqestOffersModel();
-            reuqestOffersDetailsModel.setId(i + 1);
-
-            reuqestOffersModels.add(reuqestOffersDetailsModel);
-        }
-
-        intiRecView(reuqestOffersModels);
-    }
-
-    public void intiRecView(ArrayList<ReuqestOffersModel> reuqestOffersModels) {
+    public void intiRecView(ArrayList<RequestOffersModel> requestOffersModels) {
 
         carParts_Rv.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         carParts_Rv.setLayoutManager(layoutManager);
 
-        requestOffersRecyViewAdapter = new RequestOffersRecyViewAdapter(getActivity(), reuqestOffersModels, this);
+        requestOffersRecyViewAdapter = new RequestOffersRecyViewAdapter(getActivity(), requestOffersModels, this);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider_height));

@@ -16,11 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 
-import com.salehni.salehni.data.model.ReuqestOffersModel;
-
 import com.salehni.salehni.data.model.WinchesListModel;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
-import com.salehni.salehni.view.adapters.RequestOffersRecyViewAdapter;
 import com.salehni.salehni.view.adapters.WinchesListAdapter;
 
 import java.util.ArrayList;

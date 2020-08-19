@@ -12,6 +12,7 @@ public class Constants {
     public static final String signin_Url = "login";
     public static final String sendCustomRequest_Url = "sendCustomRequest";
     public static final String myRequest_Url = "myRequest";
+    public static final String requestOffersScreen_Url = "requestOffersScreen";
 
     //putExtras
     public static final String otp_key = "otp_key";
