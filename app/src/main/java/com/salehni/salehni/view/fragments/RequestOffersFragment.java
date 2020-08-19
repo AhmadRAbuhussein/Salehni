@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -36,6 +37,13 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
     ArrayList<RequestOffersModel> requestOffersModelArrayList;
 
     RequestOffersViewModel requestOffersViewModel;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        requestOffersModelArrayList = new ArrayList<>();
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -108,6 +116,7 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
     }
 
     public void setFragment(Fragment fragment, String tag) {
+        requestOffersRecyViewAdapter = null;
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.mainFrameLayout, fragment, tag);
