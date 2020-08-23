@@ -19,8 +19,11 @@ import com.salehni.salehni.R;
 
 import com.salehni.salehni.data.model.RequestOffersDetailsModel;
 
+import com.salehni.salehni.data.model.RequestOffersModel;
+import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.RequestOffersDetailsAdapter;
+import com.salehni.salehni.viewmodel.RequestOffersViewModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -33,12 +36,16 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
 
     LinearLayout acceptOffer_Ll;
 
+    RequestOffersModel requestOffersModel;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_offers_details, container, false);
         items_Rv = (RecyclerView) view.findViewById(R.id.items_Rv);
         acceptOffer_Ll = (LinearLayout) view.findViewById(R.id.acceptOffer_Ll);
         acceptOffer_Ll.requestFocus();
+
+        getExtra();
 
         testingData();
 
@@ -106,5 +113,15 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         transaction.replace(R.id.mainFrameLayout, fragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void getExtra() {
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            requestOffersModel = bundle.getParcelable(Constants.selectedRequest);
+        }
+
+
     }
 }

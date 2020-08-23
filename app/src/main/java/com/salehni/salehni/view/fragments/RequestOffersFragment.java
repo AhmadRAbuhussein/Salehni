@@ -22,6 +22,7 @@ import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.MyRequestModel;
 import com.salehni.salehni.data.model.RequestOffersModel;
 
+import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.RequestOffersRecyViewAdapter;
@@ -159,10 +160,16 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
 
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
         RequestOffersDetailsFragment requestOffersDetailsFragment = new RequestOffersDetailsFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.selectedRequest, requestOffersModelArrayList.get(position));
+        requestOffersDetailsFragment.setArguments(bundle);
+
         setFragment(requestOffersDetailsFragment, "requestOffersDetailsFragment");
+
     }
 
 //    public void setFragment(Fragment fragment) {

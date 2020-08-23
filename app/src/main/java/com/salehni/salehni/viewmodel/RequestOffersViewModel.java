@@ -78,7 +78,7 @@ public class RequestOffersViewModel extends AndroidViewModel implements Interfac
 
         String error = "";
         ArrayList<RequestOffersModel> requestOffersModels = new ArrayList<>();
-        ArrayList<ItemsInnerObject> itemsInnerObjects = new ArrayList<>();
+
 
         try {
             JSONObject jsonObject = new JSONObject(response);
@@ -109,6 +109,8 @@ public class RequestOffersViewModel extends AndroidViewModel implements Interfac
 
                     offerInnerObject.setNote(offer.getString("note"));
                     offerInnerObject.setVoice_note(offer.getString("voice_note"));
+
+                    ArrayList<ItemsInnerObject> itemsInnerObjects = new ArrayList<>();
 
                     JSONArray items = offer.getJSONArray("items");
                     for (int j = 0; j < items.length(); j++) {
