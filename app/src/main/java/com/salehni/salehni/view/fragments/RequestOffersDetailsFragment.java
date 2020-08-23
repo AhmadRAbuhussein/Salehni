@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -17,13 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 
-import com.salehni.salehni.data.model.RequestOffersDetailsModel;
+import com.salehni.salehni.data.model.ItemsInnerObject;
 
 import com.salehni.salehni.data.model.RequestOffersModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.RequestOffersDetailsAdapter;
-import com.salehni.salehni.viewmodel.RequestOffersViewModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -32,22 +32,33 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
 
     RecyclerView items_Rv;
     RequestOffersDetailsAdapter requestOffersDetailsAdapter;
-    ArrayList<RequestOffersDetailsModel> requestOffersDetailsModels;
+//    ArrayList<RequestOffersDetailsModel> requestOffersDetailsModels;
 
     LinearLayout acceptOffer_Ll;
 
     RequestOffersModel requestOffersModel;
+
+    TextView totalPrice_Tv;
+    TextView working_days_Tv;
+    TextView note_Tv;
+    TextView sumPrice_Tv;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_offers_details, container, false);
         items_Rv = (RecyclerView) view.findViewById(R.id.items_Rv);
         acceptOffer_Ll = (LinearLayout) view.findViewById(R.id.acceptOffer_Ll);
+
+        totalPrice_Tv = (TextView) view.findViewById(R.id.totalPrice_Tv);
+        working_days_Tv = (TextView) view.findViewById(R.id.working_days_Tv);
+        note_Tv = (TextView) view.findViewById(R.id.note_Tv);
+        sumPrice_Tv = (TextView) view.findViewById(R.id.sumPrice_Tv);
+
         acceptOffer_Ll.requestFocus();
 
         getExtra();
-
-        testingData();
+        setData();
+        initialItemsList();
 
         acceptOffer_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,27 +80,18 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
 
     }
 
-    private void testingData() {
+    private void initialItemsList() {
 
-        requestOffersDetailsModels = new ArrayList<>();
-
-        for (int i = 0; i < 20; i++) {
-            RequestOffersDetailsModel reuqestOffersDetailsModel = new RequestOffersDetailsModel();
-            reuqestOffersDetailsModel.setId(i + 1);
-
-            requestOffersDetailsModels.add(reuqestOffersDetailsModel);
-        }
-
-        intiRecView(requestOffersDetailsModels);
+        intiRecView(requestOffersModel.getOfferInnerObject().getItemsInnerObjects());
     }
 
-    public void intiRecView(ArrayList<RequestOffersDetailsModel> reuqestOffersDetailsModels) {
+    public void intiRecView(ArrayList<ItemsInnerObject> itemsInnerObjects) {
 
         items_Rv.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         items_Rv.setLayoutManager(layoutManager);
 
-        requestOffersDetailsAdapter = new RequestOffersDetailsAdapter(getActivity(), reuqestOffersDetailsModels, this);
+        requestOffersDetailsAdapter = new RequestOffersDetailsAdapter(getActivity(), itemsInnerObjects, this);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider_height));
@@ -121,7 +123,12 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         if (bundle != null) {
             requestOffersModel = bundle.getParcelable(Constants.selectedRequest);
         }
+    }
 
-
+    public void setData() {
+        totalPrice_Tv.setText(requestOffersModel.getTotal_price());
+        working_days_Tv.setText(requestOffersModel.getWorking_days());
+        note_Tv.setText(requestOffersModel.getOfferInnerObject().getNote());
+        sumPrice_Tv.setText(requestOffersModel.getTotal_price());
     }
 }

@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 ;
+import com.salehni.salehni.data.model.ItemsInnerObject;
 import com.salehni.salehni.data.model.RequestOffersDetailsModel;
 
 import java.util.ArrayList;
 
 public class RequestOffersDetailsAdapter extends
         RecyclerView.Adapter<RequestOffersDetailsAdapter.MyViewHolder> {
-    ArrayList<RequestOffersDetailsModel> reuqestOffersDetailsModels;
+    ArrayList<ItemsInnerObject> itemsInnerObjects;
     private AdapterView.OnItemClickListener onItemClickListener;
 
     Context context;
@@ -56,10 +57,10 @@ public class RequestOffersDetailsAdapter extends
     }
 
     public RequestOffersDetailsAdapter(Context context,
-                                       ArrayList<RequestOffersDetailsModel> reuqestOffersDetailsModels,
+                                       ArrayList<ItemsInnerObject> itemsInnerObjects,
                                        AdapterView.OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.reuqestOffersDetailsModels = reuqestOffersDetailsModels;
+        this.itemsInnerObjects = itemsInnerObjects;
         this.onItemClickListener = onItemClickListener;
 
     }
@@ -67,14 +68,15 @@ public class RequestOffersDetailsAdapter extends
     @Override
     public void onBindViewHolder(RequestOffersDetailsAdapter.MyViewHolder holder, int position) {
 
-        RequestOffersDetailsModel reuqestOffersDetailsModel = reuqestOffersDetailsModels.get(position);
+        ItemsInnerObject itemsInnerObject = itemsInnerObjects.get(position);
 
-
+        holder.item_name_Tv.setText(itemsInnerObject.getTitle_en());
+        holder.item_price_Tv.setText(itemsInnerObject.getPrice());
     }
 
     @Override
     public int getItemCount() {
-        return reuqestOffersDetailsModels.size();
+        return itemsInnerObjects.size();
     }
 
     @Override
