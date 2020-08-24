@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -47,6 +48,8 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
     TextView working_days_Tv;
     TextView note_Tv;
     TextView sumPrice_Tv;
+
+    int fix_at = 1;
 
     AcceptOfferViewModel acceptOfferViewModel;
 
@@ -102,8 +105,13 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
             public void onChanged(Boolean status) {
 
                 if (status) {
-                    WinchesListFragment winchesListFragment = new WinchesListFragment();
-                    setFragment(winchesListFragment, "winchesListFragment");
+
+                    if (fix_at == 0) {
+
+                    } else {
+                        AcceptedOfferFragment acceptedOfferFragment = new AcceptedOfferFragment();
+                        setFragment(acceptedOfferFragment, "acceptedOfferFragment");
+                    }
                 }
             }
         });
@@ -150,6 +158,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
     }
 
     public void setFragment(Fragment fragment, String tag) {
+        requestOffersDetailsAdapter = null;
         FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.mainFrameLayout, fragment, tag);
@@ -162,6 +171,8 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             requestOffersModel = bundle.getParcelable(Constants.selectedRequest);
+
+            fix_at = requestOffersModel.getFix_at();
         }
     }
 

@@ -98,6 +98,7 @@ public class RequestOffersViewModel extends AndroidViewModel implements Interfac
                     requestOffersModel.setId(temp.getInt("id"));
                     requestOffersModel.setProvider_id(temp.getInt("provider_id"));
                     requestOffersModel.setRequest_id(temp.getInt("request_id"));
+                    requestOffersModel.setFix_at(temp.getInt("fix_at"));
                     requestOffersModel.setProvider_name(temp.getString("provider_name"));
                     requestOffersModel.setTotal_price(temp.getString("total_price"));
                     requestOffersModel.setWorking_days(temp.getString("working_days"));

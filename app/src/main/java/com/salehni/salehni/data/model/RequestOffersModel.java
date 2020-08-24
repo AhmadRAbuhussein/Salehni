@@ -11,6 +11,7 @@ public class RequestOffersModel implements Parcelable {
     int id;
     int provider_id;
     int request_id;
+    int fix_at;
     String provider_name;
     String total_price;
     String working_days;
@@ -24,6 +25,7 @@ public class RequestOffersModel implements Parcelable {
         id = in.readInt();
         provider_id = in.readInt();
         request_id = in.readInt();
+        fix_at = in.readInt();
         provider_name = in.readString();
         total_price = in.readString();
         working_days = in.readString();
@@ -63,6 +65,14 @@ public class RequestOffersModel implements Parcelable {
 
     public void setRequest_id(int request_id) {
         this.request_id = request_id;
+    }
+
+    public int getFix_at() {
+        return fix_at;
+    }
+
+    public void setFix_at(int fix_at) {
+        this.fix_at = fix_at;
     }
 
     public String getProvider_name() {
@@ -107,6 +117,7 @@ public class RequestOffersModel implements Parcelable {
         parcel.writeInt(id);
         parcel.writeInt(provider_id);
         parcel.writeInt(request_id);
+        parcel.writeInt(fix_at);
         parcel.writeString(provider_name);
         parcel.writeString(total_price);
         parcel.writeString(working_days);
