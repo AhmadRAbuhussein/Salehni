@@ -76,7 +76,6 @@ public class RequestOffersViewModel extends AndroidViewModel implements Interfac
 
         showProgressDialogMutableLiveData.setValue(false);
 
-        String error = "";
         ArrayList<RequestOffersModel> requestOffersModels = new ArrayList<>();
 
 
@@ -84,7 +83,7 @@ public class RequestOffersViewModel extends AndroidViewModel implements Interfac
             JSONObject jsonObject = new JSONObject(response);
 
             boolean status = jsonObject.getBoolean("status");
-            error = jsonObject.getString("error");
+            String error = jsonObject.getString("error");
             JSONObject data = jsonObject.getJSONObject("data");
 
             if (status) {

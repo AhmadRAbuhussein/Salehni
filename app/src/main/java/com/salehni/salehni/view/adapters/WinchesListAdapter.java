@@ -68,6 +68,8 @@ public class WinchesListAdapter extends
 
         WinchesListModel winchesListModel = winchesListModels.get(position);
 
+        holder.driver_name_Tv.setText(winchesListModel.getDriver_name());
+        holder.phone_number_Tv.setText(winchesListModel.getPhone_number());
 
     }
 

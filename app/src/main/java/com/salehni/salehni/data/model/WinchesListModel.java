@@ -4,7 +4,7 @@ public class WinchesListModel {
 
     int id;
     String driver_name;
-    int phone_number;
+    String phone_number;
 
     public int getId() {
         return id;
@@ -22,11 +22,11 @@ public class WinchesListModel {
         this.driver_name = driver_name;
     }
 
-    public int getPhone_number() {
+    public String getPhone_number() {
         return phone_number;
     }
 
-    public void setPhone_number(int phone_number) {
+    public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
 }
