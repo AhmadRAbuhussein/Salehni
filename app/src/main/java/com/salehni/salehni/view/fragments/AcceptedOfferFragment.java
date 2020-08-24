@@ -38,7 +38,7 @@ public class AcceptedOfferFragment extends Fragment {
     }
 
     public void setFragment(Fragment fragment, String tag) {
-        FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+        FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.mainFrameLayout, fragment, tag);
         transaction.addToBackStack(null);

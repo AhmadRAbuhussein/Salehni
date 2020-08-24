@@ -49,6 +49,7 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_offers, container, false);
+
         carParts_Rv = (RecyclerView) view.findViewById(R.id.carParts_Rv);
         carParts_Rv.setNestedScrollingEnabled(false);
         //testingData();

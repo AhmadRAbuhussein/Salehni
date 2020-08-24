@@ -53,29 +53,9 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
 
     AcceptOfferViewModel acceptOfferViewModel;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_request_offers_details, container, false);
-        items_Rv = (RecyclerView) view.findViewById(R.id.items_Rv);
-        acceptOffer_Ll = (LinearLayout) view.findViewById(R.id.acceptOffer_Ll);
-
-        totalPrice_Tv = (TextView) view.findViewById(R.id.totalPrice_Tv);
-        working_days_Tv = (TextView) view.findViewById(R.id.working_days_Tv);
-        note_Tv = (TextView) view.findViewById(R.id.note_Tv);
-        sumPrice_Tv = (TextView) view.findViewById(R.id.sumPrice_Tv);
-
-        acceptOffer_Ll.requestFocus();
-
-        getExtra();
-        setData();
-        initialItemsList();
-
-        acceptOffer_Ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                acceptOfferViewModel.getData(requestOffersModel);
-            }
-        });
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         acceptOfferViewModel = ViewModelProviders.of(getActivity()).get(AcceptOfferViewModel.class);
         acceptOfferViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
@@ -116,6 +96,32 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
             }
         });
 
+
+    }
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_request_offers_details, container, false);
+        items_Rv = (RecyclerView) view.findViewById(R.id.items_Rv);
+        acceptOffer_Ll = (LinearLayout) view.findViewById(R.id.acceptOffer_Ll);
+
+        totalPrice_Tv = (TextView) view.findViewById(R.id.totalPrice_Tv);
+        working_days_Tv = (TextView) view.findViewById(R.id.working_days_Tv);
+        note_Tv = (TextView) view.findViewById(R.id.note_Tv);
+        sumPrice_Tv = (TextView) view.findViewById(R.id.sumPrice_Tv);
+
+        acceptOffer_Ll.requestFocus();
+
+        acceptOffer_Ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                acceptOfferViewModel.getData(requestOffersModel);
+            }
+        });
+
+        getExtra();
+        setData();
+        initialItemsList();
 
         return view;
     }
@@ -159,7 +165,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
 
     public void setFragment(Fragment fragment, String tag) {
         requestOffersDetailsAdapter = null;
-        FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+        FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.mainFrameLayout, fragment, tag);
         transaction.addToBackStack(null);
