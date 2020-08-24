@@ -129,6 +129,14 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         totalPrice_Tv.setText(requestOffersModel.getTotal_price());
         working_days_Tv.setText(requestOffersModel.getWorking_days());
         note_Tv.setText(requestOffersModel.getOfferInnerObject().getNote());
-        sumPrice_Tv.setText(requestOffersModel.getTotal_price());
+        sumPrice_Tv.setText(setSumPrice());
+    }
+
+    public String setSumPrice() {
+        int sum = 0;
+        for (int i = 0; i < requestOffersModel.getOfferInnerObject().getItemsInnerObjects().size(); i++) {
+            sum = sum + Integer.parseInt(requestOffersModel.getOfferInnerObject().getItemsInnerObjects().get(i).getPrice());
+        }
+        return sum + "";
     }
 }
