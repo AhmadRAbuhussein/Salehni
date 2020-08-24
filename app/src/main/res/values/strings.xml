@@ -152,5 +152,10 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
     <string name="remove">remove</string>
     <string name="close">close</string>
     <string name="clickAgainToExit">Click again to exit!</string>
+    <string name="thank_you">Thank You</string>
+    <string name="acceptance">Your Acceptance has been recevied</string>
+    <string name="by_car">Going by Car</string>
+    <string name="winches_list">Winches List</string>
+
 
 </resources>
