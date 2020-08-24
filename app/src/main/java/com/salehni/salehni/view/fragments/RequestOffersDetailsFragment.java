@@ -12,6 +12,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,8 +24,11 @@ import com.salehni.salehni.data.model.ItemsInnerObject;
 
 import com.salehni.salehni.data.model.RequestOffersModel;
 import com.salehni.salehni.util.Constants;
+import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.RequestOffersDetailsAdapter;
+import com.salehni.salehni.viewmodel.AcceptOfferViewModel;
+import com.salehni.salehni.viewmodel.CustomRequestViewModel;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -42,6 +47,8 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
     TextView working_days_Tv;
     TextView note_Tv;
     TextView sumPrice_Tv;
+
+    AcceptOfferViewModel acceptOfferViewModel;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,8 +70,41 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         acceptOffer_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                WinchesListFragment winchesListFragment = new WinchesListFragment();
-                setFragment(winchesListFragment, "winchesListFragment");
+                acceptOfferViewModel.getData(requestOffersModel);
+            }
+        });
+
+        acceptOfferViewModel = ViewModelProviders.of(getActivity()).get(AcceptOfferViewModel.class);
+        acceptOfferViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+
+                if (aBoolean) {
+                    Global.progress(getActivity());
+                } else {
+                    Global.progressDismiss();
+                }
+
+            }
+        });
+
+        acceptOfferViewModel.showToastMutableLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                Global.toast(getActivity().getApplicationContext(), s);
+
+            }
+        });
+
+        acceptOfferViewModel.acceptOfferStatusModelMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean status) {
+
+                if (status) {
+                    WinchesListFragment winchesListFragment = new WinchesListFragment();
+                    setFragment(winchesListFragment, "winchesListFragment");
+                }
             }
         });
 
