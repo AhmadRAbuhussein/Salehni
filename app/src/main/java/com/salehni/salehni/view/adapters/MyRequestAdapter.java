@@ -41,10 +41,10 @@ public class MyRequestAdapter extends
 
 
             container_Ll = (LinearLayout) view.findViewById(R.id.container_Ll);
-            request_img = (ImageView) view.findViewById(R.id.notfication_Iv);
+            request_img = (ImageView) view.findViewById(R.id.request_img);
             go_Iv = (ImageView) view.findViewById(R.id.go_Iv);
-            request = (TextView) view.findViewById(R.id.request_Tv);
-            request_type = (TextView) view.findViewById(R.id.request_type_Tv);
+            request = (TextView) view.findViewById(R.id.mechanicName_Tv);
+            request_type = (TextView) view.findViewById(R.id.description_Tv);
             time = (TextView) view.findViewById(R.id.time_Tv);
 
             container_Ll.setOnClickListener(this);

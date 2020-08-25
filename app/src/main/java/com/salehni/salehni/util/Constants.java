@@ -15,6 +15,7 @@ public class Constants {
     public static final String requestOffersScreen_Url = "requestOffersScreen";
     public static final String userAcceptOffer_Url = "userAcceptOffer";
     public static final String winchesList_Url = "winchesList";
+    public static final String userNotifications_Url = "userNotifications";
 
     //putExtras
     public static final String otp_key = "otp_key";

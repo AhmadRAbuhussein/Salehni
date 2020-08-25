@@ -28,12 +28,10 @@ public class ClientNotificationAdapter extends
      */
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-
-        public ImageView request_img;
         public ImageView go_Iv;
-        public TextView request;
-        public TextView request_type;
-        public TextView clock;
+        public TextView mechanicName_Tv;
+        public TextView description_Tv;
+        public TextView time_Tv;
         public LinearLayout container_Ll;
 
         public MyViewHolder(View view) {
@@ -41,11 +39,10 @@ public class ClientNotificationAdapter extends
 
 
             container_Ll = (LinearLayout) view.findViewById(R.id.container_Ll);
-            request_img = (ImageView) view.findViewById(R.id.notfication_Iv);
             go_Iv = (ImageView) view.findViewById(R.id.go_Iv);
-            request = (TextView) view.findViewById(R.id.request_Tv);
-            request_type = (TextView) view.findViewById(R.id.request_type_Tv);
-            clock = (TextView) view.findViewById(R.id.time_Tv);
+            mechanicName_Tv = (TextView) view.findViewById(R.id.mechanicName_Tv);
+            description_Tv = (TextView) view.findViewById(R.id.description_Tv);
+            time_Tv = (TextView) view.findViewById(R.id.time_Tv);
 
             container_Ll.setOnClickListener(this);
 
@@ -74,6 +71,9 @@ public class ClientNotificationAdapter extends
 
         ClientNotificationModel clientNotificationModel = clientNotificationModels.get(position);
 
+        holder.mechanicName_Tv.setText(clientNotificationModel.getMechanic_name());
+        holder.description_Tv.setText(context.getResources().getString(R.string.send_offer) + " " + clientNotificationModel.getRequest_id());
+        holder.time_Tv.setText(clientNotificationModel.getTime());
     }
 
     @Override

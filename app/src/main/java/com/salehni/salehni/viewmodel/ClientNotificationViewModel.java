@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.api.ApiData;
 import com.salehni.salehni.data.api.InterfaceApi;
+import com.salehni.salehni.data.model.ClientNotificationModel;
 import com.salehni.salehni.data.model.WinchesListModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
@@ -24,7 +25,7 @@ import java.util.Map;
 
 public class ClientNotificationViewModel extends AndroidViewModel implements InterfaceApi {
 
-    public MutableLiveData<ArrayList<WinchesListModel>> arrayListMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<ArrayList<ClientNotificationModel>> arrayListMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> showProgressDialogMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<String> showToastMutableLiveData = new MutableLiveData<>();
 
@@ -45,9 +46,19 @@ public class ClientNotificationViewModel extends AndroidViewModel implements Int
 
             Map<String, String> headerParams = new HashMap<String, String>();
 
+            JSONObject jsonObject = new JSONObject();
+
+            try {
+                jsonObject.put("user_id", "");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            final String mRequestBody = jsonObject.toString();
+
             ApiData apiData = new ApiData();
 
-            apiData.getdata(this.getApplication(), this, Constants.main_url + Constants.winchesList_Url, headerParams);
+            apiData.getdata(this.getApplication(), this, Constants.main_url + Constants.userNotifications_Url, headerParams, mRequestBody);
 
         } else {
 
@@ -62,7 +73,7 @@ public class ClientNotificationViewModel extends AndroidViewModel implements Int
 
         showProgressDialogMutableLiveData.setValue(false);
 
-        ArrayList<WinchesListModel> winchesListModels = new ArrayList<>();
+        ArrayList<ClientNotificationModel> clientNotificationModels = new ArrayList<>();
 
         try {
             JSONObject jsonObject = new JSONObject(response);
@@ -73,18 +84,19 @@ public class ClientNotificationViewModel extends AndroidViewModel implements Int
 
             if (status) {
 
-                JSONArray winchesArray = data.getJSONArray("winches");
-                for (int i = 0; i < winchesArray.length(); i++) {
+                JSONArray notificationArray = data.getJSONArray("notifications");
+                for (int i = 0; i < notificationArray.length(); i++) {
 
-                    JSONObject temp = winchesArray.getJSONObject(i);
+                    JSONObject temp = notificationArray.getJSONObject(i);
 
-                    WinchesListModel winchesListModel = new WinchesListModel();
+                    ClientNotificationModel clientNotificationModel = new ClientNotificationModel();
 
-                    winchesListModel.setId(temp.getInt("id"));
-                    winchesListModel.setDriver_name(temp.getString("driver_name"));
-                    winchesListModel.setPhone_number(temp.getString("phone_number"));
+                    clientNotificationModel.setId(temp.getInt("id"));
+                    clientNotificationModel.setMechanic_name(temp.getString("mechanic_name"));
+                    clientNotificationModel.setRequest_id(temp.getString("request_id"));
+                    clientNotificationModel.setTime(temp.getString("time"));
 
-                    winchesListModels.add(winchesListModel);
+                    clientNotificationModels.add(clientNotificationModel);
 
                 }
             } else {
@@ -95,7 +107,7 @@ public class ClientNotificationViewModel extends AndroidViewModel implements Int
             e.printStackTrace();
         }
 
-        arrayListMutableLiveData.setValue(winchesListModels);
+        arrayListMutableLiveData.setValue(clientNotificationModels);
 
     }
 

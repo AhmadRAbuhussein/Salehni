@@ -10,7 +10,7 @@
 
 
     <ImageView
-        android:id="@+id/notfication_Iv"
+        android:id="@+id/request_img"
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
         android:minWidth="0dp"
