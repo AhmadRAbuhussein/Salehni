@@ -1,5 +1,6 @@
 package com.salehni.salehni.view.fragments;
 
+import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -60,6 +61,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
     SeekBar seekBar;
     boolean wasPlaying = false;
     ImageView playPause_Iv;
+    ImageView share_IV;
 
     int fix_at = 1;
 
@@ -126,6 +128,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         note_Tv = (TextView) view.findViewById(R.id.note_Tv);
         sumPrice_Tv = (TextView) view.findViewById(R.id.sumPrice_Tv);
         playPause_Iv = (ImageView) view.findViewById(R.id.playPause_Iv);
+        share_IV = (ImageView) view.findViewById(R.id.share_IV);
         seekBar = view.findViewById(R.id.seekbar);
         acceptOffer_Ll.requestFocus();
 
@@ -141,6 +144,19 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         getExtra();
         setData();
         initialItemsList();
+
+        share_IV.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, requestOffersModel.getOfferInnerObject().getVoice_note());
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+            }
+        });
 
         playPause_Iv.setOnClickListener(new View.OnClickListener() {
             @Override
