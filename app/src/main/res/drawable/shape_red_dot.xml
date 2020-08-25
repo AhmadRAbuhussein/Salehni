@@ -5,6 +5,10 @@
     <solid android:color="@color/links_and_buttons" />
     <corners android:radius="@dimen/_20sdp" />
 
+    <size
+        android:height="@dimen/_8sdp"
+        android:width="@dimen/_8sdp" />
+
     <stroke
         android:width="@dimen/_1sdp"
         android:color="@color/links_and_buttons" />

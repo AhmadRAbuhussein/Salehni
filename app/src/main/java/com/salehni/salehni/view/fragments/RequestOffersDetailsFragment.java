@@ -1,12 +1,18 @@
 package com.salehni.salehni.view.fragments;
 
+import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -31,10 +37,11 @@ import com.salehni.salehni.view.adapters.RequestOffersDetailsAdapter;
 import com.salehni.salehni.viewmodel.AcceptOfferViewModel;
 import com.salehni.salehni.viewmodel.CustomRequestViewModel;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class RequestOffersDetailsFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class RequestOffersDetailsFragment extends Fragment implements AdapterView.OnItemClickListener, Runnable {
 
     RecyclerView items_Rv;
     RequestOffersDetailsAdapter requestOffersDetailsAdapter;
@@ -49,13 +56,22 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
     TextView note_Tv;
     TextView sumPrice_Tv;
 
+    MediaPlayer mediaPlayer;
+    SeekBar seekBar;
+    boolean wasPlaying = false;
+    ImageView playPause_Iv;
+
     int fix_at = 1;
+
+    boolean pause = false;
 
     AcceptOfferViewModel acceptOfferViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mediaPlayer = new MediaPlayer();
 
         acceptOfferViewModel = ViewModelProviders.of(getActivity()).get(AcceptOfferViewModel.class);
         acceptOfferViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
@@ -109,8 +125,11 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         working_days_Tv = (TextView) view.findViewById(R.id.working_days_Tv);
         note_Tv = (TextView) view.findViewById(R.id.note_Tv);
         sumPrice_Tv = (TextView) view.findViewById(R.id.sumPrice_Tv);
-
+        playPause_Iv = (ImageView) view.findViewById(R.id.playPause_Iv);
+        seekBar = view.findViewById(R.id.seekbar);
         acceptOffer_Ll.requestFocus();
+
+        seekBar.setEnabled(false);
 
         acceptOffer_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,6 +141,47 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         getExtra();
         setData();
         initialItemsList();
+
+        playPause_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!requestOffersModel.getOfferInnerObject().getVoice_note().equalsIgnoreCase("")) {
+                    playSong();
+                }
+
+            }
+        });
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+
+                int x = (int) Math.ceil(progress / 1000f);
+
+                if (x > 0 && mediaPlayer != null && !mediaPlayer.isPlaying() && !pause) {
+                    clearMediaPlayer();
+                    playPause_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.play));
+                    seekBar.setProgress(0);
+                }
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                if (mediaPlayer != null) {
+                    mediaPlayer.seekTo(seekBar.getProgress());
+                }
+
+            }
+
+        });
 
         return view;
     }
@@ -196,4 +256,108 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         }
         return sum + "";
     }
+
+    @Override
+    public void run() {
+
+        int currentPosition = mediaPlayer.getCurrentPosition();
+        int total = mediaPlayer.getDuration();
+
+
+        while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
+            try {
+                Thread.sleep(1000);
+                currentPosition = mediaPlayer.getCurrentPosition();
+            } catch (InterruptedException e) {
+                return;
+            } catch (Exception e) {
+                return;
+            }
+
+            seekBar.setProgress(currentPosition);
+
+        }
+    }
+
+    public void playSong() {
+
+        try {
+
+            seekBar.setEnabled(true);
+
+            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+//                clearMediaPlayer();
+//                seekBar.setProgress(0);
+                pauseMediaPlayer();
+                wasPlaying = true;
+                playPause_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.play));
+            }
+
+
+            if (!wasPlaying) {
+
+
+                if (mediaPlayer == null) {
+                    mediaPlayer = new MediaPlayer();
+                }
+
+                if (pause) {
+                    pause = false;
+                    mediaPlayer.start();
+
+                    playPause_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.pause));
+
+                    new Thread(this).start();
+                } else {
+                    playPause_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.pause));
+
+                    mediaPlayer.setDataSource(requestOffersModel.getOfferInnerObject().getVoice_note());
+
+                    mediaPlayer.prepare();
+                    mediaPlayer.setVolume(0.5f, 0.5f);
+                    mediaPlayer.setLooping(false);
+                    seekBar.setMax(mediaPlayer.getDuration());
+
+                    mediaPlayer.start();
+                    new Thread(this).start();
+                }
+
+
+            }
+
+            wasPlaying = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+
+        clearMediaPlayer();
+
+        super.onDestroy();
+
+    }
+
+    private void clearMediaPlayer() {
+
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+
+    }
+
+    private void pauseMediaPlayer() {
+
+        if (mediaPlayer != null) {
+            pause = true;
+            mediaPlayer.pause();
+        }
+
+    }
+
 }
