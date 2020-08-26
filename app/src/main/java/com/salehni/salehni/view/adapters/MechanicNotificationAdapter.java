@@ -28,12 +28,10 @@ public class MechanicNotificationAdapter extends
      */
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-
-        public ImageView request_img;
         public ImageView go_Iv;
-        public TextView client_name_Tv;
+        public TextView customer_name_Tv;
         public TextView description_Tv;
-        public TextView clock;
+        public TextView time_Tv;
         public LinearLayout container_Ll;
 
         public MyViewHolder(View view) {
@@ -41,11 +39,10 @@ public class MechanicNotificationAdapter extends
 
 
             container_Ll = (LinearLayout) view.findViewById(R.id.container_Ll);
-            request_img = (ImageView) view.findViewById(R.id.request_img);
             go_Iv = (ImageView) view.findViewById(R.id.go_Iv);
-            client_name_Tv = (TextView) view.findViewById(R.id.mechanicName_Tv);
+            customer_name_Tv = (TextView) view.findViewById(R.id.customer_name_Tv);
             description_Tv = (TextView) view.findViewById(R.id.description_Tv);
-            clock = (TextView) view.findViewById(R.id.time_Tv);
+            time_Tv = (TextView) view.findViewById(R.id.time_Tv);
 
             container_Ll.setOnClickListener(this);
 
@@ -73,6 +70,10 @@ public class MechanicNotificationAdapter extends
     public void onBindViewHolder(MechanicNotificationAdapter.MyViewHolder holder, int position) {
 
         MechanicNotificationModel mechanicNotificationModel = mechanicNotificationModels.get(position);
+
+        holder.customer_name_Tv.setText(mechanicNotificationModel.getCustomer_name());
+        holder.description_Tv.setText(context.getResources().getString(R.string.send_custom_request) + " " + mechanicNotificationModel.getRequest_id());
+        holder.time_Tv.setText(mechanicNotificationModel.getTime());
 
     }
 

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -34,13 +35,18 @@ public class WinchesListFragment extends Fragment implements AdapterView.OnItemC
 
     WinchesListViewModel winchesListViewModel;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        winchesListArrayList = new ArrayList<>();
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_winches_list, container, false);
         winches_Rv = (RecyclerView) view.findViewById(R.id.winches_Rv);
         winches_Rv.setNestedScrollingEnabled(false);
-
-        winchesListArrayList = new ArrayList<>();
 
         winchesListViewModel = ViewModelProviders.of(requireActivity()).get(WinchesListViewModel.class);
         winchesListViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
@@ -131,6 +137,7 @@ public class WinchesListFragment extends Fragment implements AdapterView.OnItemC
     }
 
     public void setFragment(Fragment fragment) {
+        winchesListAdapter = null;
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.mainFrameLayout, fragment, null);

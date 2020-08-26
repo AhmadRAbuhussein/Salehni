@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -33,14 +34,18 @@ public class ClientNotificationFragment extends Fragment implements AdapterView.
     ArrayList<ClientNotificationModel> clientNotificationArraylist;
     ClientNotificationViewModel clientNotificationViewModel;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        clientNotificationArraylist = new ArrayList<>();
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_client_notification, container, false);
 
         notification_Rv = (RecyclerView) view.findViewById(R.id.notification_Rv);
-//        testingData();
-
-        clientNotificationArraylist = new ArrayList<>();
 
         clientNotificationViewModel = ViewModelProviders.of(requireActivity()).get(ClientNotificationViewModel.class);
         clientNotificationViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {

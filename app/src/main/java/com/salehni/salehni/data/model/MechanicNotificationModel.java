@@ -2,10 +2,9 @@ package com.salehni.salehni.data.model;
 
 public class MechanicNotificationModel {
     int id;
-    String request_img;
-    String client_name;
-    String description;
-    String clock;
+    String customer_name;
+    String request_id;
+    String time;
 
     public int getId() {
         return id;
@@ -15,35 +14,27 @@ public class MechanicNotificationModel {
         this.id = id;
     }
 
-    public String getRequest_img() {
-        return request_img;
+    public String getCustomer_name() {
+        return customer_name;
     }
 
-    public void setRequest_img(String request_img) {
-        this.request_img = request_img;
+    public void setCustomer_name(String customer_name) {
+        this.customer_name = customer_name;
     }
 
-    public String getClient_name() {
-        return client_name;
+    public String getRequest_id() {
+        return request_id;
     }
 
-    public void setClient_name(String client_name) {
-        this.client_name = client_name;
+    public void setRequest_id(String request_id) {
+        this.request_id = request_id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getTime() {
+        return time;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getClock() {
-        return clock;
-    }
-
-    public void setClock(String clock) {
-        this.clock = clock;
+    public void setTime(String time) {
+        this.time = time;
     }
 }

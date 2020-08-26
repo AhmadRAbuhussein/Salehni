@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:id="@+id/container_Ll"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_Ll"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_50sdp"
+    android:layout_height="@dimen/_60sdp"
     android:background="@drawable/shape_my_request"
     android:orientation="horizontal"
     android:paddingLeft="@dimen/_5sdp"
@@ -13,21 +13,21 @@
         android:id="@+id/request_img"
         android:layout_width="@dimen/_25sdp"
         android:layout_height="@dimen/_25sdp"
+        android:layout_gravity="center"
         android:minWidth="0dp"
         android:minHeight="0dp"
-        android:src="@drawable/notification"
-        android:layout_gravity="center" />
+        android:src="@drawable/notification" />
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="100"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:orientation="vertical"
-        android:layout_marginLeft="@dimen/_5sdp">
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_weight="100"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/client_name_Tv"
+            android:id="@+id/customer_name_Tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ahmad_abuhussein"
@@ -61,8 +61,8 @@
         <ImageView
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/recy_pin"
-            android:layout_marginRight="@dimen/_3sdp" />
+            android:layout_marginRight="@dimen/_3sdp"
+            android:src="@drawable/recy_pin" />
 
         <ImageView
             android:id="@+id/go_Iv"
