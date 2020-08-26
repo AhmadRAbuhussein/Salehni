@@ -30,5 +30,10 @@ public class Constants {
     public static final int openVideo = 3;
     public static final int openLocation = 4;
 
+    //Date Formats
+    public static final String DD_MM_YYYY_HH_MM_A = "dd/MM/yyyy - hh:mm a";
+    public static final String HH_MM_A = "hh:mm a";
+    public static final String currentDate = "26/8/2020";
+
 
 }

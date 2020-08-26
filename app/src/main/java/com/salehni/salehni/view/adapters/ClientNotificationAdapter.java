@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.ClientNotificationModel;
+import com.salehni.salehni.util.Constants;
+import com.salehni.salehni.util.Global;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class ClientNotificationAdapter extends
@@ -73,7 +76,11 @@ public class ClientNotificationAdapter extends
 
         holder.mechanicName_Tv.setText(clientNotificationModel.getMechanic_name());
         holder.description_Tv.setText(context.getResources().getString(R.string.send_offer) + " " + clientNotificationModel.getRequest_id());
-        holder.time_Tv.setText(clientNotificationModel.getTime());
+        try {
+            holder.time_Tv.setText(Global.formatDateFromDateString(Constants.DD_MM_YYYY_HH_MM_A, Constants.HH_MM_A, Constants.currentDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
