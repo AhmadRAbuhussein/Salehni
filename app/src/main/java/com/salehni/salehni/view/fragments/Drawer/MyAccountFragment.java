@@ -1,4 +1,4 @@
-package com.salehni.salehni.view.fragments;
+package com.salehni.salehni.view.fragments.Drawer;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,12 +10,12 @@ import androidx.fragment.app.Fragment;
 import com.salehni.salehni.R;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 
-public class ContactUsFragment extends Fragment {
+public class MyAccountFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_contact_us, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_profile, container, false);
         return view;
     }
 
@@ -23,6 +23,6 @@ public class ContactUsFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.contact_us));
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.my_prof));
     }
 }

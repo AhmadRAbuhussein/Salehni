@@ -38,22 +38,30 @@
                     android:weightSum="100">
 
                     <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/fixAtLocation_Rb"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
                         android:text="@string/fix_at_your_location"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_9ssp"
-                        app:buttonTint="@color/text_on_black_bg" />
+                        android:textSize="@dimen/_8ssp"
+                        app:buttonTint="@color/text_on_black_bg"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
 
                     <androidx.appcompat.widget.AppCompatRadioButton
+                        android:id="@+id/fixAtMechanic_Rb"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="50"
                         android:text="@string/fix_at_mechanic_location"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_9ssp"
-                        app:buttonTint="@color/text_on_black_bg" />
+                        android:textSize="@dimen/_8ssp"
+                        app:buttonTint="@color/text_on_black_bg"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false" />
                 </RadioGroup>
 
 
@@ -81,6 +89,7 @@
 
 
                     <TextView
+                        android:id="@+id/numOfImages_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/images3"
@@ -143,6 +152,7 @@
                         android:src="@drawable/location" />
 
                     <TextView
+                        android:id="@+id/location_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/amman_jordan"
@@ -153,6 +163,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/notes_Tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/etc"

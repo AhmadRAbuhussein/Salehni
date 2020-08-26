@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,14 +27,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.salehni.salehni.data.model.DrawerItemModel;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.adapters.ListViewDrawerAdapter;
-import com.salehni.salehni.view.fragments.ContactUsFragment;
+import com.salehni.salehni.view.fragments.Drawer.ContactUsFragment;
 import com.salehni.salehni.view.fragments.CustomRequestFragment;
-import com.salehni.salehni.view.fragments.MyAccountFragment;
-import com.salehni.salehni.view.fragments.PrivacyPolicyFragment;
+import com.salehni.salehni.view.fragments.Drawer.MyAccountFragment;
+import com.salehni.salehni.view.fragments.Drawer.PrivacyPolicyFragment;
 import com.salehni.salehni.R;
-import com.salehni.salehni.view.fragments.TermsConditionFragment;
-
-import net.skoumal.fragmentback.BackFragmentHelper;
+import com.salehni.salehni.view.fragments.Drawer.TermsConditionFragment;
 
 import java.util.ArrayList;
 

@@ -11,13 +11,13 @@ import android.widget.LinearLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
-import com.salehni.salehni.data.model.MechanicRequestModel;
+import com.salehni.salehni.util.Global;
 
 import java.util.ArrayList;
 
-public class MechanicRequestAdapter extends
-        RecyclerView.Adapter<MechanicRequestAdapter.MyViewHolder> {
-    ArrayList<MechanicRequestModel> mechanicRequestModels;
+public class MechanicImagesRequestAdapter extends
+        RecyclerView.Adapter<MechanicImagesRequestAdapter.MyViewHolder> {
+    ArrayList<String> images;
     private AdapterView.OnItemClickListener onItemClickListener;
 
     Context context;
@@ -29,14 +29,14 @@ public class MechanicRequestAdapter extends
 
 
         public LinearLayout container_Fl;
-        public ImageView fix_pic_Iv;
+        public ImageView accedant_pic_Iv;
 
         public MyViewHolder(View view) {
             super(view);
 
 
             container_Fl = (LinearLayout) view.findViewById(R.id.container_Fl);
-            fix_pic_Iv = (ImageView) view.findViewById(R.id.accedant_pic_Iv);
+            accedant_pic_Iv = (ImageView) view.findViewById(R.id.accedant_pic_Iv);
 
             container_Fl.setOnClickListener(this);
 
@@ -50,11 +50,11 @@ public class MechanicRequestAdapter extends
         }
     }
 
-    public MechanicRequestAdapter(Context context,
-                                  ArrayList<MechanicRequestModel> mechanicRequestModels,
-                                  AdapterView.OnItemClickListener onItemClickListener) {
+    public MechanicImagesRequestAdapter(Context context,
+                                        ArrayList<String> images,
+                                        AdapterView.OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.mechanicRequestModels = mechanicRequestModels;
+        this.images = images;
         this.onItemClickListener = onItemClickListener;
 
     }
@@ -62,16 +62,16 @@ public class MechanicRequestAdapter extends
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        MechanicRequestModel mechanicRequestModel = mechanicRequestModels.get(position);
+        String image = images.get(position);
 
-//        holder.fix_pic_Iv.setImageBitmap(Global.convertStringToBitmap(fixingPicturesModel.getImg()));
+        holder.accedant_pic_Iv.setImageBitmap(Global.convertStringToBitmap(image));
 
 
     }
 
     @Override
     public int getItemCount() {
-        return mechanicRequestModels.size();
+        return images.size();
     }
 
     @Override

@@ -508,10 +508,10 @@ public class CustomRequestFragment extends Fragment implements AdapterView.OnIte
 
     private void sendImageToRecyView(String img) {
 
-        AccedentImagesModel customRequestModelRecyView = new AccedentImagesModel();
-        customRequestModelRecyView.setImg(img);
+        AccedentImagesModel accedentImagesModel = new AccedentImagesModel();
+        accedentImagesModel.setImg(img);
 
-        accedentImagesModels.add(customRequestModelRecyView);
+        accedentImagesModels.add(accedentImagesModel);
 
         if (accedentImagesModels != null) {
 
