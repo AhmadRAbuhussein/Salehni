@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -30,27 +29,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
-import com.salehni.salehni.data.model.MechanicRequestModel;
+import com.salehni.salehni.data.model.UserRequestDetailsModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.activities.VideoActivity;
 import com.salehni.salehni.view.adapters.MechanicImagesRequestAdapter;
-import com.salehni.salehni.viewmodel.MechanicRequestViewModel;
+import com.salehni.salehni.viewmodel.UserRequestDetailsViewModel;
 
 import java.util.ArrayList;
 
 import static com.salehni.salehni.util.Constants.selectedVideoPath;
 import static com.salehni.salehni.util.MyApplication.context;
 
-public class MechanicRequestFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class UserRequestDetails extends Fragment implements AdapterView.OnItemClickListener {
 
     RecyclerView img_recycler_view;
     MechanicImagesRequestAdapter mechanicRequestAdapter;
 
-    MechanicRequestViewModel mechanicRequestViewModel;
+    UserRequestDetailsViewModel userRequestDetailsViewModel;
 
-    MechanicRequestModel mechanicRequestModelData;
+    UserRequestDetailsModel userRequestDetailsModelData;
 
     LinearLayout send_request_Ll;
 
@@ -93,8 +92,8 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
             }
         });
 
-        mechanicRequestViewModel = ViewModelProviders.of(requireActivity()).get(MechanicRequestViewModel.class);
-        mechanicRequestViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
+        userRequestDetailsViewModel = ViewModelProviders.of(requireActivity()).get(UserRequestDetailsViewModel.class);
+        userRequestDetailsViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
 
@@ -107,7 +106,7 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
             }
         });
 
-        mechanicRequestViewModel.showToastMutableLiveData.observe(this, new Observer<String>() {
+        userRequestDetailsViewModel.showToastMutableLiveData.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
 
@@ -116,14 +115,14 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
             }
         });
 
-        mechanicRequestViewModel.mechanicRequestModelMutableLiveData.observe(this, new Observer<MechanicRequestModel>() {
+        userRequestDetailsViewModel.mechanicRequestModelMutableLiveData.observe(this, new Observer<UserRequestDetailsModel>() {
             @Override
-            public void onChanged(MechanicRequestModel mechanicRequestModel) {
+            public void onChanged(UserRequestDetailsModel userRequestDetailsModel) {
 
-                if (mechanicRequestModel != null) {
+                if (userRequestDetailsModel != null) {
 
-                    mechanicRequestModelData = mechanicRequestModel;
-                    setData(mechanicRequestModel);
+                    userRequestDetailsModelData = userRequestDetailsModel;
+                    setData(userRequestDetailsModel);
 
 
                 }
@@ -140,9 +139,9 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
     public void onResume() {
         super.onResume();
 
-        mechanicRequestViewModel.getData(mechanicNotificationModel);
+        userRequestDetailsViewModel.getData(mechanicNotificationModel);
 
-        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.send_request));
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.user_request_details));
     }
 
     public void intiRecView(ArrayList<String> images) {
@@ -177,38 +176,38 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
         int accedant_pic_Iv_ID = R.id.accedant_pic_Iv;
 
         if (view.getId() == accedant_pic_Iv_ID) {
-            showImage_popup(mechanicRequestModelData.getImages().get(position));
+            showImage_popup(userRequestDetailsModelData.getImages().get(position));
         }
     }
 
-    public void setData(final MechanicRequestModel mechanicRequestModel) {
+    public void setData(final UserRequestDetailsModel userRequestDetailsModel) {
 
-        if (Integer.parseInt(mechanicRequestModel.getFix_at()) == 0) {
+        if (Integer.parseInt(userRequestDetailsModel.getFix_at()) == 0) {
             atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.radio_checked));
             atMechanic_Iv.setBackground(getResources().getDrawable(R.drawable.radio_unchecked));
         } else {
             atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.radio_unchecked));
             atMechanic_Iv.setBackground(getResources().getDrawable(R.drawable.radio_checked));
         }
-        numOfImages_Tv.setText(mechanicRequestModel.getImages().size() + " " + getResources().getString(R.string.images_));
+        numOfImages_Tv.setText(userRequestDetailsModel.getImages().size() + " " + getResources().getString(R.string.images_));
 
         if (mechanicRequestAdapter != null) {
             mechanicRequestAdapter.notifyDataSetChanged();
         } else {
-            intiRecView(mechanicRequestModel.getImages());
+            intiRecView(userRequestDetailsModel.getImages());
         }
 
 
-        notes_Tv.setText(mechanicRequestModel.getNotes());
+        notes_Tv.setText(userRequestDetailsModel.getNotes());
 
-        location_Tv.setText(mechanicRequestModel.getLocation());
+        location_Tv.setText(userRequestDetailsModel.getLocation());
 
         watchVideo_Tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (selectedVideoPath.length() > 0) {
                     Intent intent = new Intent(getActivity(), VideoActivity.class);
-                    intent.putExtra(Constants.selectedVideoPath, mechanicRequestModel.getVideo());
+                    intent.putExtra(Constants.selectedVideoPath, userRequestDetailsModel.getVideo());
                     startActivity(intent);
                 }
             }

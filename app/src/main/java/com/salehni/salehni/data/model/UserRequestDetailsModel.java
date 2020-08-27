@@ -2,7 +2,7 @@ package com.salehni.salehni.data.model;
 
 import java.util.ArrayList;
 
-public class MechanicRequestModel {
+public class UserRequestDetailsModel {
     int user_id;
     String request_id;
     String fix_at;

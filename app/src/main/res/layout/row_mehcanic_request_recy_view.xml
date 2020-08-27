@@ -8,7 +8,6 @@
         android:id="@+id/accedant_pic_Iv"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
-        android:background="@color/text_on_black_bg"
         android:minWidth="0dp"
         android:minHeight="0dp" />
 

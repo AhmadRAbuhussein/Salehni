@@ -2,7 +2,6 @@ package com.salehni.salehni.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,7 +11,7 @@ import com.salehni.salehni.R;
 import com.salehni.salehni.data.api.ApiData;
 import com.salehni.salehni.data.api.InterfaceApi;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
-import com.salehni.salehni.data.model.MechanicRequestModel;
+import com.salehni.salehni.data.model.UserRequestDetailsModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 
@@ -24,15 +23,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MechanicRequestViewModel extends AndroidViewModel implements InterfaceApi {
+public class UserRequestDetailsViewModel extends AndroidViewModel implements InterfaceApi {
 
-    public MutableLiveData<MechanicRequestModel> mechanicRequestModelMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<UserRequestDetailsModel> mechanicRequestModelMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> showProgressDialogMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<String> showToastMutableLiveData = new MutableLiveData<>();
 
     Context context;
 
-    public MechanicRequestViewModel(@NonNull Application application) {
+    public UserRequestDetailsViewModel(@NonNull Application application) {
         super(application);
 
         this.context = application.getApplicationContext();
@@ -89,16 +88,16 @@ public class MechanicRequestViewModel extends AndroidViewModel implements Interf
 
             if (status) {
 
-                MechanicRequestModel mechanicRequestModel = new MechanicRequestModel();
+                UserRequestDetailsModel userRequestDetailsModel = new UserRequestDetailsModel();
 
-                mechanicRequestModel.setUser_id(data.getInt("user_id"));
-                mechanicRequestModel.setRequest_id(data.getString("request_id"));
-                mechanicRequestModel.setFix_at(data.getString("fix_at"));
-                mechanicRequestModel.setVideo(data.getString("video"));
-                mechanicRequestModel.setLat(data.getString("lat"));
-                mechanicRequestModel.setLon(data.getString("lon"));
-                mechanicRequestModel.setLocation(data.getString("location"));
-                mechanicRequestModel.setNotes(data.getString("notes"));
+                userRequestDetailsModel.setUser_id(data.getInt("user_id"));
+                userRequestDetailsModel.setRequest_id(data.getString("request_id"));
+                userRequestDetailsModel.setFix_at(data.getString("fix_at"));
+                userRequestDetailsModel.setVideo(data.getString("video"));
+                userRequestDetailsModel.setLat(data.getString("lat"));
+                userRequestDetailsModel.setLon(data.getString("lon"));
+                userRequestDetailsModel.setLocation(data.getString("location"));
+                userRequestDetailsModel.setNotes(data.getString("notes"));
 
                 JSONArray imagesArray = data.getJSONArray("images");
                 ArrayList<String> images = new ArrayList<>();
@@ -107,9 +106,9 @@ public class MechanicRequestViewModel extends AndroidViewModel implements Interf
                     JSONObject temp = imagesArray.getJSONObject(i);
                     images.add(temp.getString("image"));
                 }
-                mechanicRequestModel.setImages(images);
+                userRequestDetailsModel.setImages(images);
 
-                mechanicRequestModelMutableLiveData.setValue(mechanicRequestModel);
+                mechanicRequestModelMutableLiveData.setValue(userRequestDetailsModel);
 
             } else {
                 showToastMutableLiveData.setValue(error);

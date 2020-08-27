@@ -28,12 +28,11 @@ import com.salehni.salehni.data.model.DrawerItemModel;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.adapters.ListViewDrawerAdapter;
 import com.salehni.salehni.view.fragments.Drawer.ContactUsFragment;
-import com.salehni.salehni.view.fragments.CustomRequestFragment;
 import com.salehni.salehni.view.fragments.Drawer.MyAccountFragment;
 import com.salehni.salehni.view.fragments.Drawer.PrivacyPolicyFragment;
 import com.salehni.salehni.R;
 import com.salehni.salehni.view.fragments.Drawer.TermsConditionFragment;
-import com.salehni.salehni.view.fragments.MechanicRequestFragment;
+import com.salehni.salehni.view.fragments.UserRequestDetails;
 
 import java.util.ArrayList;
 
@@ -180,8 +179,8 @@ public class MainPageCustomerActivity extends AppCompatActivity {
 //        CustomRequestFragment customRequestFragment = new CustomRequestFragment();
 //        replaceFragment(customRequestFragment, "customRequestFragment");
 
-        MechanicRequestFragment mechanicRequestFragment = new MechanicRequestFragment();
-        replaceFragment(mechanicRequestFragment, "mechanicRequestFragment");
+        UserRequestDetails userRequestDetails = new UserRequestDetails();
+        replaceFragment(userRequestDetails, "mechanicRequestFragment");
     }
 
     private void logoutPopup() {

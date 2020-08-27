@@ -115,7 +115,6 @@
                         android:id="@+id/numOfImages_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/images3"
                         android:textColor="@color/text_on_black_bg"
                         android:textSize="@dimen/_7ssp"
                         android:layout_marginLeft="@dimen/_2sdp"
@@ -179,7 +178,6 @@
                         android:id="@+id/location_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/amman_jordan"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_10ssp"
                         android:layout_gravity="center" />
@@ -190,7 +188,6 @@
                     android:id="@+id/notes_Tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/etc"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10ssp"
                     android:layout_marginTop="@dimen/_20sdp"

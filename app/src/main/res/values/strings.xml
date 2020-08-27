@@ -157,6 +157,7 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
     <string name="acceptance">Your Acceptance has been recevied</string>
     <string name="by_car">Going by Car</string>
     <string name="accepted_offer">Accepted Offer</string>
+    <string name="user_request_details">User Request Details</string>
 
 
 </resources>

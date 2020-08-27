@@ -18,13 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
-import com.salehni.salehni.data.model.ClientNotificationModel;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.MechanicNotificationAdapter;
-import com.salehni.salehni.viewmodel.ClientNotificationViewModel;
 import com.salehni.salehni.viewmodel.MechanicNotificationViewModel;
 
 import java.util.ArrayList;
@@ -114,13 +112,13 @@ public class MechanicNotificationFragment extends Fragment implements AdapterVie
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
-        MechanicRequestFragment mechanicRequestFragment = new MechanicRequestFragment();
+        UserRequestDetails userRequestDetails = new UserRequestDetails();
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(Constants.selectedMechanicNotification, mechanicNotificationArraylist.get(position));
-        mechanicRequestFragment.setArguments(bundle);
+        userRequestDetails.setArguments(bundle);
 
-        setFragment(mechanicRequestFragment, "mechanicRequestFragment");
+        setFragment(userRequestDetails, "mechanicRequestFragment");
 
     }
 
