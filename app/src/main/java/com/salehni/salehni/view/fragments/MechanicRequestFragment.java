@@ -1,6 +1,7 @@
 package com.salehni.salehni.view.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -32,11 +34,13 @@ import com.salehni.salehni.data.model.MechanicRequestModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
+import com.salehni.salehni.view.activities.VideoActivity;
 import com.salehni.salehni.view.adapters.MechanicImagesRequestAdapter;
 import com.salehni.salehni.viewmodel.MechanicRequestViewModel;
 
 import java.util.ArrayList;
 
+import static com.salehni.salehni.util.Constants.selectedVideoPath;
 import static com.salehni.salehni.util.MyApplication.context;
 
 public class MechanicRequestFragment extends Fragment implements AdapterView.OnItemClickListener {
@@ -57,6 +61,7 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
     TextView numOfImages_Tv;
     TextView notes_Tv;
     TextView location_Tv;
+    TextView watchVideo_Tv;
 
     PopupWindow popupWindow;
 
@@ -74,6 +79,7 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
         numOfImages_Tv = (TextView) view.findViewById(R.id.numOfImages_Tv);
         notes_Tv = (TextView) view.findViewById(R.id.notes_Tv);
         location_Tv = (TextView) view.findViewById(R.id.location_Tv);
+        watchVideo_Tv = (TextView) view.findViewById(R.id.watchVideo_Tv);
 
         send_request_Ll.requestFocus();
 
@@ -175,7 +181,7 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
         }
     }
 
-    public void setData(MechanicRequestModel mechanicRequestModel) {
+    public void setData(final MechanicRequestModel mechanicRequestModel) {
 
         if (Integer.parseInt(mechanicRequestModel.getFix_at()) == 0) {
             atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.radio_checked));
@@ -186,11 +192,27 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
         }
         numOfImages_Tv.setText(mechanicRequestModel.getImages().size() + " " + getResources().getString(R.string.images_));
 
-        intiRecView(mechanicRequestModel.getImages());
+        if (mechanicRequestAdapter != null) {
+            mechanicRequestAdapter.notifyDataSetChanged();
+        } else {
+            intiRecView(mechanicRequestModel.getImages());
+        }
+
 
         notes_Tv.setText(mechanicRequestModel.getNotes());
 
         location_Tv.setText(mechanicRequestModel.getLocation());
+
+        watchVideo_Tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (selectedVideoPath.length() > 0) {
+                    Intent intent = new Intent(getActivity(), VideoActivity.class);
+                    intent.putExtra(Constants.selectedVideoPath, mechanicRequestModel.getVideo());
+                    startActivity(intent);
+                }
+            }
+        });
     }
 
     public void getExtra() {

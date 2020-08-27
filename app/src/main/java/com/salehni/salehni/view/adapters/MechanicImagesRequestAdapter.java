@@ -64,8 +64,10 @@ public class MechanicImagesRequestAdapter extends
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
+        String image = images.get(position);
+
         Glide.with(context)
-                .load(images.get(position))
+                .load(image)
                 .centerCrop()
                 .placeholder(R.color.grey)
                 .into(holder.accedant_pic_Iv);
