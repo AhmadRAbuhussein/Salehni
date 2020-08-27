@@ -33,6 +33,7 @@ import com.salehni.salehni.view.fragments.Drawer.MyAccountFragment;
 import com.salehni.salehni.view.fragments.Drawer.PrivacyPolicyFragment;
 import com.salehni.salehni.R;
 import com.salehni.salehni.view.fragments.Drawer.TermsConditionFragment;
+import com.salehni.salehni.view.fragments.MechanicRequestFragment;
 
 import java.util.ArrayList;
 
@@ -67,8 +68,7 @@ public class MainPageCustomerActivity extends AppCompatActivity {
         mainFrameLayout = findViewById(R.id.mainFrameLayout);
         title_Tv = findViewById(R.id.title_Tv);
 
-        CustomRequestFragment customRequestFragment = new CustomRequestFragment();
-        replaceFragment(customRequestFragment, "customRequestFragment");
+        initialFirstFragment();
 
         menu_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,13 +174,15 @@ public class MainPageCustomerActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-//    public void setFragment(Fragment fragment) {
-//        FragmentManager manager = getSupportFragmentManager();
-//        FragmentTransaction transaction = manager.beginTransaction();
-//        transaction.replace(R.id.mainFrameLayout, fragment, null);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//    }
+    private void initialFirstFragment() {
+
+        //TODO return this because it's for testing
+//        CustomRequestFragment customRequestFragment = new CustomRequestFragment();
+//        replaceFragment(customRequestFragment, "customRequestFragment");
+
+        MechanicRequestFragment mechanicRequestFragment = new MechanicRequestFragment();
+        replaceFragment(mechanicRequestFragment, "mechanicRequestFragment");
+    }
 
     private void logoutPopup() {
 

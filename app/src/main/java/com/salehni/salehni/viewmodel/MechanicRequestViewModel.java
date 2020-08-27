@@ -44,13 +44,18 @@ public class MechanicRequestViewModel extends AndroidViewModel implements Interf
 
             showProgressDialogMutableLiveData.setValue(true);
 
+            String request_id = "";
+            if (mechanicNotificationModel != null) {
+                mechanicNotificationModel.getRequest_id();
+            }
+
             Map<String, String> headerParams = new HashMap<String, String>();
 
             JSONObject jsonObject = new JSONObject();
 
             try {
                 jsonObject.put("user_id", "");
-                jsonObject.put("request_id", mechanicNotificationModel.getRequest_id());
+                jsonObject.put("request_id", request_id);
 
             } catch (JSONException e) {
                 e.printStackTrace();
