@@ -2,6 +2,7 @@ package com.salehni.salehni.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -49,7 +50,7 @@ public class MechanicRequestViewModel extends AndroidViewModel implements Interf
 
             try {
                 jsonObject.put("user_id", "");
-                jsonObject.put("request_id", "");
+                jsonObject.put("request_id", mechanicNotificationModel.getRequest_id());
 
             } catch (JSONException e) {
                 e.printStackTrace();

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.ClientNotificationModel;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
+import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.MechanicNotificationAdapter;
@@ -111,10 +112,15 @@ public class MechanicNotificationFragment extends Fragment implements AdapterVie
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
 
         MechanicRequestFragment mechanicRequestFragment = new MechanicRequestFragment();
-        setFragment(mechanicRequestFragment);
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(Constants.selectedMechanicNotification, mechanicNotificationArraylist.get(position));
+        mechanicRequestFragment.setArguments(bundle);
+
+        setFragment(mechanicRequestFragment, "mechanicRequestFragment");
 
     }
 
@@ -135,11 +141,11 @@ public class MechanicNotificationFragment extends Fragment implements AdapterVie
 
     }
 
-    public void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment, String tag) {
         mechanicNotificationAdapter = null;
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.replace(R.id.mainFrameLayout, fragment, null);
+        transaction.replace(R.id.mainFrameLayout, fragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
     }

@@ -1,14 +1,20 @@
 package com.salehni.salehni.view.fragments;
 
+import android.content.Context;
+import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Display;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import androidx.appcompat.widget.AppCompatRadioButton;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -19,15 +25,19 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
 import com.salehni.salehni.data.model.MechanicRequestModel;
+import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.MechanicImagesRequestAdapter;
 import com.salehni.salehni.viewmodel.MechanicRequestViewModel;
 
 import java.util.ArrayList;
+
+import static com.salehni.salehni.util.MyApplication.context;
 
 public class MechanicRequestFragment extends Fragment implements AdapterView.OnItemClickListener {
 
@@ -36,15 +46,20 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
 
     MechanicRequestViewModel mechanicRequestViewModel;
 
+    MechanicRequestModel mechanicRequestModelData;
+
     LinearLayout send_request_Ll;
 
     MechanicNotificationModel mechanicNotificationModel;
 
-    AppCompatRadioButton fixAtLocation_Rb;
-    AppCompatRadioButton fixAtMechanic_Rb;
+    ImageView atLocation_Iv;
+    ImageView atMechanic_Iv;
     TextView numOfImages_Tv;
     TextView notes_Tv;
     TextView location_Tv;
+
+    PopupWindow popupWindow;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,13 +67,17 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
 
         img_recycler_view = (RecyclerView) view.findViewById(R.id.img_recycler_view);
         send_request_Ll = (LinearLayout) view.findViewById(R.id.send_request_Ll);
-        fixAtLocation_Rb = (AppCompatRadioButton) view.findViewById(R.id.fixAtLocation_Rb);
-        fixAtMechanic_Rb = (AppCompatRadioButton) view.findViewById(R.id.fixAtMechanic_Rb);
+
+        atLocation_Iv = (ImageView) view.findViewById(R.id.atLocation_Iv);
+        atMechanic_Iv = (ImageView) view.findViewById(R.id.atMechanic_Iv);
+
         numOfImages_Tv = (TextView) view.findViewById(R.id.numOfImages_Tv);
         notes_Tv = (TextView) view.findViewById(R.id.notes_Tv);
         location_Tv = (TextView) view.findViewById(R.id.location_Tv);
 
         send_request_Ll.requestFocus();
+
+        getExtra();
 
         send_request_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +116,7 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
 
                 if (mechanicRequestModel != null) {
 
+                    mechanicRequestModelData = mechanicRequestModel;
                     setData(mechanicRequestModel);
 
 
@@ -147,16 +167,22 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+        int accedant_pic_Iv_ID = R.id.accedant_pic_Iv;
 
+        if (view.getId() == accedant_pic_Iv_ID) {
+            showImage_popup(mechanicRequestModelData.getImages().get(position));
+        }
     }
 
     public void setData(MechanicRequestModel mechanicRequestModel) {
 
         if (Integer.parseInt(mechanicRequestModel.getFix_at()) == 0) {
-            fixAtLocation_Rb.setChecked(true);
+            atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.radio_checked));
+            atMechanic_Iv.setBackground(getResources().getDrawable(R.drawable.radio_unchecked));
         } else {
-            fixAtMechanic_Rb.setChecked(true);
+            atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.radio_unchecked));
+            atMechanic_Iv.setBackground(getResources().getDrawable(R.drawable.radio_checked));
         }
         numOfImages_Tv.setText(mechanicRequestModel.getImages().size() + " " + getResources().getString(R.string.images_));
 
@@ -167,5 +193,62 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
         location_Tv.setText(mechanicRequestModel.getLocation());
     }
 
+    public void getExtra() {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            mechanicNotificationModel = bundle.getParcelable(Constants.selectedMechanicNotification);
+        }
+
+    }
+
+    public void showImage_popup(String img) {
+
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View layout = inflater.inflate(R.layout.show_image2_popup, null);
+
+        popupWindow = new PopupWindow(layout);
+        popupWindow.setAnimationStyle(R.style.popup_window_animation_zoom);
+        popupWindow.setWidth(width);
+        popupWindow.setHeight(height);
+        popupWindow.setFocusable(true);
+        popupWindow.setTouchable(true);
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setBackgroundDrawable(new ColorDrawable());
+        popupWindow.showAtLocation(getActivity().getWindow().getDecorView(), Gravity.CENTER, 0, 0);
+
+        ImageView removePic_Iv = (ImageView) layout.findViewById(R.id.removePic_Iv);
+        ImageView accident_Iv = (ImageView) layout.findViewById(R.id.accident_Iv);
+
+        removePic_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
+
+        Glide.with(context)
+                .load(img)
+                .centerCrop()
+                .placeholder(R.color.grey)
+                .into(accident_Iv);
+
+
+        Global.dimBehind(popupWindow);
+
+    }
+
+    private void refreshDataViews(int size) {
+        numOfImages_Tv.setText(size + " " + getResources().getString(R.string.images2));
+
+        mechanicRequestAdapter.notifyDataSetChanged();
+    }
+
 
 }
+

@@ -23,6 +23,7 @@ public class Constants {
     public static final String otp_key = "otp_key";
     public static final String selectedVideoPath = "selectedVideoPath";
     public static final String selectedRequest = "selectedRequest";
+    public static final String selectedMechanicNotification = "selectedMechanicNotfifcation";
 
 
     //requestCode

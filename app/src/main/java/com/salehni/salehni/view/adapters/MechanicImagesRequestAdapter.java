@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.salehni.salehni.R;
 import com.salehni.salehni.util.Global;
 
@@ -39,6 +40,7 @@ public class MechanicImagesRequestAdapter extends
             accedant_pic_Iv = (ImageView) view.findViewById(R.id.accedant_pic_Iv);
 
             container_Fl.setOnClickListener(this);
+            accedant_pic_Iv.setOnClickListener(this);
 
         }
 
@@ -62,10 +64,11 @@ public class MechanicImagesRequestAdapter extends
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        String image = images.get(position);
-
-        holder.accedant_pic_Iv.setImageBitmap(Global.convertStringToBitmap(image));
-
+        Glide.with(context)
+                .load(images.get(position))
+                .centerCrop()
+                .placeholder(R.color.grey)
+                .into(holder.accedant_pic_Iv);
 
     }
 
