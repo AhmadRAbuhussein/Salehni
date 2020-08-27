@@ -213,7 +213,7 @@ public class MechanicRequestFragment extends Fragment implements AdapterView.OnI
         final View layout = inflater.inflate(R.layout.show_image2_popup, null);
 
         popupWindow = new PopupWindow(layout);
-        popupWindow.setAnimationStyle(R.style.popup_window_animation_zoom);
+        popupWindow.setAnimationStyle(R.style.popup_window_animation);
         popupWindow.setWidth(width);
         popupWindow.setHeight(height);
         popupWindow.setFocusable(true);
