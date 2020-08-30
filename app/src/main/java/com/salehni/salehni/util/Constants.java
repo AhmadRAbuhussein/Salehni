@@ -18,12 +18,14 @@ public class Constants {
     public static final String userNotifications_Url = "userNotifications";
     public static final String mechanicNotifications_Url = "mechanicNotifications";
     public static final String getUserRequest_Url = "getUserRequest";
+    public static final String mechanicSendOffer_Url = "mechanicSendOffer";
 
     //putExtras
     public static final String otp_key = "otp_key";
     public static final String selectedVideoPath = "selectedVideoPath";
     public static final String selectedRequest = "selectedRequest";
     public static final String selectedMechanicNotification = "selectedMechanicNotfifcation";
+    public static final String request_id = "request_id";
 
 
     //requestCode

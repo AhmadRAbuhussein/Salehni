@@ -92,6 +92,11 @@ public class UserRequestDetails extends Fragment implements AdapterView.OnItemCl
             @Override
             public void onClick(View view) {
                 WriteYourOfferFragment writeYourOfferFragment = new WriteYourOfferFragment();
+
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.request_id, userRequestDetailsModelData.getRequest_id());
+                writeYourOfferFragment.setArguments(bundle);
+
                 setFragment(writeYourOfferFragment);
             }
         });

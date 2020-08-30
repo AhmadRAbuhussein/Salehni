@@ -72,11 +72,14 @@
                         android:src="@drawable/dollar_sign" />
 
                     <EditText
+                        android:id="@+id/price_Et"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:background="@null"
                         android:hint="@string/price_here"
+                        android:textColor="@color/white"
+                        android:inputType="number"
                         android:textColorHint="@color/white"
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
@@ -97,6 +100,7 @@
                         android:src="@drawable/note" />
 
                     <EditText
+                        android:id="@+id/notes_Et"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
@@ -150,7 +154,8 @@
                         android:text="@string/sound"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginRight="@dimen/_1sdp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -158,7 +163,8 @@
                         android:text="@string/listen"
                         android:textColor="@color/blue"
                         android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:layout_marginLeft="@dimen/_1sdp" />
 
                 </LinearLayout>
 

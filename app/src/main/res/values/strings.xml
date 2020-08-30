@@ -100,6 +100,7 @@
     <string name="watch"><u>Watch</u></string>
     <string name="video">Video |</string>
     <string name="write_offer">Write your offer</string>
+    <string name="write_your_offer">Write Your Offer</string>
     <string name="person_name">Person Name</string>
     <string name="request11111">Request 111</string>
     <string name="price_here">Price Here</string>
@@ -158,6 +159,7 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
     <string name="by_car">Going by Car</string>
     <string name="accepted_offer">Accepted Offer</string>
     <string name="user_request_details">User Request Details</string>
+    <string name="enter_price">Enter Your Price</string>
 
 
 </resources>
