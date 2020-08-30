@@ -168,6 +168,7 @@ public class UserRequestDetails extends Fragment implements AdapterView.OnItemCl
     }
 
     public void setFragment(Fragment fragment) {
+        mechanicRequestAdapter = null;
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.mainFrameLayout, fragment, null);
