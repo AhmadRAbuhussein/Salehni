@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Gravity;
@@ -38,6 +39,7 @@ import com.salehni.salehni.view.adapters.MechanicImagesRequestAdapter;
 import com.salehni.salehni.viewmodel.UserRequestDetailsViewModel;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import static com.salehni.salehni.util.Constants.selectedVideoPath;
 import static com.salehni.salehni.util.MyApplication.context;
@@ -61,6 +63,7 @@ public class UserRequestDetails extends Fragment implements AdapterView.OnItemCl
     TextView notes_Tv;
     TextView location_Tv;
     TextView watchVideo_Tv;
+    LinearLayout location_Ll;
 
     PopupWindow popupWindow;
 
@@ -79,6 +82,7 @@ public class UserRequestDetails extends Fragment implements AdapterView.OnItemCl
         notes_Tv = (TextView) view.findViewById(R.id.notes_Tv);
         location_Tv = (TextView) view.findViewById(R.id.location_Tv);
         watchVideo_Tv = (TextView) view.findViewById(R.id.watchVideo_Tv);
+        location_Ll = (LinearLayout) view.findViewById(R.id.location_Ll);
 
         send_request_Ll.requestFocus();
 
@@ -210,6 +214,18 @@ public class UserRequestDetails extends Fragment implements AdapterView.OnItemCl
                     intent.putExtra(Constants.selectedVideoPath, userRequestDetailsModel.getVideo());
                     startActivity(intent);
                 }
+            }
+        });
+
+        location_Ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String strUri = "http://maps.google.com/maps?q=loc:" + userRequestDetailsModel.getLat() + "," + userRequestDetailsModel.getLon() + "";
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(strUri));
+
+                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+
+                startActivity(intent);
             }
         });
     }

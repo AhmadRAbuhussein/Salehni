@@ -34,17 +34,17 @@
                 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="100"
                     android:clickable="false"
                     android:focusable="false"
-                    android:focusableInTouchMode="false">
+                    android:focusableInTouchMode="false"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
 
                     <LinearLayout
                         android:id="@+id/atLocation_Ll"
                         android:layout_width="0dp"
-                        android:layout_weight="50"
                         android:layout_height="wrap_content"
+                        android:layout_weight="50"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -66,8 +66,8 @@
                     <LinearLayout
                         android:id="@+id/atMechanic_Ll"
                         android:layout_width="0dp"
-                        android:layout_weight="50"
                         android:layout_height="wrap_content"
+                        android:layout_weight="50"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -91,8 +91,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -104,36 +104,36 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:text="@string/images"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_10ssp"
-                        android:layout_gravity="center" />
+                        android:textSize="@dimen/_10ssp" />
 
 
                     <TextView
                         android:id="@+id/numOfImages_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/text_on_black_bg"
-                        android:textSize="@dimen/_7ssp"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_2sdp"
-                        android:layout_gravity="center" />
-
+                        android:textColor="@color/text_on_black_bg"
+                        android:textSize="@dimen/_7ssp" />
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/img_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_marginLeft="@dimen/_10sdp" />
+                    android:layout_marginRight="@dimen/_10sdp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:orientation="horizontal">
 
@@ -145,28 +145,29 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:text="@string/video"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_10ssp"
-                        android:layout_gravity="center" />
+                        android:textSize="@dimen/_10ssp" />
 
                     <TextView
                         android:id="@+id/watchVideo_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/watch"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_2sdp"
+                        android:text="@string/watch"
                         android:textColor="@color/blue"
-                        android:textSize="@dimen/_7ssp"
-                        android:layout_gravity="center" />
+                        android:textSize="@dimen/_7ssp" />
                 </LinearLayout>
 
 
                 <LinearLayout
+                    android:id="@+id/location_Ll"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_15sdp">
 
                     <ImageView
@@ -178,9 +179,9 @@
                         android:id="@+id/location_Tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_10ssp"
-                        android:layout_gravity="center" />
+                        android:textSize="@dimen/_10ssp" />
 
                 </LinearLayout>
 
@@ -188,11 +189,11 @@
                     android:id="@+id/notes_Tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_10ssp"
-                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
-                    android:layout_marginRight="@dimen/_15sdp" />
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginRight="@dimen/_15sdp"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10ssp" />
 
             </LinearLayout>
 
@@ -203,11 +204,11 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:background="@drawable/shape_btn_red_bg"
-                android:gravity="center"
-                android:orientation="horizontal"
                 android:clickable="true"
+                android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:focusable="true">
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="@dimen/_15sdp"
@@ -215,21 +216,21 @@
                     android:layout_gravity="center"
                     android:layout_marginRight="@dimen/_4sdp"
                     android:background="@drawable/write_offer"
-                    android:focusableInTouchMode="false"
+                    android:clickable="false"
                     android:focusable="false"
-                    android:clickable="false" />
+                    android:focusableInTouchMode="false" />
 
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:text="@string/write_offer"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_11ssp"
-                    android:focusableInTouchMode="false"
-                    android:focusable="false"
-                    android:clickable="false" />
+                    android:textSize="@dimen/_11ssp" />
 
             </LinearLayout>
 
