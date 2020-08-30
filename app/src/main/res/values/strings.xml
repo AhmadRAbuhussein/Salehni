@@ -160,6 +160,8 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
     <string name="accepted_offer">Accepted Offer</string>
     <string name="user_request_details">User Request Details</string>
     <string name="enter_price">Enter Your Price</string>
+    <string name="time0">00:00</string>
+    <string name="max_1_minute">You have maximum 1 minute to record</string>
 
 
 </resources>

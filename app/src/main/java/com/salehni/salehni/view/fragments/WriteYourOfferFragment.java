@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -23,25 +26,61 @@ import com.salehni.salehni.viewmodel.WriteYourOfferViewModel;
 
 public class WriteYourOfferFragment extends Fragment {
 
+    LinearLayout voice_description_Ll;
     LinearLayout send_request_Ll;
     EditText price_Et;
     EditText notes_Et;
+    TextView voice_note_time;
+    TextView voice_time_Tv;
+    FrameLayout voice_record_Fl;
 
     WriteYourOfferViewModel writeYourOfferViewModel;
 
     String request_id = "";
+
+    ImageView start_recording_Iv;
+    ImageView stop_recording_Iv;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_your_offer, container, false);
 
+        voice_note_time = view.findViewById(R.id.voice_note_time);
+        voice_time_Tv = view.findViewById(R.id.voice_time_Tv);
+        start_recording_Iv = view.findViewById(R.id.start_recording_Iv);
+        stop_recording_Iv = view.findViewById(R.id.stop_recording_Iv);
         price_Et = view.findViewById(R.id.price_Et);
         notes_Et = view.findViewById(R.id.notes_Et);
+        voice_description_Ll = view.findViewById(R.id.voice_description_Ll);
+        voice_record_Fl = view.findViewById(R.id.voice_record_Fl);
         send_request_Ll = view.findViewById(R.id.send_request_Ll);
         send_request_Ll.requestFocus();
 
         getExtra();
+
+        start_recording_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stop_recording_Iv.setVisibility(View.VISIBLE);
+                voice_note_time.setText(getResources().getString(R.string.time0));
+                voice_time_Tv.setVisibility(View.VISIBLE);
+                voice_description_Ll.setVisibility(View.GONE);
+                voice_record_Fl.setVisibility(View.GONE);
+            }
+        });
+
+        stop_recording_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                stop_recording_Iv.setVisibility(View.GONE);
+                voice_note_time.setText(getResources().getString(R.string.send_voice_note));
+                voice_time_Tv.setVisibility(View.GONE);
+                voice_description_Ll.setVisibility(View.VISIBLE);
+                voice_record_Fl.setVisibility(View.VISIBLE);
+
+            }
+        });
 
         send_request_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
