@@ -230,7 +230,7 @@
                     android:background="@drawable/shape_voice_note"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
-                    android:visibility="gone">
+                    android:visibility="">
 
                     <ImageView
                         android:id="@+id/play_recording_Iv"
@@ -245,18 +245,21 @@
                         android:layout_marginLeft="@dimen/_25sdp"
                         android:background="@drawable/shape_voice_line" />
 
-                    <View
-                        android:layout_width="@dimen/_5sdp"
-                        android:layout_height="@dimen/_5sdp"
+                    <SeekBar
+                        android:id="@+id/seekbar"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/shape_red_dot" />
+                        android:progressTint="@color/grey"
+                        android:thumb="@drawable/shape_red_dot" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="@dimen/_25sdp"
-                        android:layout_marginBottom="@dimen/_4sdp"
+                        android:layout_marginBottom="@dimen/_3sdp"
                         android:text="@string/clock"
                         android:textColor="@color/links_and_buttons"
                         android:textSize="@dimen/_7ssp"

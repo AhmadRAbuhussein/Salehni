@@ -16,10 +16,12 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -74,6 +76,8 @@ public class WriteYourOfferFragment extends Fragment {
 
     RoundedHorizontalProgressBar roundedHorizontalProgressBar;
 
+    SeekBar seekbar;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,6 +95,7 @@ public class WriteYourOfferFragment extends Fragment {
         voice_record_Fl = view.findViewById(R.id.voice_record_Fl);
         play_recording_Iv = view.findViewById(R.id.play_recording_Iv);
         roundedHorizontalProgressBar = view.findViewById(R.id.progress_bar_1);
+        seekbar = view.findViewById(R.id.seekbar);
         send_request_Ll = view.findViewById(R.id.send_request_Ll);
         send_request_Ll.requestFocus();
 
@@ -172,6 +177,36 @@ public class WriteYourOfferFragment extends Fragment {
                     setFragment(mechanicNotificationFragment);
                 }
             }
+        });
+
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
+
+                int x = (int) Math.ceil(progress / 1000f);
+
+                if (x > 0 && mediaPlayer != null && !mediaPlayer.isPlaying() && !playingCheck) {
+                    clearMediaPlayer();
+                    play_recording_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.play));
+                    seekBar.setProgress(0);
+                }
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                if (mediaPlayer != null) {
+                    mediaPlayer.seekTo(seekBar.getProgress());
+                }
+
+            }
+
         });
 
         return view;
@@ -347,5 +382,15 @@ public class WriteYourOfferFragment extends Fragment {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+    }
+
+    private void clearMediaPlayer() {
+
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+
     }
 }
