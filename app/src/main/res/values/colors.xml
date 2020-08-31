@@ -19,6 +19,8 @@
     <color name="green_cards">#b6e1c8</color>
     <color name="orange">#ffc04c</color>
     <color name="edit_prof">#78bcff</color>
+    <color name="recording_color">#612931</color>
+    <color name="progress_color">#3e222b</color>
 
 
 </resources>

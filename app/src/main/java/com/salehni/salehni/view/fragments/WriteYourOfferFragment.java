@@ -5,12 +5,13 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.viewmodel.WriteYourOfferViewModel;
+import com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -41,7 +43,7 @@ public class WriteYourOfferFragment extends Fragment {
     LinearLayout send_request_Ll;
     EditText price_Et;
     EditText notes_Et;
-    TextView voice_note_time;
+    TextView voice_note_time_Tv;
     TextView voice_time_Tv;
     FrameLayout voice_record_Fl;
 
@@ -59,7 +61,18 @@ public class WriteYourOfferFragment extends Fragment {
 
     private String fileName;
     private MediaRecorder recorder;
-    private MediaPlayer player;
+    private MediaPlayer mediaPlayer;
+
+    int time = 0;
+    int timePrevious = 0;
+    boolean playingCheck = false;
+    long startTime = 0;
+
+    Handler handler;
+    Runnable runnable;
+
+    RoundedHorizontalProgressBar roundedHorizontalProgressBar;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,7 +80,7 @@ public class WriteYourOfferFragment extends Fragment {
 
         ActivityCompat.requestPermissions(getActivity(), permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
-        voice_note_time = view.findViewById(R.id.voice_note_time);
+        voice_note_time_Tv = view.findViewById(R.id.voice_note_time_Tv);
         voice_time_Tv = view.findViewById(R.id.voice_time_Tv);
         start_recording_Iv = view.findViewById(R.id.start_recording_Iv);
         stop_recording_Iv = view.findViewById(R.id.stop_recording_Iv);
@@ -76,6 +89,7 @@ public class WriteYourOfferFragment extends Fragment {
         voice_description_Ll = view.findViewById(R.id.voice_description_Ll);
         voice_record_Fl = view.findViewById(R.id.voice_record_Fl);
         play_recording_Iv = view.findViewById(R.id.play_recording_Iv);
+        roundedHorizontalProgressBar = view.findViewById(R.id.progress_bar_1);
         send_request_Ll = view.findViewById(R.id.send_request_Ll);
         send_request_Ll.requestFocus();
 
@@ -86,10 +100,11 @@ public class WriteYourOfferFragment extends Fragment {
             public void onClick(View view) {
                 startRecording();
                 stop_recording_Iv.setVisibility(View.VISIBLE);
-                voice_note_time.setText(getResources().getString(R.string.time0));
+                voice_note_time_Tv.setText(getResources().getString(R.string.time0));
                 voice_time_Tv.setVisibility(View.VISIBLE);
                 voice_description_Ll.setVisibility(View.GONE);
                 voice_record_Fl.setVisibility(View.GONE);
+                playingCheck = true;
             }
         });
 
@@ -98,10 +113,11 @@ public class WriteYourOfferFragment extends Fragment {
             public void onClick(View view) {
                 stopRecording();
                 stop_recording_Iv.setVisibility(View.GONE);
-                voice_note_time.setText(getResources().getString(R.string.send_voice_note));
+                voice_note_time_Tv.setText(getResources().getString(R.string.send_voice_note));
                 voice_time_Tv.setVisibility(View.GONE);
                 voice_description_Ll.setVisibility(View.VISIBLE);
                 voice_record_Fl.setVisibility(View.VISIBLE);
+                playingCheck = false;
 
             }
         });
@@ -160,6 +176,60 @@ public class WriteYourOfferFragment extends Fragment {
         return view;
     }
 
+    private void threadLooper() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (playingCheck) {
+
+//                    if (time > 0) {
+//                        roundedHorizontalProgressBar.animateProgress(60000, time - 1000, time); // (animationDuration, oldProgress, newProgress)
+//                    } else {
+//                        roundedHorizontalProgressBar.animateProgress(60000, 0, 0); // (animationDuration, oldProgress, newProgress)
+//                    }
+
+                    roundedHorizontalProgressBar.animateProgress(60, timePrevious, time);// (animationDuration, oldProgress, newProgress)
+
+
+                    time += 1;
+                    timePrevious = time - 1;
+
+                    countdown();
+
+                    handler.postDelayed(this, 1000L);  // 1 second delay
+                } else {
+                    stopRecording();
+                    stop_recording_Iv.setVisibility(View.GONE);
+                    voice_note_time_Tv.setText(getResources().getString(R.string.send_voice_note));
+                    voice_time_Tv.setVisibility(View.GONE);
+                    voice_description_Ll.setVisibility(View.VISIBLE);
+                    voice_record_Fl.setVisibility(View.VISIBLE);
+                    playingCheck = false;
+                }
+
+            }
+        };
+        handler.post(runnable);
+    }
+
+    private void countdown() {
+        new CountDownTimer(60000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+                if (playingCheck) {
+//                   voice_note_time_Tv.setText(Global.formatDateFromDateString(millisUntilFinished / 1000),);
+                }
+
+            }
+
+            public void onFinish() {
+            }
+
+        }.start();
+    }
+
     private void startRecording() {
         String uuid = UUID.randomUUID().toString();
         fileName = getActivity().getExternalCacheDir().getAbsolutePath() + "/" + uuid + ".3gp";
@@ -178,6 +248,7 @@ public class WriteYourOfferFragment extends Fragment {
         }
 
         recorder.start();
+        threadLooper();
     }
 
     private void stopRecording() {
@@ -250,26 +321,26 @@ public class WriteYourOfferFragment extends Fragment {
     }
 
     private void playRecording() {
-        player = new MediaPlayer();
+        mediaPlayer = new MediaPlayer();
         try {
-            player.setDataSource(fileName);
-            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            mediaPlayer.setDataSource(fileName);
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                 @Override
                 public void onCompletion(MediaPlayer mediaPlayer) {
                     stopPlaying();
                 }
             });
-            player.prepare();
-            player.start();
+            mediaPlayer.prepare();
+            mediaPlayer.start();
         } catch (IOException e) {
             Log.e(WriteYourOfferFragment.class.getSimpleName() + ":playRecording()", "prepare() failed");
         }
     }
 
     private void stopPlaying() {
-        if (player != null) {
-            player.release();
-            player = null;
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
         }
     }
 }
