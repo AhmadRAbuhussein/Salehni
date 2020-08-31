@@ -238,7 +238,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_marginLeft="@dimen/_25sdp"
-                        android:layout_marginBottom="@dimen/_7sdp"
+                        android:layout_marginBottom="@dimen/_4sdp"
                         android:text="@string/clock"
                         android:textColor="@color/links_and_buttons"
                         android:textSize="@dimen/_7ssp"
