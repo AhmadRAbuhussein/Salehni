@@ -38,6 +38,8 @@ public class Constants {
     public static final String DD_MM_YYYY_HH_MM_A = "dd/MM/yyyy - hh:mm a";
     public static final String HH_MM_A = "hh:mm a";
     public static final String currentDate = "26/8/2020";
+    public static final String SS = "ss";
+    public static final String MM_SS = "mm:ss";
 
 
 }

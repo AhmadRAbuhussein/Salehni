@@ -35,6 +35,7 @@ import com.salehni.salehni.viewmodel.WriteYourOfferViewModel;
 import com.sasank.roundedhorizontalprogress.RoundedHorizontalProgressBar;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.UUID;
 
 public class WriteYourOfferFragment extends Fragment {
@@ -219,7 +220,11 @@ public class WriteYourOfferFragment extends Fragment {
             public void onTick(long millisUntilFinished) {
 
                 if (playingCheck) {
-//                   voice_note_time_Tv.setText(Global.formatDateFromDateString(millisUntilFinished / 1000),);
+                    try {
+                        voice_note_time_Tv.setText(Global.formatDateFromDateString(Constants.SS, Constants.MM_SS, (millisUntilFinished / 1000) + ""));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
 
             }
