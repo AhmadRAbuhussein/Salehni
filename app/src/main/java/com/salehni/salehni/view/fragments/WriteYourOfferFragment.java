@@ -1,16 +1,24 @@
 package com.salehni.salehni.view.fragments;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,6 +31,9 @@ import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.viewmodel.WriteYourOfferViewModel;
+
+import java.io.IOException;
+import java.util.UUID;
 
 public class WriteYourOfferFragment extends Fragment {
 
@@ -40,11 +51,21 @@ public class WriteYourOfferFragment extends Fragment {
 
     ImageView start_recording_Iv;
     ImageView stop_recording_Iv;
+    ImageView play_recording_Iv;
 
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private static final String[] permissions = {Manifest.permission.RECORD_AUDIO};
+    private boolean audioRecordingPermissionGranted = false;
+
+    private String fileName;
+    private MediaRecorder recorder;
+    private MediaPlayer player;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_your_offer, container, false);
+
+        ActivityCompat.requestPermissions(getActivity(), permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
         voice_note_time = view.findViewById(R.id.voice_note_time);
         voice_time_Tv = view.findViewById(R.id.voice_time_Tv);
@@ -54,6 +75,7 @@ public class WriteYourOfferFragment extends Fragment {
         notes_Et = view.findViewById(R.id.notes_Et);
         voice_description_Ll = view.findViewById(R.id.voice_description_Ll);
         voice_record_Fl = view.findViewById(R.id.voice_record_Fl);
+        play_recording_Iv = view.findViewById(R.id.play_recording_Iv);
         send_request_Ll = view.findViewById(R.id.send_request_Ll);
         send_request_Ll.requestFocus();
 
@@ -62,6 +84,7 @@ public class WriteYourOfferFragment extends Fragment {
         start_recording_Iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startRecording();
                 stop_recording_Iv.setVisibility(View.VISIBLE);
                 voice_note_time.setText(getResources().getString(R.string.time0));
                 voice_time_Tv.setVisibility(View.VISIBLE);
@@ -73,12 +96,20 @@ public class WriteYourOfferFragment extends Fragment {
         stop_recording_Iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                stopRecording();
                 stop_recording_Iv.setVisibility(View.GONE);
                 voice_note_time.setText(getResources().getString(R.string.send_voice_note));
                 voice_time_Tv.setVisibility(View.GONE);
                 voice_description_Ll.setVisibility(View.VISIBLE);
                 voice_record_Fl.setVisibility(View.VISIBLE);
 
+            }
+        });
+
+        play_recording_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playRecording();
             }
         });
 
@@ -129,6 +160,47 @@ public class WriteYourOfferFragment extends Fragment {
         return view;
     }
 
+    private void startRecording() {
+        String uuid = UUID.randomUUID().toString();
+        fileName = getActivity().getExternalCacheDir().getAbsolutePath() + "/" + uuid + ".3gp";
+        Log.i(WriteYourOfferFragment.class.getSimpleName(), fileName);
+
+        recorder = new MediaRecorder();
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        recorder.setOutputFile(fileName);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        try {
+            recorder.prepare();
+        } catch (IOException e) {
+            Log.e(WriteYourOfferFragment.class.getSimpleName() + ":startRecording()", "prepare() failed");
+        }
+
+        recorder.start();
+    }
+
+    private void stopRecording() {
+        if (recorder != null) {
+            recorder.release();
+            recorder = null;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_RECORD_AUDIO_PERMISSION:
+                audioRecordingPermissionGranted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                break;
+        }
+
+        if (!audioRecordingPermissionGranted) {
+            getActivity().finish();
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -175,5 +247,29 @@ public class WriteYourOfferFragment extends Fragment {
         return validation;
 
 
+    }
+
+    private void playRecording() {
+        player = new MediaPlayer();
+        try {
+            player.setDataSource(fileName);
+            player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    stopPlaying();
+                }
+            });
+            player.prepare();
+            player.start();
+        } catch (IOException e) {
+            Log.e(WriteYourOfferFragment.class.getSimpleName() + ":playRecording()", "prepare() failed");
+        }
+    }
+
+    private void stopPlaying() {
+        if (player != null) {
+            player.release();
+            player = null;
+        }
     }
 }

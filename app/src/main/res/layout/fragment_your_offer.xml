@@ -215,6 +215,7 @@
                     android:visibility="gone">
 
                     <ImageView
+                        android:id="@+id/play_recording_Iv"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
                         android:layout_gravity="center_vertical"
