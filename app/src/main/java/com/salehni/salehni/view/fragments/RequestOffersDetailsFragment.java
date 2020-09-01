@@ -1,8 +1,6 @@
 package com.salehni.salehni.view.fragments;
 
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -36,11 +33,8 @@ import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.RequestOffersDetailsAdapter;
 import com.salehni.salehni.viewmodel.AcceptOfferViewModel;
-import com.salehni.salehni.viewmodel.CustomRequestViewModel;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class RequestOffersDetailsFragment extends Fragment implements AdapterView.OnItemClickListener, Runnable {
 
@@ -163,7 +157,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
             public void onClick(View view) {
 
                 if (!requestOffersModel.getOfferInnerObject().getVoice_note().equalsIgnoreCase("")) {
-                    playSong();
+                    playRecord();
                 }
 
             }
@@ -295,7 +289,7 @@ public class RequestOffersDetailsFragment extends Fragment implements AdapterVie
         }
     }
 
-    public void playSong() {
+    public void playRecord() {
 
         try {
 

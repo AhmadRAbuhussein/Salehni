@@ -40,7 +40,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.UUID;
 
-public class WriteYourOfferFragment extends Fragment {
+public class WriteYourOfferFragment extends Fragment implements Runnable {
 
     LinearLayout voice_description_Ll;
     LinearLayout send_request_Ll;
@@ -48,6 +48,8 @@ public class WriteYourOfferFragment extends Fragment {
     EditText notes_Et;
     TextView voice_note_time_Tv;
     TextView voice_time_Tv;
+    TextView voice_time_description_Tv;
+    TextView end_time_Tv;
     FrameLayout voice_record_Fl;
 
     WriteYourOfferViewModel writeYourOfferViewModel;
@@ -62,7 +64,7 @@ public class WriteYourOfferFragment extends Fragment {
     private static final String[] permissions = {Manifest.permission.RECORD_AUDIO};
     private boolean audioRecordingPermissionGranted = false;
 
-    private String fileName;
+    private String fileName = "";
     private MediaRecorder recorder;
     private MediaPlayer mediaPlayer;
 
@@ -76,9 +78,14 @@ public class WriteYourOfferFragment extends Fragment {
     Handler handler;
     Runnable runnable;
 
+    boolean pause = false;
+    boolean wasPlaying = false;
+
     RoundedHorizontalProgressBar roundedHorizontalProgressBar;
 
-    SeekBar seekbar;
+    SeekBar seekBar;
+    int currentPosition;
+    int total;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,9 +104,13 @@ public class WriteYourOfferFragment extends Fragment {
         voice_record_Fl = view.findViewById(R.id.voice_record_Fl);
         play_recording_Iv = view.findViewById(R.id.play_recording_Iv);
         roundedHorizontalProgressBar = view.findViewById(R.id.progress_bar_1);
-        seekbar = view.findViewById(R.id.seekbar);
+        seekBar = view.findViewById(R.id.seekbar);
+        voice_time_description_Tv = view.findViewById(R.id.voice_time_description_Tv);
+        end_time_Tv = view.findViewById(R.id.end_time_Tv);
         send_request_Ll = view.findViewById(R.id.send_request_Ll);
         send_request_Ll.requestFocus();
+
+        seekBar.setEnabled(false);
 
         getExtra();
 
@@ -127,7 +138,10 @@ public class WriteYourOfferFragment extends Fragment {
         play_recording_Iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                playRecording();
+                if (!fileName.equalsIgnoreCase("")) {
+                    playRecording();
+                }
+
             }
         });
 
@@ -175,7 +189,7 @@ public class WriteYourOfferFragment extends Fragment {
             }
         });
 
-        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
 
@@ -248,6 +262,28 @@ public class WriteYourOfferFragment extends Fragment {
         handler.post(runnable);
     }
 
+    @Override
+    public void run() {
+
+        int currentPosition = mediaPlayer.getCurrentPosition();
+        int total = mediaPlayer.getDuration();
+
+
+        while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
+            try {
+                Thread.sleep(1000);
+                currentPosition = mediaPlayer.getCurrentPosition();
+            } catch (InterruptedException e) {
+                return;
+            } catch (Exception e) {
+                return;
+            }
+
+            seekBar.setProgress(currentPosition);
+
+        }
+    }
+
     private void countdown() {
         new CountDownTimer(60000, 1000) {
 
@@ -286,16 +322,26 @@ public class WriteYourOfferFragment extends Fragment {
 
         recorder.start();
         threadLooper();
+        time = 0;
     }
 
     private void stopRecording() {
-
         roundedHorizontalProgressBar.clearAnimation();
         stop_recording_Iv.setVisibility(View.GONE);
         voice_note_time_Tv.setText(getResources().getString(R.string.send_voice_note));
         voice_time_Tv.setVisibility(View.GONE);
         voice_description_Ll.setVisibility(View.VISIBLE);
+        try {
+            voice_time_description_Tv.setText(getResources().getString(R.string.sound1) + " " + Global.formatDateFromDateString(Constants.S, Constants.MM_SS, time + ""));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         voice_record_Fl.setVisibility(View.VISIBLE);
+        try {
+            end_time_Tv.setText(Global.formatDateFromDateString(Constants.S, Constants.MM_SS, time + ""));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         playingCheck = false;
         timerRecorderStart = false;
         progressTimeStart = false;
@@ -368,29 +414,91 @@ public class WriteYourOfferFragment extends Fragment {
 
     }
 
-    private void playRecording() {
-        mediaPlayer = new MediaPlayer();
+    public void playRecording() {
+
         try {
-            mediaPlayer.setDataSource(fileName);
-            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                @Override
-                public void onCompletion(MediaPlayer mediaPlayer) {
-                    stopPlaying();
+
+            seekBar.setEnabled(true);
+
+            if (mediaPlayer != null && mediaPlayer.isPlaying()) {
+//                clearMediaPlayer();
+//                seekBar.setProgress(0);
+                pauseMediaPlayer();
+                wasPlaying = true;
+                play_recording_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.play));
+            }
+
+
+            if (!wasPlaying) {
+
+
+                if (mediaPlayer == null) {
+                    mediaPlayer = new MediaPlayer();
                 }
-            });
-            mediaPlayer.prepare();
-            mediaPlayer.start();
-        } catch (IOException e) {
-            Log.e(WriteYourOfferFragment.class.getSimpleName() + ":playRecording()", "prepare() failed");
+
+                if (pause) {
+                    pause = false;
+                    mediaPlayer.start();
+
+                    play_recording_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.pause));
+
+                    new Thread((Runnable) this).start();
+                } else {
+                    play_recording_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.pause));
+
+                    mediaPlayer.setDataSource(fileName);
+
+                    mediaPlayer.prepare();
+                    mediaPlayer.setVolume(0.5f, 0.5f);
+                    mediaPlayer.setLooping(false);
+                    seekBar.setMax(mediaPlayer.getDuration());
+
+                    mediaPlayer.start();
+                    new Thread((Runnable) this).start();
+                }
+                currentPosition = mediaPlayer.getCurrentPosition();
+                total = mediaPlayer.getDuration();
+            }
+
+            wasPlaying = false;
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
     }
 
-    private void stopPlaying() {
+    private void pauseMediaPlayer() {
+
         if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
+            pause = true;
+            mediaPlayer.pause();
         }
+
     }
+
+//    private void playRecording() {
+//        mediaPlayer = new MediaPlayer();
+//        try {
+//            mediaPlayer.setDataSource(fileName);
+//            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                @Override
+//                public void onCompletion(MediaPlayer mediaPlayer) {
+//                    stopPlaying();
+//                }
+//            });
+//            mediaPlayer.prepare();
+//            mediaPlayer.start();
+//        } catch (IOException e) {
+//            Log.e(WriteYourOfferFragment.class.getSimpleName() + ":playRecording()", "prepare() failed");
+//        }
+//    }
+//
+//    private void stopPlaying() {
+//        if (mediaPlayer != null) {
+//            mediaPlayer.release();
+//            mediaPlayer = null;
+//        }
+//    }
 
     private void clearMediaPlayer() {
 
