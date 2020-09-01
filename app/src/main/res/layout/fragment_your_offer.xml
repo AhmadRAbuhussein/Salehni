@@ -128,8 +128,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:indeterminate="false"
-                        android:maxHeight="12dp"
-                        android:minHeight="12dp"
                         app:backgroundColor="@color/progress_color"
                         app:progressColor="@color/recording_color" />
 
@@ -230,7 +228,7 @@
                     android:background="@drawable/shape_voice_note"
                     android:paddingLeft="@dimen/_10sdp"
                     android:paddingRight="@dimen/_10sdp"
-                    android:visibility="">
+                    android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/play_recording_Iv"

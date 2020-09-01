@@ -70,6 +70,8 @@ public class WriteYourOfferFragment extends Fragment {
     int timePrevious = 0;
     boolean playingCheck = false;
     long startTime = 0;
+    boolean timerRecorderStart = false;
+    boolean progressTimeStart = false;
 
     Handler handler;
     Runnable runnable;
@@ -118,12 +120,6 @@ public class WriteYourOfferFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 stopRecording();
-                stop_recording_Iv.setVisibility(View.GONE);
-                voice_note_time_Tv.setText(getResources().getString(R.string.send_voice_note));
-                voice_time_Tv.setVisibility(View.GONE);
-                voice_description_Ll.setVisibility(View.VISIBLE);
-                voice_record_Fl.setVisibility(View.VISIBLE);
-                playingCheck = false;
 
             }
         });
@@ -225,23 +221,26 @@ public class WriteYourOfferFragment extends Fragment {
 //                        roundedHorizontalProgressBar.animateProgress(60000, 0, 0); // (animationDuration, oldProgress, newProgress)
 //                    }
 
-                    roundedHorizontalProgressBar.animateProgress(60, timePrevious, time);// (animationDuration, oldProgress, newProgress)
+                    if (!progressTimeStart) {
+                        progressTimeStart = true;
+                        roundedHorizontalProgressBar.animateProgress(60000, 100);// (animationDuration, oldProgress, newProgress)
+
+                    }
 
 
                     time += 1;
-                    timePrevious = time - 1;
+                    timePrevious = time - 10;
 
-                    countdown();
+                    if (!timerRecorderStart) {
+                        timerRecorderStart = true;
+                        countdown();
+                    }
 
-                    handler.postDelayed(this, 1000L);  // 1 second delay
+
+                    handler.postDelayed(this, 1000);  // 1 second delay
                 } else {
                     stopRecording();
-                    stop_recording_Iv.setVisibility(View.GONE);
-                    voice_note_time_Tv.setText(getResources().getString(R.string.send_voice_note));
-                    voice_time_Tv.setVisibility(View.GONE);
-                    voice_description_Ll.setVisibility(View.VISIBLE);
-                    voice_record_Fl.setVisibility(View.VISIBLE);
-                    playingCheck = false;
+
                 }
 
             }
@@ -255,16 +254,14 @@ public class WriteYourOfferFragment extends Fragment {
             public void onTick(long millisUntilFinished) {
 
                 if (playingCheck) {
-                    try {
-                        voice_note_time_Tv.setText(Global.formatDateFromDateString(Constants.SS, Constants.MM_SS, (millisUntilFinished / 1000) + ""));
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    voice_note_time_Tv.setText(Global.convertDate((millisUntilFinished) + "", Constants.MM_SS));
                 }
 
             }
 
             public void onFinish() {
+
+                playingCheck = false;
             }
 
         }.start();
@@ -292,6 +289,17 @@ public class WriteYourOfferFragment extends Fragment {
     }
 
     private void stopRecording() {
+
+        roundedHorizontalProgressBar.clearAnimation();
+        stop_recording_Iv.setVisibility(View.GONE);
+        voice_note_time_Tv.setText(getResources().getString(R.string.send_voice_note));
+        voice_time_Tv.setVisibility(View.GONE);
+        voice_description_Ll.setVisibility(View.VISIBLE);
+        voice_record_Fl.setVisibility(View.VISIBLE);
+        playingCheck = false;
+        timerRecorderStart = false;
+        progressTimeStart = false;
+
         if (recorder != null) {
             recorder.release();
             recorder = null;

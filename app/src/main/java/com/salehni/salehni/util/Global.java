@@ -13,6 +13,7 @@ import android.location.Geocoder;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Environment;
+import android.text.format.DateFormat;
 import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
@@ -477,6 +478,10 @@ public class Global {
         mParsedDate = mInputDateFormat.parse(inputDate);
         mOutputDateString = mOutputDateFormat.format(mParsedDate);
         return mOutputDateString;
+    }
+
+    public static String convertDate(String dateInMilliseconds, String dateFormat) {
+        return DateFormat.format(dateFormat, Long.parseLong(dateInMilliseconds)).toString();
     }
 
 }
