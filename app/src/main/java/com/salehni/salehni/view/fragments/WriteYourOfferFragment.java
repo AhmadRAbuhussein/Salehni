@@ -82,6 +82,7 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
     boolean wasPlaying = false;
 
     RoundedHorizontalProgressBar roundedHorizontalProgressBar;
+    CountDownTimer countDownTimer;
 
     SeekBar seekBar;
     int currentPosition;
@@ -130,7 +131,7 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
         stop_recording_Iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                stopRecording();
+                playingCheck = false;
 
             }
         });
@@ -229,12 +230,6 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
             public void run() {
                 if (playingCheck) {
 
-//                    if (time > 0) {
-//                        roundedHorizontalProgressBar.animateProgress(60000, time - 1000, time); // (animationDuration, oldProgress, newProgress)
-//                    } else {
-//                        roundedHorizontalProgressBar.animateProgress(60000, 0, 0); // (animationDuration, oldProgress, newProgress)
-//                    }
-
                     if (!progressTimeStart) {
                         progressTimeStart = true;
                         roundedHorizontalProgressBar.animateProgress(60000, 100);// (animationDuration, oldProgress, newProgress)
@@ -243,7 +238,6 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
 
 
                     time += 1;
-                    timePrevious = time - 10;
 
                     if (!timerRecorderStart) {
                         timerRecorderStart = true;
@@ -285,7 +279,7 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
     }
 
     private void countdown() {
-        new CountDownTimer(60000, 1000) {
+        countDownTimer = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
 
@@ -322,7 +316,6 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
 
         recorder.start();
         threadLooper();
-        time = 0;
     }
 
     private void stopRecording() {
@@ -331,6 +324,10 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
         voice_note_time_Tv.setText(getResources().getString(R.string.send_voice_note));
         voice_time_Tv.setVisibility(View.GONE);
         voice_description_Ll.setVisibility(View.VISIBLE);
+        roundedHorizontalProgressBar.setProgress(0);
+        countDownTimer.cancel();
+
+
         try {
             voice_time_description_Tv.setText(getResources().getString(R.string.sound1) + " " + Global.formatDateFromDateString(Constants.S, Constants.MM_SS, time + ""));
         } catch (ParseException e) {
@@ -350,6 +347,9 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
             recorder.release();
             recorder = null;
         }
+
+
+        time = 0;
     }
 
     @Override
