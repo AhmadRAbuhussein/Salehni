@@ -214,6 +214,10 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
 
                 if (mediaPlayer != null) {
                     mediaPlayer.seekTo(seekBar.getProgress());
+                    
+                    clearMediaPlayer();
+                    play_recording_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.play));
+                    seekBar.setProgress(0);
                 }
 
             }
@@ -298,6 +302,11 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
     }
 
     private void startRecording() {
+
+        clearMediaPlayer();
+        play_recording_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.play));
+        seekBar.setProgress(0);
+
         String uuid = UUID.randomUUID().toString();
         fileName = getActivity().getExternalCacheDir().getAbsolutePath() + "/" + uuid + ".3gp";
         Log.i(WriteYourOfferFragment.class.getSimpleName(), fileName);
