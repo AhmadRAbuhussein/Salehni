@@ -49,6 +49,7 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
     TextView voice_note_time_Tv;
     TextView voice_time_Tv;
     TextView voice_time_description_Tv;
+    TextView start_time_tv;
     TextView end_time_Tv;
     FrameLayout voice_record_Fl;
 
@@ -74,6 +75,7 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
     long startTime = 0;
     boolean timerRecorderStart = false;
     boolean progressTimeStart = false;
+    int timeOfListenRecord = 0;
 
     Handler handler;
     Runnable runnable;
@@ -107,6 +109,7 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
         roundedHorizontalProgressBar = view.findViewById(R.id.progress_bar_1);
         seekBar = view.findViewById(R.id.seekbar);
         voice_time_description_Tv = view.findViewById(R.id.voice_time_description_Tv);
+        start_time_tv = view.findViewById(R.id.start_time_tv);
         end_time_Tv = view.findViewById(R.id.end_time_Tv);
         send_request_Ll = view.findViewById(R.id.send_request_Ll);
         send_request_Ll.requestFocus();
@@ -202,6 +205,12 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
                     seekBar.setProgress(0);
                 }
 
+                try {
+                    start_time_tv.setText(Global.formatDateFromDateString(Constants.S, Constants.MM_SS, timeOfListenRecord + ""));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
             }
 
             @Override
@@ -214,10 +223,21 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
 
                 if (mediaPlayer != null) {
                     mediaPlayer.seekTo(seekBar.getProgress());
-                    
-                    clearMediaPlayer();
-                    play_recording_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.play));
-                    seekBar.setProgress(0);
+                } else {
+
+                    if (!end_time_Tv.getText().toString().equalsIgnoreCase("")) {
+                        try {
+                            if ((timeOfListenRecord + "").equalsIgnoreCase(Global.formatDateFromDateString(Constants.MM_SS, Constants.S, end_time_Tv.getText().toString()))) {
+                                {
+                                    clearMediaPlayer();
+//                            play_recording_Iv.setImageDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.play));
+                                    seekBar.setProgress(0);
+                                }
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
             }
@@ -269,7 +289,9 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
 
         while (mediaPlayer != null && mediaPlayer.isPlaying() && currentPosition < total) {
             try {
+
                 Thread.sleep(1000);
+
                 currentPosition = mediaPlayer.getCurrentPosition();
             } catch (InterruptedException e) {
                 return;
@@ -277,8 +299,10 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
                 return;
             }
 
+
             seekBar.setProgress(currentPosition);
 
+            timeOfListenRecord += 1;
         }
     }
 
@@ -515,6 +539,8 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
             mediaPlayer.stop();
             mediaPlayer.release();
             mediaPlayer = null;
+
+            timeOfListenRecord = 0;
         }
 
     }

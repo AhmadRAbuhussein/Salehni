@@ -257,6 +257,7 @@
                         android:thumb="@drawable/shape_red_dot" />
 
                     <TextView
+                        android:id="@+id/start_time_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
