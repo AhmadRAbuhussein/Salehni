@@ -37,9 +37,6 @@ public class ClientNotificationFragment extends Fragment implements AdapterView.
     ArrayList<ClientNotificationModel> clientNotificationArraylist;
     ClientNotificationViewModel clientNotificationViewModel;
 
-    SignInTokenModel signInTokenModel;
-    TinyDB tinyDB;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +47,6 @@ public class ClientNotificationFragment extends Fragment implements AdapterView.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_client_notification, container, false);
-
-        tinyDB = new TinyDB(getActivity());
-        signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
 
         notification_Rv = (RecyclerView) view.findViewById(R.id.notification_Rv);
 
@@ -111,7 +105,7 @@ public class ClientNotificationFragment extends Fragment implements AdapterView.
     public void onResume() {
         super.onResume();
 
-        clientNotificationViewModel.getData(signInTokenModel);
+        clientNotificationViewModel.getData();
 
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.notification));
     }

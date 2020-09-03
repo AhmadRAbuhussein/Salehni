@@ -46,7 +46,7 @@ import java.util.Locale;
 import static com.salehni.salehni.util.Constants.selectedVideoPath;
 import static com.salehni.salehni.util.MyApplication.context;
 
-public class UserRequestDetails extends Fragment implements AdapterView.OnItemClickListener {
+public class UserRequestDetailsFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     RecyclerView img_recycler_view;
     MechanicImagesRequestAdapter mechanicRequestAdapter;
@@ -69,16 +69,10 @@ public class UserRequestDetails extends Fragment implements AdapterView.OnItemCl
 
     PopupWindow popupWindow;
 
-    TinyDB tinyDB;
-    SignInTokenModel signInTokenModel;
-
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mechanic_send_request, container, false);
-
-        tinyDB = new TinyDB(getActivity());
-        signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
 
         img_recycler_view = (RecyclerView) view.findViewById(R.id.img_recycler_view);
         send_request_Ll = (LinearLayout) view.findViewById(R.id.send_request_Ll);
@@ -156,7 +150,7 @@ public class UserRequestDetails extends Fragment implements AdapterView.OnItemCl
     public void onResume() {
         super.onResume();
 
-        userRequestDetailsViewModel.getData(mechanicNotificationModel, signInTokenModel);
+        userRequestDetailsViewModel.getData(mechanicNotificationModel);
 
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.user_request_details));
     }

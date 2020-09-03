@@ -15,6 +15,7 @@ import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.data.model.UserRequestDetailsModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
+import com.salehni.salehni.util.TinyDB;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,18 +32,21 @@ public class UserRequestDetailsViewModel extends AndroidViewModel implements Int
     public MutableLiveData<String> showToastMutableLiveData = new MutableLiveData<>();
 
     Context context;
+    TinyDB tinyDB;
 
     public UserRequestDetailsViewModel(@NonNull Application application) {
         super(application);
-
         this.context = application.getApplicationContext();
+        tinyDB = new TinyDB(this.context);
     }
 
-    public void getData(MechanicNotificationModel mechanicNotificationModel, SignInTokenModel signInTokenModel) {
+    public void getData(MechanicNotificationModel mechanicNotificationModel) {
 
         if (Global.isNetworkAvailable(context)) {
 
             showProgressDialogMutableLiveData.setValue(true);
+
+            SignInTokenModel signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
 
             String request_id = "";
             if (mechanicNotificationModel != null) {

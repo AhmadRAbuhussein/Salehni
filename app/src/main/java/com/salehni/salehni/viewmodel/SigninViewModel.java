@@ -87,8 +87,6 @@ public class SigninViewModel extends AndroidViewModel implements InterfaceApi {
 
             token = dataJsonObject.getString("token");
 
-            //TODO add token to tiny_DB
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -41,9 +41,6 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
 
     RequestOffersViewModel requestOffersViewModel;
 
-    TinyDB tinyDB;
-    SignInTokenModel signInTokenModel;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +51,6 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_request_offers, container, false);
-
-        tinyDB = new TinyDB(getActivity());
-        signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
 
         carParts_Rv = (RecyclerView) view.findViewById(R.id.carParts_Rv);
         carParts_Rv.setNestedScrollingEnabled(false);
@@ -120,7 +114,7 @@ public class RequestOffersFragment extends Fragment implements AdapterView.OnIte
     public void onResume() {
         super.onResume();
 
-        requestOffersViewModel.getData(signInTokenModel);
+        requestOffersViewModel.getData();
 
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.request_offers));
     }

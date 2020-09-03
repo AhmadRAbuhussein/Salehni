@@ -50,9 +50,6 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
     SwipeRefreshLayout swipeRefreshLayout;
 
-    TinyDB tinyDB;
-    SignInTokenModel signInTokenModel;
-
     boolean progress = true;
 
     @Override
@@ -66,9 +63,6 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_request, container, false);
 
-        tinyDB = new TinyDB(getActivity());
-        signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
-
         requests_Rv = (RecyclerView) view.findViewById(R.id.requests_Rv);
         //testingData();
 
@@ -80,7 +74,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
             @Override
             public void onRefresh() {
                 progress = false;
-                myRequestViewModel.getData(signInTokenModel);
+                myRequestViewModel.getData();
             }
         });
 
@@ -150,7 +144,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     public void onResume() {
         super.onResume();
 
-        myRequestViewModel.getData(signInTokenModel);
+        myRequestViewModel.getData();
 
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.my_request));
     }

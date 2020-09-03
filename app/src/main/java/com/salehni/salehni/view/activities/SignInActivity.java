@@ -141,9 +141,6 @@ public class SignInActivity extends AppCompatActivity {
             public void onChanged(String token) {
                 try {
                     decodedLoginToken(token);
-                    Intent intent = new Intent(SignInActivity.this, MainPageCustomerActivity.class);
-                    startActivity(intent);
-                    finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -189,6 +186,12 @@ public class SignInActivity extends AppCompatActivity {
             signInTokenModel.setUser_type(user_type);
 
             tinydb.putObject(Constants.login_token, signInTokenModel);
+
+            if (!id.equalsIgnoreCase("") && user_type != 0) {
+                Intent intent = new Intent(SignInActivity.this, MainPageCustomerActivity.class);
+                startActivity(intent);
+                finish();
+            }
 
 
         } catch (JSONException e) {

@@ -37,7 +37,6 @@ import com.salehni.salehni.view.fragments.Drawer.PrivacyPolicyFragment;
 import com.salehni.salehni.R;
 import com.salehni.salehni.view.fragments.Drawer.TermsConditionFragment;
 import com.salehni.salehni.view.fragments.MechanicNotificationFragment;
-import com.salehni.salehni.view.fragments.UserRequestDetails;
 
 import java.util.ArrayList;
 
@@ -55,9 +54,6 @@ public class MainPageCustomerActivity extends AppCompatActivity {
     PopupWindow popupWindow;
 
     SignInTokenModel signInTokenModel;
-
-    boolean doubleBackToExitPressedOnce = false;
-
     TinyDB tinyDB;
 
     @Override
@@ -72,12 +68,7 @@ public class MainPageCustomerActivity extends AppCompatActivity {
 
         tinyDB = new TinyDB(this);
         signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
-        if (signInTokenModel.getUser_type() == 1) {
-            initialFirstFragment();
-        } else {
-            MechanicNotificationFragment mechanicNotificationFragment = new MechanicNotificationFragment();
-            replaceFragment(mechanicNotificationFragment, "mechanicNotificationFragment");
-        }
+        initialFirstFragment();
 
         leftDrawer = findViewById(R.id.left_drawer);
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -192,12 +183,13 @@ public class MainPageCustomerActivity extends AppCompatActivity {
 
     private void initialFirstFragment() {
 
-        //TODO return this because it's for testing
-        CustomRequestFragment customRequestFragment = new CustomRequestFragment();
-        replaceFragment(customRequestFragment, "customRequestFragment");
-
-//        UserRequestDetails userRequestDetails = new UserRequestDetails();
-//        replaceFragment(userRequestDetails, "mechanicRequestFragment");
+        if (signInTokenModel.getUser_type() == 1) {
+            CustomRequestFragment customRequestFragment = new CustomRequestFragment();
+            replaceFragment(customRequestFragment, "customRequestFragment");
+        } else {
+            MechanicNotificationFragment mechanicNotificationFragment = new MechanicNotificationFragment();
+            replaceFragment(mechanicNotificationFragment, "mechanicNotificationFragment");
+        }
     }
 
     private void logoutPopup() {

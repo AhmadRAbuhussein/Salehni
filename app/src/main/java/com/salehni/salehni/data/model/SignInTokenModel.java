@@ -1,9 +1,9 @@
 package com.salehni.salehni.data.model;
 
 public class SignInTokenModel {
-    String id;
-    String name;
-    int user_type;
+    String id = "";
+    String name = "";
+    int user_type = 0;
 
     public String getId() {
         return id;

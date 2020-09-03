@@ -15,6 +15,7 @@ import com.salehni.salehni.data.model.MechanicNotificationModel;
 import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
+import com.salehni.salehni.util.TinyDB;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,18 +33,20 @@ public class MechanicNotificationViewModel extends AndroidViewModel implements I
 
 
     Context context;
-
+    TinyDB tinyDB;
     public MechanicNotificationViewModel(@NonNull Application application) {
         super(application);
-
         this.context = application.getApplicationContext();
+        tinyDB = new TinyDB(this.context);
     }
 
-    public void getData(SignInTokenModel signInTokenModel) {
+    public void getData() {
 
         if (Global.isNetworkAvailable(context)) {
 
             showProgressDialogMutableLiveData.setValue(true);
+
+            SignInTokenModel signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
 
             Map<String, String> headerParams = new HashMap<String, String>();
 
