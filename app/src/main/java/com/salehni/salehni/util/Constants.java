@@ -42,5 +42,8 @@ public class Constants {
     public static final String S = "s";
     public static final String MM_SS = "mm:ss";
 
+    //Tiny Db
+    public static final String login_token = "loginToken";
+
 
 }

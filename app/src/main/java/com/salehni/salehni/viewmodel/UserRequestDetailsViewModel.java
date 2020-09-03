@@ -11,6 +11,7 @@ import com.salehni.salehni.R;
 import com.salehni.salehni.data.api.ApiData;
 import com.salehni.salehni.data.api.InterfaceApi;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
+import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.data.model.UserRequestDetailsModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
@@ -37,7 +38,7 @@ public class UserRequestDetailsViewModel extends AndroidViewModel implements Int
         this.context = application.getApplicationContext();
     }
 
-    public void getData(MechanicNotificationModel mechanicNotificationModel) {
+    public void getData(MechanicNotificationModel mechanicNotificationModel, SignInTokenModel signInTokenModel) {
 
         if (Global.isNetworkAvailable(context)) {
 
@@ -53,7 +54,7 @@ public class UserRequestDetailsViewModel extends AndroidViewModel implements Int
             JSONObject jsonObject = new JSONObject();
 
             try {
-                jsonObject.put("user_id", "");
+                jsonObject.put("user_id", signInTokenModel.getId());
                 jsonObject.put("request_id", request_id);
 
             } catch (JSONException e) {

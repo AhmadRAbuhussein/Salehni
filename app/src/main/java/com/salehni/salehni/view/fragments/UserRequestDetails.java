@@ -30,9 +30,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
+import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.data.model.UserRequestDetailsModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
+import com.salehni.salehni.util.TinyDB;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.activities.VideoActivity;
 import com.salehni.salehni.view.adapters.MechanicImagesRequestAdapter;
@@ -67,10 +69,16 @@ public class UserRequestDetails extends Fragment implements AdapterView.OnItemCl
 
     PopupWindow popupWindow;
 
+    TinyDB tinyDB;
+    SignInTokenModel signInTokenModel;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mechanic_send_request, container, false);
+
+        tinyDB = new TinyDB(getActivity());
+        signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
 
         img_recycler_view = (RecyclerView) view.findViewById(R.id.img_recycler_view);
         send_request_Ll = (LinearLayout) view.findViewById(R.id.send_request_Ll);
@@ -148,7 +156,7 @@ public class UserRequestDetails extends Fragment implements AdapterView.OnItemCl
     public void onResume() {
         super.onResume();
 
-        userRequestDetailsViewModel.getData(mechanicNotificationModel);
+        userRequestDetailsViewModel.getData(mechanicNotificationModel, signInTokenModel);
 
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.user_request_details));
     }

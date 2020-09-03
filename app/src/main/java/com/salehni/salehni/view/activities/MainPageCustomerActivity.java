@@ -25,13 +25,18 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.salehni.salehni.data.model.DrawerItemModel;
+import com.salehni.salehni.data.model.SignInTokenModel;
+import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
+import com.salehni.salehni.util.TinyDB;
 import com.salehni.salehni.view.adapters.ListViewDrawerAdapter;
+import com.salehni.salehni.view.fragments.CustomRequestFragment;
 import com.salehni.salehni.view.fragments.Drawer.ContactUsFragment;
 import com.salehni.salehni.view.fragments.Drawer.MyAccountFragment;
 import com.salehni.salehni.view.fragments.Drawer.PrivacyPolicyFragment;
 import com.salehni.salehni.R;
 import com.salehni.salehni.view.fragments.Drawer.TermsConditionFragment;
+import com.salehni.salehni.view.fragments.MechanicNotificationFragment;
 import com.salehni.salehni.view.fragments.UserRequestDetails;
 
 import java.util.ArrayList;
@@ -49,7 +54,11 @@ public class MainPageCustomerActivity extends AppCompatActivity {
 
     PopupWindow popupWindow;
 
+    SignInTokenModel signInTokenModel;
+
     boolean doubleBackToExitPressedOnce = false;
+
+    TinyDB tinyDB;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -61,13 +70,21 @@ public class MainPageCustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main_page);
 
+        tinyDB = new TinyDB(this);
+        signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
+        if (signInTokenModel.getUser_type() == 1) {
+            initialFirstFragment();
+        } else {
+            MechanicNotificationFragment mechanicNotificationFragment = new MechanicNotificationFragment();
+            replaceFragment(mechanicNotificationFragment, "mechanicNotificationFragment");
+        }
+
         leftDrawer = findViewById(R.id.left_drawer);
         drawerLayout = findViewById(R.id.drawer_layout);
         menu_Btn = findViewById(R.id.menu_Btn);
         mainFrameLayout = findViewById(R.id.mainFrameLayout);
         title_Tv = findViewById(R.id.title_Tv);
 
-        initialFirstFragment();
 
         menu_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,11 +193,11 @@ public class MainPageCustomerActivity extends AppCompatActivity {
     private void initialFirstFragment() {
 
         //TODO return this because it's for testing
-//        CustomRequestFragment customRequestFragment = new CustomRequestFragment();
-//        replaceFragment(customRequestFragment, "customRequestFragment");
+        CustomRequestFragment customRequestFragment = new CustomRequestFragment();
+        replaceFragment(customRequestFragment, "customRequestFragment");
 
-        UserRequestDetails userRequestDetails = new UserRequestDetails();
-        replaceFragment(userRequestDetails, "mechanicRequestFragment");
+//        UserRequestDetails userRequestDetails = new UserRequestDetails();
+//        replaceFragment(userRequestDetails, "mechanicRequestFragment");
     }
 
     private void logoutPopup() {

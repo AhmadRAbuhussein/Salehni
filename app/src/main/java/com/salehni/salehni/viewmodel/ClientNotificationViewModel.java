@@ -11,6 +11,7 @@ import com.salehni.salehni.R;
 import com.salehni.salehni.data.api.ApiData;
 import com.salehni.salehni.data.api.InterfaceApi;
 import com.salehni.salehni.data.model.ClientNotificationModel;
+import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.data.model.WinchesListModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
@@ -38,7 +39,7 @@ public class ClientNotificationViewModel extends AndroidViewModel implements Int
         this.context = application.getApplicationContext();
     }
 
-    public void getData() {
+    public void getData(SignInTokenModel signInTokenModel) {
 
         if (Global.isNetworkAvailable(context)) {
 
@@ -49,7 +50,7 @@ public class ClientNotificationViewModel extends AndroidViewModel implements Int
             JSONObject jsonObject = new JSONObject();
 
             try {
-                jsonObject.put("user_id", "");
+                jsonObject.put("user_id", signInTokenModel.getId());
             } catch (JSONException e) {
                 e.printStackTrace();
             }

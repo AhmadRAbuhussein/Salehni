@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,12 +18,17 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.salehni.salehni.R;
+import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.data.model.SigninModel;
-import com.salehni.salehni.data.model.SignupModel;
-import com.salehni.salehni.data.model.SignupStatusModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
+import com.salehni.salehni.util.TinyDB;
 import com.salehni.salehni.viewmodel.SigninViewModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
@@ -36,7 +43,11 @@ public class SignInActivity extends AppCompatActivity {
 
     SigninViewModel signinViewModel;
 
+    TinyDB tinydb;
+
     boolean isRemember = false;
+
+    SignInTokenModel signInTokenModel;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -47,6 +58,8 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        tinydb = new TinyDB(this);
 
         sign_up_Tv = findViewById(R.id.sign_up_Tv);
         remeberMeCheckbox = findViewById(R.id.remeberMeCheckbox);
@@ -123,19 +136,64 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
-        signinViewModel.signinStatusModelMutableLiveData.observe(this, new Observer<Boolean>() {
+        signinViewModel.signinTokenStringMutableLiveData.observe(this, new Observer<String>() {
             @Override
-            public void onChanged(Boolean status) {
-
-                if (status) {
+            public void onChanged(String token) {
+                try {
+                    decodedLoginToken(token);
                     Intent intent = new Intent(SignInActivity.this, MainPageCustomerActivity.class);
                     startActivity(intent);
                     finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                } else
-                    Global.toast(SignInActivity.this, getResources().getString(R.string.loginWrong));
             }
         });
+
+    }
+
+    public void decodedLoginToken(String JWTEncoded) throws Exception {
+        try {
+            String[] split = JWTEncoded.split("\\.");
+            Log.d("JWT_DECODED", "Header: " + getJson(split[0]));
+            Log.d("JWT_DECODED", "Body: " + getJson(split[1]));
+
+            String info = getJson(split[1]);
+
+            if (info.length() > 0) {
+                saveLoginUserInfo(info);
+            }
+        } catch (UnsupportedEncodingException e) {
+            //Error
+        }
+    }
+
+    private String getJson(String strEncoded) throws UnsupportedEncodingException {
+        byte[] decodedBytes = Base64.decode(strEncoded, Base64.URL_SAFE);
+        return new String(decodedBytes, "UTF-8");
+    }
+
+    private void saveLoginUserInfo(String info) {
+
+        try {
+            JSONObject jsonObject = new JSONObject(info);
+
+            String id = jsonObject.getString("id");
+            String name = jsonObject.getString("name");
+            int user_type = jsonObject.getInt("user_type");
+
+            signInTokenModel = new SignInTokenModel();
+            signInTokenModel.setId(id);
+            signInTokenModel.setName(name);
+            signInTokenModel.setUser_type(user_type);
+
+            tinydb.putObject(Constants.login_token, signInTokenModel);
+
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -40,6 +40,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.UUID;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 public class WriteYourOfferFragment extends Fragment implements Runnable {
 
     LinearLayout voice_description_Ll;
@@ -57,8 +60,11 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
 
     String request_id = "";
 
+    @InjectView(R.id.start_recording_Iv)
     ImageView start_recording_Iv;
+    @InjectView(R.id.stop_recording_Iv)
     ImageView stop_recording_Iv;
+    @InjectView(R.id.play_recording_Iv)
     ImageView play_recording_Iv;
 
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
@@ -94,18 +100,18 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_your_offer, container, false);
-
+        ButterKnife.inject(this, view);
         ActivityCompat.requestPermissions(getActivity(), permissions, REQUEST_RECORD_AUDIO_PERMISSION);
 
         voice_note_time_Tv = view.findViewById(R.id.voice_note_time_Tv);
         voice_time_Tv = view.findViewById(R.id.voice_time_Tv);
-        start_recording_Iv = view.findViewById(R.id.start_recording_Iv);
-        stop_recording_Iv = view.findViewById(R.id.stop_recording_Iv);
+//        start_recording_Iv = view.findViewById(R.id.start_recording_Iv);
+//        stop_recording_Iv = view.findViewById(R.id.stop_recording_Iv);
         price_Et = view.findViewById(R.id.price_Et);
         notes_Et = view.findViewById(R.id.notes_Et);
         voice_description_Ll = view.findViewById(R.id.voice_description_Ll);
         voice_record_Fl = view.findViewById(R.id.voice_record_Fl);
-        play_recording_Iv = view.findViewById(R.id.play_recording_Iv);
+//        play_recording_Iv = view.findViewById(R.id.play_recording_Iv);
         roundedHorizontalProgressBar = view.findViewById(R.id.progress_bar_1);
         seekBar = view.findViewById(R.id.seekbar);
         voice_time_description_Tv = view.findViewById(R.id.voice_time_description_Tv);

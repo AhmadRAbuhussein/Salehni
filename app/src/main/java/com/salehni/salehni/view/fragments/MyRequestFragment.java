@@ -25,7 +25,10 @@ import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.MyRequestFragModel;
 import com.salehni.salehni.data.model.MyRequestModel;
 
+import com.salehni.salehni.data.model.SignInTokenModel;
+import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
+import com.salehni.salehni.util.TinyDB;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.MyRequestAdapter;
 import com.salehni.salehni.viewmodel.MyRequestViewModel;
@@ -47,6 +50,9 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
 
     SwipeRefreshLayout swipeRefreshLayout;
 
+    TinyDB tinyDB;
+    SignInTokenModel signInTokenModel;
+
     boolean progress = true;
 
     @Override
@@ -60,6 +66,9 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_request, container, false);
 
+        tinyDB = new TinyDB(getActivity());
+        signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
+
         requests_Rv = (RecyclerView) view.findViewById(R.id.requests_Rv);
         //testingData();
 
@@ -71,7 +80,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
             @Override
             public void onRefresh() {
                 progress = false;
-                myRequestViewModel.getData();
+                myRequestViewModel.getData(signInTokenModel);
             }
         });
 
@@ -141,7 +150,7 @@ public class MyRequestFragment extends Fragment implements AdapterView.OnItemCli
     public void onResume() {
         super.onResume();
 
-        myRequestViewModel.getData();
+        myRequestViewModel.getData(signInTokenModel);
 
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.my_request));
     }

@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.api.ApiData;
 import com.salehni.salehni.data.api.InterfaceApi;
+import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.data.model.SigninModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
@@ -22,7 +23,7 @@ import java.util.Map;
 
 public class SigninViewModel extends AndroidViewModel implements InterfaceApi {
 
-    public MutableLiveData<Boolean> signinStatusModelMutableLiveData = new MutableLiveData<>();
+    public MutableLiveData<String> signinTokenStringMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<Boolean> showProgressDialogMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<String> showToastMutableLiveData = new MutableLiveData<>();
 
@@ -72,16 +73,19 @@ public class SigninViewModel extends AndroidViewModel implements InterfaceApi {
         showProgressDialogMutableLiveData.setValue(false);
 
         boolean status = false;
+        String error = "";
+        String token = "";
 
         try {
             JSONObject jsonObject =
                     new JSONObject(response);
 
             status = jsonObject.getBoolean("status");
+            error = jsonObject.getString("error");
 
             JSONObject dataJsonObject = jsonObject.getJSONObject("data");
 
-            String token = dataJsonObject.getString("token");
+            token = dataJsonObject.getString("token");
 
             //TODO add token to tiny_DB
 
@@ -89,7 +93,12 @@ public class SigninViewModel extends AndroidViewModel implements InterfaceApi {
             e.printStackTrace();
         }
 
-        signinStatusModelMutableLiveData.setValue(status);
+        if (status) {
+
+            signinTokenStringMutableLiveData.setValue(token);
+        } else {
+            showToastMutableLiveData.setValue(error);
+        }
 
     }
 

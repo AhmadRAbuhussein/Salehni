@@ -19,8 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
+import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
+import com.salehni.salehni.util.TinyDB;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.MechanicNotificationAdapter;
 import com.salehni.salehni.viewmodel.MechanicNotificationViewModel;
@@ -36,6 +38,9 @@ public class MechanicNotificationFragment extends Fragment implements AdapterVie
 
     MechanicNotificationViewModel mechanicNotificationViewModel;
 
+    TinyDB tinyDB;
+    SignInTokenModel signInTokenModel;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +51,9 @@ public class MechanicNotificationFragment extends Fragment implements AdapterVie
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mechanic_notification, container, false);
+
+        tinyDB = new TinyDB(getActivity());
+        signInTokenModel = tinyDB.getObject(Constants.login_token, SignInTokenModel.class);
 
         notification_Rv = (RecyclerView) view.findViewById(R.id.notification_Rv);
 
@@ -104,7 +112,7 @@ public class MechanicNotificationFragment extends Fragment implements AdapterVie
     public void onResume() {
         super.onResume();
 
-        mechanicNotificationViewModel.getData();
+        mechanicNotificationViewModel.getData(signInTokenModel);
 
         MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.notification));
     }

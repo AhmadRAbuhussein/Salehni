@@ -13,6 +13,7 @@ import com.salehni.salehni.data.api.InterfaceApi;
 import com.salehni.salehni.data.model.ItemsInnerObject;
 import com.salehni.salehni.data.model.OfferInnerObject;
 import com.salehni.salehni.data.model.RequestOffersModel;
+import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 
@@ -38,7 +39,7 @@ public class RequestOffersViewModel extends AndroidViewModel implements Interfac
         this.context = application.getApplicationContext();
     }
 
-    public void getData() {
+    public void getData(SignInTokenModel signInTokenModel) {
 
         if (Global.isNetworkAvailable(context)) {
 
@@ -50,7 +51,7 @@ public class RequestOffersViewModel extends AndroidViewModel implements Interfac
 
             try {
                 //TODO get user id from tiny db
-                jsonObject.put("user_id", "");
+                jsonObject.put("user_id", signInTokenModel.getId());
                 jsonObject.put("request_id", "");
 
             } catch (JSONException e) {
