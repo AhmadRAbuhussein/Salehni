@@ -36,6 +36,7 @@ import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.util.TinyDB;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
+import com.salehni.salehni.view.activities.MapsActivity;
 import com.salehni.salehni.view.activities.VideoActivity;
 import com.salehni.salehni.view.adapters.MechanicImagesRequestAdapter;
 import com.salehni.salehni.viewmodel.UserRequestDetailsViewModel;
@@ -85,6 +86,14 @@ public class UserRequestDetailsFragment extends Fragment implements AdapterView.
         location_Tv = (TextView) view.findViewById(R.id.location_Tv);
         watchVideo_Tv = (TextView) view.findViewById(R.id.watchVideo_Tv);
         location_Ll = (LinearLayout) view.findViewById(R.id.location_Ll);
+
+        location_Ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         send_request_Ll.requestFocus();
 
@@ -225,17 +234,17 @@ public class UserRequestDetailsFragment extends Fragment implements AdapterView.
             }
         });
 
-        location_Ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String strUri = "http://maps.google.com/maps?q=loc:" + userRequestDetailsModel.getLat() + "," + userRequestDetailsModel.getLon() + "";
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(strUri));
-
-                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-
-                startActivity(intent);
-            }
-        });
+//        location_Ll.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String strUri = "http://maps.google.com/maps?q=loc:" + userRequestDetailsModel.getLat() + "," + userRequestDetailsModel.getLon() + "";
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(strUri));
+//
+//                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+//
+//                startActivity(intent);
+//            }
+//        });
     }
 
     public void getExtra() {
