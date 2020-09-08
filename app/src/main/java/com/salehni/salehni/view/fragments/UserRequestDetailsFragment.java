@@ -37,6 +37,7 @@ import com.salehni.salehni.util.Global;
 import com.salehni.salehni.util.TinyDB;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.activities.MapsActivity;
+import com.salehni.salehni.view.activities.RouteBetweenLocationsActivity;
 import com.salehni.salehni.view.activities.VideoActivity;
 import com.salehni.salehni.view.adapters.MechanicImagesRequestAdapter;
 import com.salehni.salehni.viewmodel.UserRequestDetailsViewModel;
@@ -87,17 +88,18 @@ public class UserRequestDetailsFragment extends Fragment implements AdapterView.
         watchVideo_Tv = (TextView) view.findViewById(R.id.watchVideo_Tv);
         location_Ll = (LinearLayout) view.findViewById(R.id.location_Ll);
 
-        location_Ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                startActivity(intent);
-            }
-        });
 
         send_request_Ll.requestFocus();
 
         getExtra();
+
+        location_Ll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), RouteBetweenLocationsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         send_request_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
