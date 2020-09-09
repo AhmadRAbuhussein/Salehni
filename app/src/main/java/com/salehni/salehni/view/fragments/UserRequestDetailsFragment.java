@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Gravity;
@@ -30,20 +29,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.MechanicNotificationModel;
-import com.salehni.salehni.data.model.SignInTokenModel;
 import com.salehni.salehni.data.model.UserRequestDetailsModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
-import com.salehni.salehni.util.TinyDB;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.activities.MapsActivity;
-import com.salehni.salehni.view.activities.RouteBetweenLocationsActivity;
 import com.salehni.salehni.view.activities.VideoActivity;
 import com.salehni.salehni.view.adapters.MechanicImagesRequestAdapter;
 import com.salehni.salehni.viewmodel.UserRequestDetailsViewModel;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import static com.salehni.salehni.util.Constants.selectedVideoPath;
 import static com.salehni.salehni.util.MyApplication.context;
@@ -96,7 +91,9 @@ public class UserRequestDetailsFragment extends Fragment implements AdapterView.
         location_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), RouteBetweenLocationsActivity.class);
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                intent.putExtra(Constants.lat, userRequestDetailsModelData.getLat());
+                intent.putExtra(Constants.lon, userRequestDetailsModelData.getLon());
                 startActivity(intent);
             }
         });

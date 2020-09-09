@@ -9,6 +9,29 @@ public class MechanicNotificationModel implements Parcelable {
     String request_id;
     String time;
 
+    public MechanicNotificationModel() {
+
+    }
+
+    protected MechanicNotificationModel(Parcel in) {
+        id = in.readInt();
+        customer_name = in.readString();
+        request_id = in.readString();
+        time = in.readString();
+    }
+
+    public static final Creator<MechanicNotificationModel> CREATOR = new Creator<MechanicNotificationModel>() {
+        @Override
+        public MechanicNotificationModel createFromParcel(Parcel in) {
+            return new MechanicNotificationModel(in);
+        }
+
+        @Override
+        public MechanicNotificationModel[] newArray(int size) {
+            return new MechanicNotificationModel[size];
+        }
+    };
+
     public int getId() {
         return id;
     }
@@ -48,6 +71,9 @@ public class MechanicNotificationModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-
+        parcel.writeInt(id);
+        parcel.writeString(customer_name);
+        parcel.writeString(request_id);
+        parcel.writeString(time);
     }
 }

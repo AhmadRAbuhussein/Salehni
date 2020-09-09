@@ -26,6 +26,8 @@ public class Constants {
     public static final String selectedRequest = "selectedRequest";
     public static final String selectedMechanicNotification = "selectedMechanicNotfifcation";
     public static final String request_id = "request_id";
+    public static final String lat = "lat";
+    public static final String lon = "lon";
 
 
     //requestCode
