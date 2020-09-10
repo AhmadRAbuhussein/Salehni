@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -23,8 +24,11 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -54,6 +58,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng mDestination;
     private Polyline mPolyline;
 
+    boolean moveCamera = false;
+
+    Marker markerDestination;
+    Marker markerOrigin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -78,8 +87,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            String lat = extras.getString(Constants.lat);
 //            String lon = extras.getString(Constants.lon);
 
-            String lat = "29.52667";
-            String lon = "35.00778";
+            String lat = "31.958662832";
+            String lon = "35.903829718";
             mDestination = new LatLng(Double.parseDouble(lat), Double.parseDouble(lon));
         }
 
@@ -90,6 +99,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         getMyLocation();
+
+
+        markerDestination = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.radio_unchecked))
+                .position(new LatLng(mDestination.latitude, mDestination.longitude))
+                .title("abuhussein").snippet("android developer"));
+
     }
 
 
@@ -122,22 +137,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Getting LocationManager object from System Service LOCATION_SERVICE
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        //drawRoute();
-
-        List<LatLng> latLngs = new ArrayList<>();
 
         mLocationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 mOrigin = new LatLng(location.getLatitude(), location.getLongitude());
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mOrigin, 12));
-                if (mOrigin != null && mDestination != null)
 
-                    latLngs.clear();
-                latLngs.add(mOrigin);
-                latLngs.add(mDestination);
+                if (markerOrigin != null) {
+                    markerOrigin.remove();
+                }
 
-                drawPolyLineOnMap(latLngs);
+                markerOrigin = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.radio_checked))
+                        .position(new LatLng(mOrigin.latitude, mOrigin.longitude))
+                        .title("ramamneh").snippet("android developer"));
+
+
+                if (!moveCamera) {
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mOrigin, 12));
+                    moveCamera = true;
+                }
             }
 
             @Override
@@ -186,13 +204,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         mMap.clear();
                         mMarkerOptions = new MarkerOptions().position(mDestination).title("Destination");
                         mMap.addMarker(mMarkerOptions);
-                        if (mOrigin != null && mDestination != null)
-
-                            latLngs.clear();
-                        latLngs.add(mOrigin);
-                        latLngs.add(mDestination);
-
-                        drawPolyLineOnMap(latLngs);
                     }
                 });
 
@@ -202,28 +213,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }, 100);
             }
         }
-    }
-
-    // Draw polyline on map
-    public void drawPolyLineOnMap(List<LatLng> list) {
-        PolylineOptions polyOptions = new PolylineOptions();
-        polyOptions.color(Color.RED);
-        polyOptions.width(5);
-        polyOptions.addAll(list);
-
-        mMap.clear();
-        mMap.addPolyline(polyOptions);
-
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        for (LatLng latLng : list) {
-            builder.include(latLng);
-        }
-
-        final LatLngBounds bounds = builder.build();
-
-        //BOUND_PADDING is an int to specify padding of bound.. try 100.
-        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, 100);
-        mMap.animateCamera(cu);
     }
 }
 
