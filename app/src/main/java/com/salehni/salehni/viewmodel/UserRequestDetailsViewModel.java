@@ -50,7 +50,7 @@ public class UserRequestDetailsViewModel extends AndroidViewModel implements Int
 
             String request_id = "";
             if (mechanicNotificationModel != null) {
-                mechanicNotificationModel.getRequest_id();
+                request_id = mechanicNotificationModel.getRequest_id();
             }
 
             Map<String, String> headerParams = new HashMap<String, String>();

@@ -6,7 +6,9 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -100,8 +102,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         getMyLocation();
 
+        int height = 95;
+        int width = 70;
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.car_pic);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
 
-        markerDestination = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.radio_unchecked))
+        markerDestination = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
                 .position(new LatLng(mDestination.latitude, mDestination.longitude))
                 .title("abuhussein").snippet("android developer"));
 
@@ -147,10 +154,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     markerOrigin.remove();
                 }
 
-                markerOrigin = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.radio_checked))
+                int height = 95;
+                int width = 70;
+                BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.mechanic_pic);
+                Bitmap b = bitmapdraw.getBitmap();
+                Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+
+                markerOrigin = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
                         .position(new LatLng(mOrigin.latitude, mOrigin.longitude))
                         .title("ramamneh").snippet("android developer"));
-
 
                 if (!moveCamera) {
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mOrigin, 12));

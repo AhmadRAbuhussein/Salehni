@@ -203,11 +203,11 @@ public class UserRequestDetailsFragment extends Fragment implements AdapterView.
     public void setData(final UserRequestDetailsModel userRequestDetailsModel) {
 
         if (Integer.parseInt(userRequestDetailsModel.getFix_at()) == 0) {
-            atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.radio_checked));
+            atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.grey_radio_button));
             atMechanic_Iv.setBackground(getResources().getDrawable(R.drawable.radio_unchecked));
         } else {
             atLocation_Iv.setBackground(getResources().getDrawable(R.drawable.radio_unchecked));
-            atMechanic_Iv.setBackground(getResources().getDrawable(R.drawable.radio_checked));
+            atMechanic_Iv.setBackground(getResources().getDrawable(R.drawable.grey_radio_button));
         }
         numOfImages_Tv.setText(userRequestDetailsModel.getImages().size() + " " + getResources().getString(R.string.images_));
 
