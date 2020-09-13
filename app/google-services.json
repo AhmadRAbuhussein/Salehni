@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "922205208091",
+    "firebase_url": "https://salehni-app.firebaseio.com",
+    "project_id": "salehni-app",
+    "storage_bucket": "salehni-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922205208091:android:532a29bc277cb23d2102be",
+        "android_client_info": {
+          "package_name": "com.salehni.salehni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922205208091-imo76cr6q5q2hmu9kjatk7tvh4574b41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8zTwhTrpwxDMrKTQXGOv2dQ0uN8DC01U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922205208091-imo76cr6q5q2hmu9kjatk7tvh4574b41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
