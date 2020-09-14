@@ -65,11 +65,8 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
     private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
     private static final String[] permissions = {Manifest.permission.RECORD_AUDIO};
 
-    @BindView(R.id.start_recording_Iv)
     ImageView start_recording_Iv;
-    @BindView(R.id.stop_recording_Iv)
     ImageView stop_recording_Iv;
-    @BindView(R.id.play_recording_Iv)
     ImageView play_recording_Iv;
 
     private boolean audioRecordingPermissionGranted = false;
@@ -108,13 +105,13 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
 
         voice_note_time_Tv = view.findViewById(R.id.voice_note_time_Tv);
         voice_time_Tv = view.findViewById(R.id.voice_time_Tv);
-//        start_recording_Iv = view.findViewById(R.id.start_recording_Iv);
-//        stop_recording_Iv = view.findViewById(R.id.stop_recording_Iv);
+        start_recording_Iv = view.findViewById(R.id.start_recording_Iv);
+        stop_recording_Iv = view.findViewById(R.id.stop_recording_Iv);
         price_Et = view.findViewById(R.id.price_Et);
         notes_Et = view.findViewById(R.id.notes_Et);
         voice_description_Ll = view.findViewById(R.id.voice_description_Ll);
         voice_record_Fl = view.findViewById(R.id.voice_record_Fl);
-//        play_recording_Iv = view.findViewById(R.id.play_recording_Iv);
+        play_recording_Iv = view.findViewById(R.id.play_recording_Iv);
         roundedHorizontalProgressBar = view.findViewById(R.id.progress_bar_1);
         seekBar = view.findViewById(R.id.seekbar);
         voice_time_description_Tv = view.findViewById(R.id.voice_time_description_Tv);
@@ -127,36 +124,36 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
 
         getExtra();
 
-//        start_recording_Iv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                startRecording();
-//                stop_recording_Iv.setVisibility(View.VISIBLE);
-//                voice_note_time_Tv.setText(getResources().getString(R.string.time0));
-//                voice_time_Tv.setVisibility(View.VISIBLE);
-//                voice_description_Ll.setVisibility(View.GONE);
-//                voice_record_Fl.setVisibility(View.GONE);
-//                playingCheck = true;
-//            }
-//        });
+        start_recording_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startRecording();
+                stop_recording_Iv.setVisibility(View.VISIBLE);
+                voice_note_time_Tv.setText(getResources().getString(R.string.time0));
+                voice_time_Tv.setVisibility(View.VISIBLE);
+                voice_description_Ll.setVisibility(View.GONE);
+                voice_record_Fl.setVisibility(View.GONE);
+                playingCheck = true;
+            }
+        });
 
-//        stop_recording_Iv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                playingCheck = false;
-//
-//            }
-//        });
+        stop_recording_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                playingCheck = false;
 
-//        play_recording_Iv.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (!fileName.equalsIgnoreCase("")) {
-//                    playRecording();
-//                }
-//
-//            }
-//        });
+            }
+        });
+
+        play_recording_Iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!fileName.equalsIgnoreCase("")) {
+                    playRecording();
+                }
+
+            }
+        });
 
         send_request_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -552,28 +549,5 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
             timeOfListenRecord = 0;
         }
 
-    }
-
-    @OnClick({R.id.start_recording_Iv, R.id.stop_recording_Iv, R.id.play_recording_Iv})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.start_recording_Iv:
-                startRecording();
-                stop_recording_Iv.setVisibility(View.VISIBLE);
-                voice_note_time_Tv.setText(getResources().getString(R.string.time0));
-                voice_time_Tv.setVisibility(View.VISIBLE);
-                voice_description_Ll.setVisibility(View.GONE);
-                voice_record_Fl.setVisibility(View.GONE);
-                playingCheck = true;
-                break;
-            case R.id.stop_recording_Iv:
-                playingCheck = false;
-                break;
-            case R.id.play_recording_Iv:
-                if (!fileName.equalsIgnoreCase("")) {
-                    playRecording();
-                }
-                break;
-        }
     }
 }
