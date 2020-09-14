@@ -112,6 +112,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .position(new LatLng(mDestination.latitude, mDestination.longitude))
                 .title("abuhussein").snippet("android developer"));
 
+        if (markerOrigin != null) {
+            markerOrigin.remove();
+        }
+
+        BitmapDrawable bitmapdraw1 = (BitmapDrawable) getResources().getDrawable(R.drawable.mechanic_pic);
+        Bitmap b1 = bitmapdraw1.getBitmap();
+        Bitmap smallMarker1 = Bitmap.createScaledBitmap(b1, width, height, false);
+
+        markerOrigin = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(smallMarker1))
+                .position(new LatLng(mOrigin.latitude, mOrigin.longitude))
+                .title("ramamneh").snippet("android developer"));
+
+        if (!moveCamera) {
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mOrigin, 12));
+            moveCamera = true;
+        }
+
     }
 
 
