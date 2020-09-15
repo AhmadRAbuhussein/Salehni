@@ -20,6 +20,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -96,6 +97,46 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
     int currentPosition;
     int total;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        getActivity().getViewModelStore().clear();
+        writeYourOfferViewModel = ViewModelProviders.of(getActivity()).get(WriteYourOfferViewModel.class);
+        writeYourOfferViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+
+                if (aBoolean) {
+                    Global.progress(getActivity());
+                } else {
+                    Global.progressDismiss();
+                }
+
+            }
+        });
+
+        writeYourOfferViewModel.showToastMutableLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+
+                Global.toast(getActivity().getApplicationContext(), s);
+
+            }
+        });
+
+        writeYourOfferViewModel.sendOfferStatusModelMutableLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean status) {
+
+                if (status) {
+                    MechanicNotificationFragment mechanicNotificationFragment = new MechanicNotificationFragment();
+                    setFragment(mechanicNotificationFragment);
+                }
+            }
+        });
+
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -165,39 +206,7 @@ public class WriteYourOfferFragment extends Fragment implements Runnable {
             }
         });
 
-        writeYourOfferViewModel = ViewModelProviders.of(getActivity()).get(WriteYourOfferViewModel.class);
-        writeYourOfferViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
 
-                if (aBoolean) {
-                    Global.progress(getActivity());
-                } else {
-                    Global.progressDismiss();
-                }
-
-            }
-        });
-
-        writeYourOfferViewModel.showToastMutableLiveData.observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-
-                Global.toast(getActivity().getApplicationContext(), s);
-
-            }
-        });
-
-        writeYourOfferViewModel.sendOfferStatusModelMutableLiveData.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean status) {
-
-                if (status) {
-                    MechanicNotificationFragment mechanicNotificationFragment = new MechanicNotificationFragment();
-                    setFragment(mechanicNotificationFragment);
-                }
-            }
-        });
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
