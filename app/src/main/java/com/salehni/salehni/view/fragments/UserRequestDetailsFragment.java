@@ -1,9 +1,12 @@
 package com.salehni.salehni.view.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Gravity;
@@ -91,10 +94,17 @@ public class UserRequestDetailsFragment extends Fragment implements AdapterView.
         location_Ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), MapsActivity.class);
-                intent.putExtra(Constants.lat, userRequestDetailsModelData.getLat());
-                intent.putExtra(Constants.lon, userRequestDetailsModelData.getLon());
-                startActivity(intent);
+
+                final LocationManager manager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+                if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                    buildAlertMessageNoGps();
+                } else {
+                    Intent intent = new Intent(getActivity(), MapsActivity.class);
+                    intent.putExtra(Constants.lat, userRequestDetailsModelData.getLat());
+                    intent.putExtra(Constants.lon, userRequestDetailsModelData.getLon());
+                    startActivity(intent);
+                }
             }
         });
 
@@ -152,6 +162,24 @@ public class UserRequestDetailsFragment extends Fragment implements AdapterView.
         });
 
         return view;
+    }
+
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override

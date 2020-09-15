@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.salehni.salehni.R;
+import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 
 
 public class PrivacyPolicyFragment extends Fragment {
@@ -27,6 +28,13 @@ public class PrivacyPolicyFragment extends Fragment {
 
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.privacy_policy));
     }
 
     @Override

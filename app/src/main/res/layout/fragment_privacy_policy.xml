@@ -20,15 +20,6 @@
             android:minHeight="0dp"
             android:src="@drawable/myprofile_pic" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:text="@string/privacy_policy"
-            android:textColor="@color/text_on_white_bg"
-            android:textSize="@dimen/_15ssp" />
-
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_110sdp"
