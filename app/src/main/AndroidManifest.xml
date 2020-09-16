@@ -18,7 +18,6 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
-
     <application
         android:name=".util.MyApplication"
         android:allowBackup="false"
@@ -28,7 +27,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/remote_config_defaults" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

@@ -7,7 +7,7 @@ public class Constants {
     public static final String EnglishFont = "Poppins-Regular.ttf";
 
     //api
-    public static final String main_url = "https://api.mocki.io/v1/af0c4690/";
+    public static String main_url = "";
     public static final String signup_Url = "signup";
     public static final String signin_Url = "login";
     public static final String sendCustomRequest_Url = "sendCustomRequest";
@@ -46,6 +46,9 @@ public class Constants {
 
     //Tiny Db
     public static final String login_token = "loginToken";
+
+    //main api key
+    public static final String main_key = "main_url";
 
 
 }
