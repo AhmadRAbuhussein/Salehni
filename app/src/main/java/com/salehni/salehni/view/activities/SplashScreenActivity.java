@@ -62,7 +62,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                         // Log and toast
                         String msg = getString(R.string.fcm_token, token);
                         Log.d(TAG, msg);
-                        Toast.makeText(SplashScreenActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
 
