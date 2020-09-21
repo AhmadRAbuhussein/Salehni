@@ -167,5 +167,8 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
 
     <string name="google_maps_key">AIzaSyCGUIbbpn9AOgjaGw7IL0PHNW6vX0iW9q0</string>
 
+    <string name="default_notification_channel_id">default_notification_channel_id</string>
+    <string name="fcm_token">FCM Token: %s</string>
+
 
 </resources>

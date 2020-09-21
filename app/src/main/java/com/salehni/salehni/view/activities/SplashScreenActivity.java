@@ -16,6 +16,9 @@ import androidx.lifecycle.ViewModelProviders;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.salehni.salehni.R;
@@ -28,6 +31,7 @@ import java.util.HashMap;
 
 import io.github.inflationx.viewpump.ViewPumpContextWrapper;
 
+import static android.content.ContentValues.TAG;
 public class SplashScreenActivity extends AppCompatActivity {
 
     FirebaseRemoteConfig mFirebaseRemoteConfig;
@@ -43,25 +47,25 @@ public class SplashScreenActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        //remoteConfig();
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
 
-//        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-//        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-//                .setMinimumFetchIntervalInSeconds(3600)
-//                .build();
-//        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
-//
-//        HashMap<String,Object> defaults = new HashMap<>();
-//        defaults.put("mechanic_notification_url",5);
-//        mFirebaseRemoteConfig.setDefaultsAsync(defaults);
-//        Task<Void> fetch = mFirebaseRemoteConfig.fetch(0);
-//        fetch.addOnSuccessListener(this, new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                mFirebaseRemoteConfig.fetchAndActivate();
-//                Constants.mechanicNotifications_Url=mFirebaseRemoteConfig.getString("mechanicNotifications_Url");
-//            }
-//        });
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        String msg = getString(R.string.fcm_token, token);
+                        Log.d(TAG, msg);
+                        Toast.makeText(SplashScreenActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
 
         mainUrlViewModel = ViewModelProviders.of(this).get(MainUrlViewModel.class);
         mainUrlViewModel.showProgressDialogMutableLiveData.observe(this, new Observer<Boolean>() {
@@ -102,29 +106,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         mainUrlViewModel.getData(this);
     }
 
-    //    private void remoteConfig() {
-//
-//        mFirebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
-//        FirebaseRemoteConfigSettings configSettings = new FirebaseRemoteConfigSettings.Builder()
-//                .setMinimumFetchIntervalInSeconds(3600)
-//                .build();
-//        mFirebaseRemoteConfig.setConfigSettingsAsync(configSettings);
-//
-//        mFirebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
-//
-//        mFirebaseRemoteConfig.fetchAndActivate()
-//                .addOnCompleteListener(this, new OnCompleteListener<Boolean>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Boolean> task) {
-//                        if (task.isSuccessful()) {
-//                            Constants.main_url = mFirebaseRemoteConfig.getString(Constants.main_key);
-//                        } else {
-//                            Global.toast(SplashScreenActivity.this, "Fetch failed");
-//                        }
-//                    }
-//                });
-//
-//    }
 
     public void delay() {
         new Handler().postDelayed(new Runnable() {
