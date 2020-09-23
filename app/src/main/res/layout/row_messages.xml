@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:text="@string/ahmad_abuhussein"
             android:textColor="@color/white"
-            android:textSize="@dimen/_14ssp" />
+            android:textSize="@dimen/_13ssp" />
 
         <TextView
             android:id="@+id/date_Tv"
