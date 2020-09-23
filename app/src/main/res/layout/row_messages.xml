@@ -1,0 +1,49 @@
+<LinearLayout android:id="@+id/container_Ll"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_50sdp"
+    android:background="@drawable/shape_my_request"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/_5sdp"
+    android:paddingRight="@dimen/_5sdp"
+    android:weightSum="100">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:weightSum="100">
+
+        <TextView
+            android:id="@+id/sender_name_Tv"
+            android:layout_width="0dp"
+            android:layout_weight="80"
+            android:layout_height="wrap_content"
+            android:text="@string/ahmad_abuhussein"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+
+        <TextView
+            android:id="@+id/date_Tv"
+            android:layout_width="0dp"
+            android:layout_weight="20"
+            android:layout_height="wrap_content"
+            android:text="@string/am_11_30"
+            android:textColor="@color/grey"
+            android:gravity="center"
+            android:textSize="@dimen/_10ssp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/message_Tv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50"
+        android:text="@string/fix_at_mechanic_location"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/grey" />
+
+</LinearLayout>

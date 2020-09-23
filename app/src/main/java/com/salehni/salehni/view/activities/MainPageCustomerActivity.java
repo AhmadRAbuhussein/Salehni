@@ -32,6 +32,7 @@ import com.salehni.salehni.util.TinyDB;
 import com.salehni.salehni.view.adapters.ListViewDrawerAdapter;
 import com.salehni.salehni.view.fragments.CustomRequestFragment;
 import com.salehni.salehni.view.fragments.Drawer.ContactUsFragment;
+import com.salehni.salehni.view.fragments.Drawer.MessagesFragment;
 import com.salehni.salehni.view.fragments.Drawer.MyAccountFragment;
 import com.salehni.salehni.view.fragments.Drawer.PrivacyPolicyFragment;
 import com.salehni.salehni.R;
@@ -146,17 +147,20 @@ public class MainPageCustomerActivity extends AppCompatActivity {
                     MyAccountFragment myAccountFragment = new MyAccountFragment();
                     replaceFragment(myAccountFragment, "myAccountFragment");
                 } else if (position == 2) {
+                    MessagesFragment messagesFragment = new MessagesFragment();
+                    replaceFragment(messagesFragment, "messagesFragment");
+                } else if (position == 3) {
                     TermsConditionFragment termsConditionFragment = new TermsConditionFragment();
                     replaceFragment(termsConditionFragment, "termsConditionFragment");
-                } else if (position == 3) {
+                } else if (position == 4) {
                     PrivacyPolicyFragment privacyPolicyFragment = new PrivacyPolicyFragment();
                     replaceFragment(privacyPolicyFragment, "privacyPolicyFragment");
-                } else if (position == 4) {
+                } else if (position == 5) {
                     ContactUsFragment contactUsFragment = new ContactUsFragment();
                     replaceFragment(contactUsFragment, "contactUsFragment");
-                } else if (position == 5) {
-                    langPopup();
                 } else if (position == 6) {
+                    langPopup();
+                } else if (position == 7) {
                     logoutPopup();
                 }
 
