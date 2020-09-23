@@ -54,6 +54,9 @@ public class ListViewDrawerAdapter extends BaseAdapter {
             holder.title_Tv = vi
                     .findViewById(R.id.title_Tv);
 
+            holder.message_num_Tv = vi
+                    .findViewById(R.id.message_num_Tv);
+
             holder.pic_Iv = vi
                     .findViewById(R.id.pic_Iv);
 
@@ -69,6 +72,10 @@ public class ListViewDrawerAdapter extends BaseAdapter {
         holder.title_Tv.setText(fields.get(holder.position).getDrawerText());
         holder.pic_Iv.setBackgroundResource(fields.get(holder.position).getDrawerIcon());
 
+        if (holder.position == 1) {
+            holder.message_num_Tv.setVisibility(View.VISIBLE);
+        }
+
 
         return vi;
     }
@@ -76,6 +83,7 @@ public class ListViewDrawerAdapter extends BaseAdapter {
     class ViewHolder {
 
         TextView title_Tv;
+        TextView message_num_Tv;
         ImageView pic_Iv;
         int position;
     }

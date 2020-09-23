@@ -95,6 +95,7 @@ public class MainPageCustomerActivity extends AppCompatActivity {
     private void setDrawer() {
 
         String[] titles = {getResources().getString(R.string.my_prof),
+                getResources().getString(R.string.messages),
                 getResources().getString(R.string.terms_conditions),
                 getResources().getString(R.string.privacy_policy),
                 getResources().getString(R.string.contact_us),
@@ -102,6 +103,7 @@ public class MainPageCustomerActivity extends AppCompatActivity {
                 getResources().getString(R.string.logout)};
 
         int[] icons = {R.drawable.my_account_icon,
+                R.drawable.messages,
                 R.drawable.terms_conditions_icon,
                 R.drawable.privacy_policy_icon,
                 R.drawable.contacts_icon,

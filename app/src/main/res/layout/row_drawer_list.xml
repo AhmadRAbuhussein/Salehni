@@ -22,4 +22,16 @@
         android:text="Name"
         android:textColor="@color/white"
         android:textSize="@dimen/_12ssp" />
+
+    <TextView
+        android:id="@+id/message_num_Tv"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:background="@drawable/shape_red_dot"
+        android:text="@string/num3"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_10ssp"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/_2sdp" />
 </LinearLayout>
