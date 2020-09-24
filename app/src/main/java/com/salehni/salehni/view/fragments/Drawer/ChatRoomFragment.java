@@ -11,43 +11,37 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.salehni.salehni.R;
-import com.salehni.salehni.data.model.ClientNotificationModel;
+import com.salehni.salehni.data.model.ChatMessageModel;
 import com.salehni.salehni.data.model.MessagesModel;
-import com.salehni.salehni.util.Global;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
-import com.salehni.salehni.view.adapters.ClientNotificationAdapter;
-import com.salehni.salehni.view.adapters.MessagesAdapter;
-import com.salehni.salehni.view.fragments.MechanicNotificationFragment;
-import com.salehni.salehni.viewmodel.ClientNotificationViewModel;
+import com.salehni.salehni.view.adapters.ChatMessageAdapter;
 
 import java.util.ArrayList;
 
 
-public class MessagesFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class ChatRoomFragment extends Fragment implements AdapterView.OnItemClickListener {
 
-    RecyclerView MessagesRecyView;
-    MessagesAdapter messagesAdapter;
-    ArrayList<MessagesModel> messagesModelArrayList;
+    RecyclerView chat_room_Rv;
+    ChatMessageAdapter chatMessageAdapter;
+    ArrayList<ChatMessageModel> chatMessageModels;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        messagesModelArrayList = new ArrayList<>();
+        chatMessageModels = new ArrayList<>();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_messages, container, false);
+        View view = inflater.inflate(R.layout.fragment_chat_room, container, false);
 
-        MessagesRecyView = (RecyclerView) view.findViewById(R.id.MessagesRecyView);
+        chat_room_Rv = (RecyclerView) view.findViewById(R.id.chat_room_Rv);
 
         testingData();
 
@@ -56,49 +50,57 @@ public class MessagesFragment extends Fragment implements AdapterView.OnItemClic
 
     private void testingData() {
 
-        messagesModelArrayList = new ArrayList<>();
+        chatMessageModels = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++) {
-            MessagesModel messagesModel = new MessagesModel();
-            messagesModel.setId(i + 1);
+        ChatMessageModel chatMessageModel = new ChatMessageModel();
+        chatMessageModel.setId(1);
+        chatMessageModels.add(chatMessageModel);
 
-            messagesModelArrayList.add(messagesModel);
-        }
+        ChatMessageModel chatMessageModel2 = new ChatMessageModel();
+        chatMessageModel2.setId(2);
+        chatMessageModels.add(chatMessageModel2);
 
-        intiRecView(messagesModelArrayList);
+        ChatMessageModel chatMessageModel3 = new ChatMessageModel();
+        chatMessageModel3.setId(3);
+        chatMessageModels.add(chatMessageModel3);
+
+        ChatMessageModel chatMessageModel4 = new ChatMessageModel();
+        chatMessageModel4.setId(2);
+        chatMessageModels.add(chatMessageModel4);
+
+        intiRecView(chatMessageModels);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.messages));
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.chat));
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        ChatRoomFragment chatRoomFragment = new ChatRoomFragment();
-        setFragment(chatRoomFragment);
+
     }
 
-    public void intiRecView(ArrayList<MessagesModel> messagesModels) {
+    public void intiRecView(ArrayList<ChatMessageModel> chatMessageModels) {
 
-        MessagesRecyView.setHasFixedSize(false);
+        chat_room_Rv.setHasFixedSize(false);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        MessagesRecyView.setLayoutManager(layoutManager);
+        chat_room_Rv.setLayoutManager(layoutManager);
 
-        messagesAdapter = new MessagesAdapter(getActivity(), messagesModels, this);
+        chatMessageAdapter = new ChatMessageAdapter(getActivity(), chatMessageModels, this);
 
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.shape_recycleview_divider_height));
 
-        MessagesRecyView.addItemDecoration(itemDecorator);
+        chat_room_Rv.addItemDecoration(itemDecorator);
 
-        MessagesRecyView.setAdapter(messagesAdapter);
+        chat_room_Rv.setAdapter(chatMessageAdapter);
 
     }
 
     public void setFragment(Fragment fragment) {
-        messagesAdapter = null;
+        chatMessageAdapter = null;
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.replace(R.id.mainFrameLayout, fragment, null);

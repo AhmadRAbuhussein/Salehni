@@ -170,6 +170,8 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
 
     <string name="default_notification_channel_id">default_notification_channel_id</string>
     <string name="fcm_token">FCM Token: %s</string>
+    <string name="chat">Chat</string>
+    <string name="today">Today</string>
 
 
 </resources>
