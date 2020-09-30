@@ -24,6 +24,9 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -33,6 +36,7 @@ import com.salehni.salehni.data.model.SignupStatusModel;
 import com.salehni.salehni.util.Constants;
 import com.salehni.salehni.util.Global;
 import com.salehni.salehni.util.TinyDB;
+import com.salehni.salehni.view.fragments.Drawer.TermsConditionFragment;
 import com.salehni.salehni.viewmodel.SignupViewModel;
 
 import java.util.ArrayList;
@@ -51,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText confirm_ps_Et;
     TextView c_code_Tv;
     TextView login_Tv;
+    TextView termsCondition_Tv;
     LinearLayout countryCode_LL;
 
     PopupWindow popupWindow;
@@ -90,10 +95,19 @@ public class SignUpActivity extends AppCompatActivity {
         password_Et = findViewById(R.id.password_Et);
         confirm_ps_Et = findViewById(R.id.confirm_ps_Et);
         login_Tv = findViewById(R.id.login_Tv);
+        termsCondition_Tv = findViewById(R.id.termsCondition_Tv);
 
         remeberMeCheckbox = findViewById(R.id.remeberMeCheckbox);
 
         getDefaultCountryCodeValue();
+
+        termsCondition_Tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TermsConditionFragment termsConditionFragment = new TermsConditionFragment();
+
+            }
+        });
 
         login_Tv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -331,6 +345,7 @@ public class SignUpActivity extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+
 }
 
 

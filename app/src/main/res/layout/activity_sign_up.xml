@@ -119,7 +119,8 @@
                         android:gravity="center|bottom"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_11ssp" />
+                        android:textSize="@dimen/_11ssp"
+                        android:layout_marginTop="@dimen/_2sdp" />
 
                 </LinearLayout>
 
@@ -144,7 +145,7 @@
                         android:hint="@string/ph_no"
                         android:imeOptions="actionNext"
                         android:inputType="number"
-                        android:paddingTop="@dimen/_5sdp"
+                        android:paddingTop="@dimen/_10sdp"
                         android:singleLine="true"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_on_black_bg"
@@ -310,7 +311,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:gravity="center"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -333,7 +333,8 @@
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/termsCondition_Tv"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/_3sdp"

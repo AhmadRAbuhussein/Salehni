@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/splash_bg"
     android:orientation="vertical">
 
@@ -43,12 +44,16 @@
                 android:layout_margin="@dimen/_5sdp">
 
                 <EditText
+                    android:id="@+id/chat_text_Tv"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_weight="100"
-                    android:background="@drawable/shape_btn_white_bg" />
+                    android:background="@drawable/shape_btn_white_bg"
+                    android:paddingLeft="@dimen/_5sdp"
+                    android:paddingRight="@dimen/_5sdp" />
 
                 <ImageView
+                    android:id="@+id/send_Btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/radio_checked" />

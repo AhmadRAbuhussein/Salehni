@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -15,9 +17,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.salehni.salehni.R;
 import com.salehni.salehni.data.model.ChatMessageModel;
-import com.salehni.salehni.data.model.MessagesModel;
 import com.salehni.salehni.view.activities.MainPageCustomerActivity;
 import com.salehni.salehni.view.adapters.ChatMessageAdapter;
 
@@ -30,6 +33,13 @@ public class ChatRoomFragment extends Fragment implements AdapterView.OnItemClic
     ChatMessageAdapter chatMessageAdapter;
     ArrayList<ChatMessageModel> chatMessageModels;
 
+    EditText chat_text_Tv;
+    ImageView send_Btn;
+
+    int i = 1;
+
+    private DatabaseReference mDatabase;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +51,29 @@ public class ChatRoomFragment extends Fragment implements AdapterView.OnItemClic
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat_room, container, false);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         chat_room_Rv = (RecyclerView) view.findViewById(R.id.chat_room_Rv);
+        chat_text_Tv = (EditText) view.findViewById(R.id.chat_text_Tv);
+        send_Btn = (ImageView) view.findViewById(R.id.send_Btn);
+
+        send_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                writeNewUser(String.valueOf(i++), chat_text_Tv.toString());
+            }
+        });
 
         testingData();
 
         return view;
     }
+
+    private void writeNewUser(String userId, String message) {
+
+        mDatabase.child("users").child(userId).setValue(message);
+    }
+
 
     private void testingData() {
 
