@@ -31,6 +31,7 @@ public class MyRequestAdapter extends
 
         public ImageView request_img;
         public ImageView go_Iv;
+        public ImageView delete_notification_Iv;
         public TextView request;
         public TextView request_type;
         public TextView time;
@@ -43,11 +44,13 @@ public class MyRequestAdapter extends
             container_Ll = (LinearLayout) view.findViewById(R.id.container_Ll);
             request_img = (ImageView) view.findViewById(R.id.request_img);
             go_Iv = (ImageView) view.findViewById(R.id.go_Iv);
+            delete_notification_Iv = (ImageView) view.findViewById(R.id.delete_notification_Iv);
             request = (TextView) view.findViewById(R.id.mechanicName_Tv);
             request_type = (TextView) view.findViewById(R.id.description_Tv);
             time = (TextView) view.findViewById(R.id.time_Tv);
 
             container_Ll.setOnClickListener(this);
+            delete_notification_Iv.setOnClickListener(this);
 
 
         }

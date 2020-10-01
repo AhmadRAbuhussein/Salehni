@@ -36,9 +36,8 @@ public class ChatRoomFragment extends Fragment implements AdapterView.OnItemClic
     EditText chat_text_Tv;
     ImageView send_Btn;
 
-    int i = 1;
-
-    private DatabaseReference mDatabase;
+    FirebaseDatabase rootNode;
+    DatabaseReference reference;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class ChatRoomFragment extends Fragment implements AdapterView.OnItemClic
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_chat_room, container, false);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         chat_room_Rv = (RecyclerView) view.findViewById(R.id.chat_room_Rv);
         chat_text_Tv = (EditText) view.findViewById(R.id.chat_text_Tv);
@@ -60,18 +58,15 @@ public class ChatRoomFragment extends Fragment implements AdapterView.OnItemClic
         send_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                writeNewUser(String.valueOf(i++), chat_text_Tv.toString());
+                rootNode = FirebaseDatabase.getInstance();
+                reference = rootNode.getReference("messages");
+                reference.setValue("hii");
             }
         });
 
         testingData();
 
         return view;
-    }
-
-    private void writeNewUser(String userId, String message) {
-
-        mDatabase.child("users").child(userId).setValue(message);
     }
 
 

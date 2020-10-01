@@ -125,7 +125,7 @@
                     android:id="@+id/img_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp" />
+                    android:layout_marginTop="@dimen/_10sdp" />
 
             <FrameLayout
                 android:id="@+id/video_Fl"

@@ -101,14 +101,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         getDefaultCountryCodeValue();
 
-        termsCondition_Tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TermsConditionFragment termsConditionFragment = new TermsConditionFragment();
-
-            }
-        });
-
         login_Tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

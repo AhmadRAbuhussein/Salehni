@@ -189,13 +189,13 @@ public class MainPageCustomerActivity extends AppCompatActivity {
 
     private void initialFirstFragment() {
 
-        if (signInTokenModel.getUser_type() == 1) {
-            CustomRequestFragment customRequestFragment = new CustomRequestFragment();
-            replaceFragment(customRequestFragment, "customRequestFragment");
-        } else {
-            MechanicNotificationFragment mechanicNotificationFragment = new MechanicNotificationFragment();
-            replaceFragment(mechanicNotificationFragment, "mechanicNotificationFragment");
-        }
+//        if (signInTokenModel.getUser_type() == 1) {
+        CustomRequestFragment customRequestFragment = new CustomRequestFragment();
+        replaceFragment(customRequestFragment, "customRequestFragment");
+//        } else {
+//            MechanicNotificationFragment mechanicNotificationFragment = new MechanicNotificationFragment();
+//            replaceFragment(mechanicNotificationFragment, "mechanicNotificationFragment");
+//        }
     }
 
     private void logoutPopup() {
