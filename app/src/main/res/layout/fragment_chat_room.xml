@@ -23,12 +23,16 @@
             android:padding="@dimen/_5sdp">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/_75sdp"
                 android:layout_height="wrap_content"
                 android:text="@string/today"
                 android:textColor="@color/grey"
                 android:layout_gravity="center"
-                android:textSize="@dimen/_10ssp" />
+                android:textSize="@dimen/_10ssp"
+                android:background="@drawable/shape_chat_day"
+                android:gravity="center"
+                android:paddingTop="@dimen/_2sdp"
+                android:paddingBottom="@dimen/_2sdp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chat_room_Rv"
@@ -46,17 +50,21 @@
                 <EditText
                     android:id="@+id/chat_text_Tv"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_25sdp"
+                    android:layout_height="@dimen/_30sdp"
                     android:layout_weight="100"
                     android:background="@drawable/shape_btn_white_bg"
                     android:paddingLeft="@dimen/_5sdp"
-                    android:paddingRight="@dimen/_5sdp" />
+                    android:paddingRight="@dimen/_5sdp"
+                    android:text="@string/type_text_here"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/_13ssp"
+                    android:padding="@dimen/_8sdp" />
 
                 <ImageView
                     android:id="@+id/send_Btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/radio_checked" />
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/red_submit" />
 
             </LinearLayout>
         </LinearLayout>

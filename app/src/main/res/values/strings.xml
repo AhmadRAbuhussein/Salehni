@@ -172,6 +172,8 @@ The following terminology applies to these Terms and Conditions, Privacy Stateme
     <string name="fcm_token">FCM Token: %s</string>
     <string name="chat">Chat</string>
     <string name="today">Today</string>
+    <string name="person_talking_to">Person who is talking to</string>
+    <string name="type_text_here">Type Text here…</string>
 
 
 </resources>

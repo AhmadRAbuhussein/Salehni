@@ -96,7 +96,7 @@ public class ChatRoomFragment extends Fragment implements AdapterView.OnItemClic
     @Override
     public void onResume() {
         super.onResume();
-        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.chat));
+        MainPageCustomerActivity.title_Tv.setText(getResources().getString(R.string.person_talking_to));
     }
 
     @Override
