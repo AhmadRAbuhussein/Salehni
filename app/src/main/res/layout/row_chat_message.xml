@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="@dimen/_5sdp"
-                android:paddingRight="@dimen/_30sdp"
+                android:paddingRight="@dimen/_40sdp"
                 android:text="@string/fix_at_mechanic_location"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_10ssp"

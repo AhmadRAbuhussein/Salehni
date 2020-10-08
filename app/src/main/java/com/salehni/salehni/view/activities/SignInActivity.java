@@ -40,6 +40,7 @@ public class SignInActivity extends AppCompatActivity {
     EditText mobileNumber_Et;
     EditText password_Et;
     TextView c_code_Tv;
+    TextView forget_password_Tv;
 
     SigninViewModel signinViewModel;
 
@@ -68,6 +69,15 @@ public class SignInActivity extends AppCompatActivity {
         mobileNumber_Et = findViewById(R.id.mobileNumber_Et);
         password_Et = findViewById(R.id.password_Et);
         c_code_Tv = findViewById(R.id.c_code_Tv);
+        forget_password_Tv = findViewById(R.id.forget_password_Tv);
+
+        forget_password_Tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SignInActivity.this, ForgetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
         sign_up_Tv.setOnClickListener(new View.OnClickListener() {
             @Override
